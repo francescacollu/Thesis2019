@@ -1,19 +1,31 @@
 \chapter{Numerical Methods for Open Quantum Systems}
-As seen in the previous chapters, the study of open systems requires to solve the Liouvillian-von Neumann master equation; solving this equation means that 
+The study of open systems requires to solve the Liouvillian-von Neumann master equation; solving this equation means that 
 
 \section{The Corner-Space Renormalization Method}
-As seen in the previous sections, simulating large quantum systems is a challenging task because their complexity grows exponentially with their size. An interesting method that reduces this complexity is the one developed by~\cite{PhysRevLett.115.080604}: the corner-space renormalization method. 
+The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem.
 
-The name of this method refers to the idea of selecting a corner of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices. 
+The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
-In particular, let us see the steps on which the algorithm is based: 
-\begin{enumerate}
-\item determine the steady-state density matrix for small lattices, for which an exact diagonalization of the Liouville super-operator is possible;
-\item merge two lattices and select the M most probable product states as a basis for the corner space;
-\item determine the steady-state solution of the density matrix in the corner-space;
-\item increase the dimension M of the corner-space until the convergence is achieved;
-\item in order to create a larger lattice, go back to step 1.
-\end{enumerate}
+In particular, the algorithm is structured in the following stages:
+\begin{description}
+    \item[calculation] of the steady-state density matrix of a single block of the system;
+    \item[merger] of two predetermined blocks;
+    \item[expression] of the density matrix of the merged block in an orthonormal basis;
+    \item[selection] of the M most probable states as a basis for the so-called \emph{corner-space};
+    \item[increase] of the dimension M of the corner-space until the convergence of the observable is achieved.
+\end{description}
+
+This process has to be repeated as many times as it is needed to reach the dimensions of the system.
+
+%In particular, let us see the steps on which the algorithm is based: 
+%\begin{enumerate}
+%\item determine the steady-state density matrix for small lattices, for which an exact diagonalization of the Liouville super-operator is possible;
+%\item merge two lattices and select the M most probable product states as a basis for the corner space;
+%\item determine the steady-state solution of the density matrix in the corner-space;
+%\item increase the dimension M of the corner-space until the convergence is achieved;
+%\item in order to create a larger lattice, go back to step 1.
+%\end{enumerate}
 
 \section{The Quantum Trajectories Method}
+
 \section{The Matrix Product Operators Method}
