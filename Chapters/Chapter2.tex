@@ -1,7 +1,7 @@
 \chapter{Numerical Methods for Open Quantum Systems}
 The study of open systems requires to solve the Liouvillian-von Neumann master equation; solving this equation means that 
 
-\section{The Corner-Space Renormalization Method}
+\section{The Corner-Space Renormalization Method (CSRM)}
 The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem.
 
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
@@ -17,15 +17,29 @@ In particular, the algorithm is structured in the following stages:
 
 This process has to be repeated as many times as it is needed to reach the dimensions of the system.
 
-%In particular, let us see the steps on which the algorithm is based: 
-%\begin{enumerate}
-%\item determine the steady-state density matrix for small lattices, for which an exact diagonalization of the Liouville super-operator is possible;
-%\item merge two lattices and select the M most probable product states as a basis for the corner space;
-%\item determine the steady-state solution of the density matrix in the corner-space;
-%\item increase the dimension M of the corner-space until the convergence is achieved;
-%\item in order to create a larger lattice, go back to step 1.
-%\end{enumerate}
 
-\section{The Quantum Trajectories Method}
+\section{The Quantum Trajectories Method (QTM)}
+A completely different approach is reached in the \emph{quantum trajectories method}, in which pure states are the subjects of the study, instead of density matrices. This means that a vector of length $N$ (where $N$ is the dimension of the Hilbert space) is stored, rather than a matrix of dimensions $NxN$.
 
-\section{The Matrix Product Operators Method}
+The idea of this method can be summarised in the following way.
+
+First of all, given the [Lindblad equation from the incipit], let us note that the \textbf{first two terms} of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
+\[
+H_{eff} = H_s + \rm{i}K,
+\]
+with
+\[
+K = -\frac{\hbar}{2}\sum_\mu L_{\mu}^{\dagger}L_{\mu}.
+\]
+In fact, we see that:
+\[
+    -\frac{\rm{i}}{\hbar}[H_{eff}, \rho] = -\frac{\rm{i}}{\hbar}[H_s, \rho] - \frac{1}{2}\sum_\mu \{L_{\mu}^{\dagger}L_{\mu}, \rho\}.
+\]
+
+The \textbf{last term} of the [Lindblad equation from the incipit], is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the [Lindblad equation from the incipit] is called \emph{quantum jump picture}. 
+
+At an initial time $t_0$, the density matrix of the system is in a pure state $\rho_0 = \Ket{\phi(t_0)}\Bra{\phi(t_0)}$ 
+
+
+
+\section{The Matrix Product Operators Method (MPOM)}
