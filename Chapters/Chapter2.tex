@@ -1,9 +1,18 @@
 \chapter{Numerical Methods for Open Quantum Systems}
-The study of open systems requires to solve the Liouvillian-von Neumann master equation; solving this equation means that 
+We can write the master equation in the \emph{lindbladian form}~\cite{presk:quant_info}:
+\begin{equation}
+    \dot{\rho} = \mathcal{L}(\rho),
+\end{equation}
+where
+\begin{equation}
+\label{eqn:lindblad_eqn}
+    \mathcal{L}(\rho) = -\emph{i}[H, \rho] + \sum_{a>0}     \Bigl(-\frac{1}{2}C^{\dagger}_a C_a \rho - \frac{1}{2}\rho C_a^{\dagger}C_a + C_a\rho C^{\dagger}_a \Bigl).
+\end{equation}
+
+To study an open quantum system consisting of $m$ subsystems, each of them characterized by an Hilbert space of dimension $N$, it is necessary to determine $N^{2m}$ variables, i.e. the square of the size of the Hilbert space.
 
 \section{The Corner-Space Renormalization Method (CSRM)}
-The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem.
-
+The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
 In particular, the algorithm is structured in the following stages:
@@ -23,7 +32,7 @@ A completely different approach is reached in the \emph{quantum trajectories met
 
 The idea of this method can be summarised in the following way.
 
-First of all, given the [Lindblad equation from the incipit], let us note that the \textbf{first two terms} of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
+First of all, given the~\ref{eqn:lindblad_eqn}, let us note that the \textbf{first three terms} of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
 \[
 H_{eff} = H_s + \rm{i}K,
 \]
@@ -36,9 +45,32 @@ In fact, we see that:
     -\frac{\rm{i}}{\hbar}[H_{eff}, \rho] = -\frac{\rm{i}}{\hbar}[H_s, \rho] - \frac{1}{2}\sum_\mu \{L_{\mu}^{\dagger}L_{\mu}, \rho\}.
 \]
 
-The \textbf{last term} of the [Lindblad equation from the incipit], is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the [Lindblad equation from the incipit] is called \emph{quantum jump picture}. 
+The \textbf{last term} of the~\ref{eqn:lindblad_eqn}, is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the~\ref{eqn:lindblad_eqn} is called \emph{quantum jump picture}~\cite{PhysRevA.69.062317}. 
 
-At an initial time $t_0$, the density matrix of the system is in a pure state $\rho_0 = \Ket{\phi(t_0)}\Bra{\phi(t_0)}$ 
+At an initial time $t_0$, the density matrix of the system is in a pure state
+\[
+\rho(t_0) = \ket{\phi(t_0)}\bra{\phi(t_0)};
+\]
+after a time $dt$, it evolves to the following statistical mixture:
+\begin{equation}
+    \rho(t_0 + dt) = \Bigl(1-\sum_\mu dp_\mu \Bigl)\ket{\phi_0}\bra{\phi_0} + \sum_\mu dp_\mu \ket{\phi_\mu}\bra{\phi_\mu},
+\end{equation}
+where
+\begin{equation}
+    dp_\mu = \bra{\phi(t_0)}L_{\mu}^{\dagger}L_{\mu}\ket{\phi(t_0)}dt
+\end{equation}
+is the probability that a jump occurs; in this case, the system evolves in the state
+\begin{equation}
+    \ket{\phi_\mu} = \frac{L_\mu}{\abs{L_\mu\ket{\phi(t_0)}}}\ket{\phi(t_0)}.
+\end{equation}
+Otherwise, if no jump happens, the system evolves according to the effective Hamiltonian $H_{eff}$ in the following way:
+\begin{equation}
+    \ket{\phi_0} = \frac{(1-\textrm{i}H_{eff}dt/\hbar)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
+\end{equation}
+
+In order to decide if the jump occurs or not, a Monte Carlo method can be integrated in this picture. 
+
+
 
 
 
