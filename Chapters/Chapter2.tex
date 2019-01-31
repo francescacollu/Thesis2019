@@ -68,10 +68,27 @@ Otherwise, if no jump happens, the system evolves according to the effective Ham
     \ket{\phi_0} = \frac{(1-\textrm{i}H_{eff}dt/\hbar)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
 \end{equation}
 
-In order to decide if the jump occurs or not, a Monte Carlo method can be integrated in this picture. 
+In order to decide if the jump occurs or not, a Monte Carlo method will be integrated in this picture. Namely, an uniform distribution in the unit interval $[0,1]$ is taken under consideration; for every experiment, a pseudo-random number $\epsilon$ is chosen from this uniform distribution, i.e. a coin is tossed: depending on the result of the throw, the possible situations are the following:
+\begin{itemize}
+    \item if $\epsilon < \sum_\mu dp_\mu$, the system jumps to one of the states $\ket{\phi_\mu}$. In particular:
+    \begin{itemize}
+        \item if $0 \leq \epsilon \leq dp_1$, the system jumps to $\ket{\phi_1}$;
+        \item if $dp_1 < \epsilon \leq dp_2$, the system jumps to $\ket{\phi_2}$;
+        \item and so on;
+    \end{itemize}
+    \item if $\epsilon > \sum_\mu dp_\mu$, the system evolves to the state \ket{\phi_0}.
+\end{itemize}
 
+This process has to be repeated as many times as $n = \frac{T}{dt}$, where $T$ is the whole elapsed time during the evolution. Let us note that $dt$ must be taken much smaller than the evolution time of the system.
 
-
+Every \emph{experiment}, i.e. every throw of the coin, gives a different \emph{quantum trajectory}, which can be used to calculate the mean value of an observable $A$ at a certain time $t$, in this way:
+\begin{equation}
+    \langle A(t)\rangle = \bra{\phi_i(t)}A\ket{\phi_i(t)}.
+\end{equation}
+Since this is a result of a Monte Carlo process, a good idea to obtain a reasonable outcome is to repeat the \emph{experiment} a number $N$ of times and to take the mean value of the results:
+\begin{equation}
+    \langle A(t)\rangle = \lim_{N\to\infty} \frac{1}{N}\sum_{i=1}^{N}\bra{\phi_i(t)}A\ket{\phi_i(t)}.
+\end{equation}
 
 
 \section{The Matrix Product Operators Method (MPOM)}
