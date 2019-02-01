@@ -61,6 +61,7 @@ where
 \end{equation}
 is the probability that a jump occurs; in this case, the system evolves in the state
 \begin{equation}
+\label{eqn:phi_mu}
     \ket{\phi_\mu} = \frac{L_\mu}{\abs{L_\mu\ket{\phi(t_0)}}}\ket{\phi(t_0)}.
 \end{equation}
 Otherwise, if no jump happens, the system evolves according to the effective Hamiltonian $H_{eff}$ in the following way:
@@ -70,7 +71,7 @@ Otherwise, if no jump happens, the system evolves according to the effective Ham
 
 In order to decide if the jump occurs or not, a Monte Carlo method will be integrated in this picture. Namely, an uniform distribution in the unit interval $[0,1]$ is taken under consideration; for every experiment, a pseudo-random number $\epsilon$ is chosen from this uniform distribution, i.e. a coin is tossed: depending on the result of the throw, the possible situations are the following:
 \begin{itemize}
-    \item if $\epsilon < \sum_\mu dp_\mu$, the system jumps to one of the states $\ket{\phi_\mu}$. In particular:
+    \item if $\epsilon < \sum_\mu dp_\mu$, the system jumps to one of the states $\ket{\phi_\mu}$, defined in~\ref{eqn:phi_mu}. In particular:
     \begin{itemize}
         \item if $0 \leq \epsilon \leq dp_1$, the system jumps to $\ket{\phi_1}$;
         \item if $dp_1 < \epsilon \leq dp_2$, the system jumps to $\ket{\phi_2}$;
@@ -91,4 +92,35 @@ Since this is a result of a Monte Carlo process, a good idea to obtain a reasona
 \end{equation}
 
 
-\section{The Matrix Product Operators Method (MPOM)}
+\section{The Matrix Product Density Operators Method (MPDOM)}
+The last numerical method analyzed in this overview, is the \emph{matrix product density operators method} (MPDOM).
+This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg}. The reason why the DMRG is a powerful method is because the many-body states of some 1D problems can be described in terms of the so-called \emph{matrix product states} (MPS)~\cite{PhysRevLett.93.207204, PhysRevLett:from_dmrg_to_mps}:
+\begin{equation}
+    \ket{\psi_{MPS}} = \sum_{s_1, ..., s_N = 1}^{d} Tr(A_1^{s_N}...A_1^{s_N}) \ket{s_1,...,s_N},
+\end{equation}
+where the $A$'s are matrices and $d$ is the dimension of the Hilbert space of the system. 
+
+The matrix product \emph{density operators} extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. A MPDO $\rho$ of $N$ $d$-level particles with $(D_1, D_2, ..., D_N)$-dimensional bonds is defined as
+\begin{equation}
+    \rho = \sum_{s_1,s_1', ... ,s_N,s_N' = 1}^{d} Tr(M_1^{s_1,s_1'} ... M_N^{s_N,s_N'}) \ket{s_1, ... ,s_N}\bra{s'_1, ... ,s'_N},
+\end{equation}
+where $M_k^{s_k,s_k'}$ are $D_k^2 \times D_{k+1}^2$ matrices which can be written in this way:
+\begin{equation}
+    M_k^{s,s'} = \sum_{a = 1}^{d_k} A_k^{s,a} \otimes (A_k^{s',a})^*.
+\end{equation}
+One can express a MPDO in terms of a pure state MPS using the \emph{purification}~\cite{nielsen_chuang} technique. The essential idea is to consider an auxiliary system with a Hilbert space of dimension $d_k$ and, after choosing an orthonormal basis $\ket{s_k, a_k}$, to write the corresponding MPS state as
+\begin{equation}
+    \ket{\psi} = \sum_{s_1,...,s_N} \sum_{a_1, ..., a_N} Tr\Bigl(\prod_{k=1}^N A_k^{s_k, a_k}\Bigl) \ket{s_1a_1, ..., s_Na_N}.
+\end{equation}
+and eventually the MPDO $\rho$ is obtained tracing over the indices referred to the auxiliary system $a_k$:
+\begin{equation}
+    \rho = Tr_a(\ket{\psi}\bra{\psi});
+\end{equation}
+this density matrix can be used to compute the expectation values of observables.
+
+***********
+
+Another way of viewing the MPDO method is through the super-operatorial formalism.~\cite{PhysRevLett.93.207205}
+
+
+***********
