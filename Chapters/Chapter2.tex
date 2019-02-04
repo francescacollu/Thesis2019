@@ -1,21 +1,32 @@
 \chapter{Numerical Methods for Open Quantum Systems}
-We can write the master equation in the \emph{lindbladian form}~\cite{presk:quant_info}:
-\begin{equation}
-    \dot{\rho} = \mathcal{L}(\rho),
-\end{equation}
-where
-\begin{equation}
-\label{eqn:lindblad_eqn}
-    \mathcal{L}(\rho) = -\emph{i}[H, \rho] + \sum_{a>0}     \Bigl(-\frac{1}{2}C^{\dagger}_a C_a \rho - \frac{1}{2}\rho C_a^{\dagger}C_a + C_a\rho C^{\dagger}_a \Bigl).
-\end{equation}
+To study an open quantum system consisting of $m$ subsystems, each of them characterized by an Hilbert space of dimension $N$, it is necessary to determine $N^{2m}$ variables, i.e. the square of the size of the Hilbert space. 
 
-To study an open quantum system consisting of $m$ subsystems, each of them characterized by an Hilbert space of dimension $N$, it is necessary to determine $N^{2m}$ variables, i.e. the square of the size of the Hilbert space.
-
-\section{The Corner-Space Renormalization Method (CSRM)}
+\section{The Corner-Space Renormalization (CSR) Method}
 The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
-In particular, the algorithm is structured in the following stages:
+Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be the central topic). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value one, considered that:
+\begin{equation}
+    \frac{d\rho}{dt} = \mathcal{L} \rho.
+\end{equation}
+We now consider two spatially adjacent sites; the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to merge in a certain way this two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
+
+In this way, we will have:
+\begin{equation}
+    \rho^{(A)} = \sum_r p_r^{(A)}\ket{\phi_r^{(A)}}\bra{\phi_r^{(A)}},
+\end{equation}
+\begin{equation}
+    \rho^{(B)} = \sum_{r'} p_{r'}^{(B)}\ket{\phi_{r'}^{(B)}}\bra{\phi_{r'}^{(B)}}.
+\end{equation}
+The steady-state density matrix of the \emph{merged block} constituted of the block A and the block B will be the following:
+\begin{equation}
+\label{rhoAUB}
+    \rho^{(AUB)} = \rho^{(A)} \otimes \rho^{(B)}.
+\end{equation}
+At this point, the CSR method suggests to delineate the \emph{corner-space}; for this purpose, we consider the $M$ most probable product states coming from~\ref{rhoAUB} of the form $\ket{\phi_{r'}^{(A)}}\ket{\phi_{r'}^{(B)}}$. 
+
+\medskip
+In short, the algorithm is structured in the following stages, as sketched in the FIG:
 \begin{description}
     \item[calculation] of the steady-state density matrix of a single block of the system;
     \item[merger] of two predetermined blocks;
@@ -24,10 +35,8 @@ In particular, the algorithm is structured in the following stages:
     \item[increase] of the dimension M of the corner-space until the convergence of the observable is achieved.
 \end{description}
 
-This process has to be repeated as many times as it is needed to reach the dimensions of the system.
 
-
-\section{The Quantum Trajectories Method (QTM)}
+\section{The Quantum Trajectories (QT) Method}
 A completely different approach is reached in the \emph{quantum trajectories method}, in which pure states are the subjects of the study, instead of density matrices. This means that a vector of length $N$ (where $N$ is the dimension of the Hilbert space) is stored, rather than a matrix of dimensions $NxN$.
 
 The idea of this method can be summarised in the following way.
@@ -77,7 +86,7 @@ In order to decide if the jump occurs or not, a Monte Carlo method will be integ
         \item if $dp_1 < \epsilon \leq dp_2$, the system jumps to $\ket{\phi_2}$;
         \item and so on;
     \end{itemize}
-    \item if $\epsilon > \sum_\mu dp_\mu$, the system evolves to the state \ket{\phi_0}.
+    \item if $\epsilon > \sum_\mu dp_\mu$, the system evolves to the state $\ket{\phi_0}$.
 \end{itemize}
 
 This process has to be repeated as many times as $n = \frac{T}{dt}$, where $T$ is the whole elapsed time during the evolution. Let us note that $dt$ must be taken much smaller than the evolution time of the system.
@@ -92,7 +101,7 @@ Since this is a result of a Monte Carlo process, a good idea to obtain a reasona
 \end{equation}
 
 
-\section{The Matrix Product Density Operators Method (MPDOM)}
+\section{The Matrix Product Density Operators (MPDO) Method}
 The last numerical method analyzed in this overview, is the \emph{matrix product density operators method} (MPDOM).
 This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg}. The reason why the DMRG is a powerful method is because the many-body states of some 1D problems can be described in terms of the so-called \emph{matrix product states} (MPS)~\cite{PhysRevLett.93.207204, PhysRevLett:from_dmrg_to_mps}:
 \begin{equation}

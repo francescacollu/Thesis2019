@@ -1,29 +1,37 @@
 \chapter{The Corner-Space Renormalization Algorithm} % Main appendix title
 \label{AppendixA}
 
-The code has been written in C++ language, useful in this work especially because of the possibility of implementing an object-oriented programming; a great help has been given by the linear algebra library \emph{Armadillo}~\cite{arma:book, arma:art}. 
+The code has been written in C++, useful in this work especially because of the possibility of implementing an object-oriented programming and employs \emph{Armadillo}~\cite{arma:book, arma:art} as linear algebra library. 
 
 \begin{algorithm}
 
 \SetAlgoLined
 \KwData{
 \begin{description}
-    \item[N] is the number of iteration necessary to cover the entire system;
+    \item[d] is the number of sites;
+    \item[N] is the number of iteration necessary to cover the entire system, i.e. $N = log_2d$;
     \item[M] is the dimension of the corner-space; 
 \end{description}
 }
-\tcc{The code starts in the following lines.}
+\bigskip
 \For{i = 1 \to N}
 {
-determine the steady-state density matrix of two spatially-adjacent blocks, $\rho^{(A)}$ and $\rho^{(B)}$;\\
-express $\rho^{(A)}$ and $\rho^{(B)}$ in terms of a orthonormal basis:
+\smallskip
+determine the steady-state density matrices $\rho^{(A)}$ and $\rho^{(B)}$ of two spatially-adjacent blocks;\\
+\smallskip
+express $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis:
 $\rho^{(A)} = \sum_r p_r^{(A)}\ket{\phi_r^{(A)}}\bra{\phi_r^{(A)}}$ and $\rho^{(B)} = \sum_r p_r^{(B)}\ket{\phi_r^{(B)}}\bra{\phi_r^{(B)}}$;
+\smallskip
 
 \eIf{there is degeneration among eigenvalues}{apply Gram-Schmidt orthonormalization process}{use the basis of $\rho^{(A)}$'s and $\rho^{(B)}$'s eigenvectors}
+\smallskip
 
 merge the two density matrices $\rho^{(A)} \otimes \rho^{(B)}$;\\
+\smallskip
 rank the terms of $\rho^{(AUB)}$ according to the joint probability $p_r^{(A)}p_{r'}^{(B)}$;\\
+\smallskip
 take the $M$ most probable product states;\\
+\smallskip
 \eIf{M>physical Hilbert space dimension}{the loop restarts}{cut the Hilbert space with a pseudo-orthogonal matrix with dimensions $N \times M$}
 }
 
@@ -31,6 +39,11 @@ take the $M$ most probable product states;\\
 \label{pseudocode}
 \end{algorithm}
 
-One should noticed the usefulness of object-oriented programming in the work of turning this algorithm in code. Indeed, the code written above is actually useful only if the physical system under consideration is invariant under translations, i.e. all sites are the same.
+One should notice the usefulness of object-oriented programming in the work of turning this algorithm in code. Indeed, the code written above is actually useful only if the physical system under consideration is invariant under translations, i.e. the A and B blocks are the same. In most cases (as that ones considered in~\ref{Chapter3}) there are no symmetries; for dealing with these circumstances, the creation of classes is a great support.
 
-In most cases (as that ones considered in~\ref{Chapter3}) 
+In particular, two classes have been created:
+\begin{itemize}
+    \item a \textbf{SITE} class: an object of this class has the essential property of the presence (or the absence) of a dissipator, which is characterized by a certain kind of it, e.g. a ladder operator (raising or lowering);
+    \item a \textbf{BLOCK} class: a \emph{block} is an object made up by a certain number of objects \emph{site} (you can say it is a nested class).
+\end{itemize}
+
