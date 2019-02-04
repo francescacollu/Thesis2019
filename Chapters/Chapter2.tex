@@ -5,11 +5,11 @@ To study an open quantum system consisting of $m$ subsystems, each of them chara
 The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
-Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be the central topic). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value one, considered that:
+Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be the central topic). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that:
 \begin{equation}
     \frac{d\rho}{dt} = \mathcal{L} \rho.
 \end{equation}
-We now consider two spatially adjacent sites; the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to merge in a certain way this two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
+We now consider two spatially adjacent sites; the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to spatially merge these two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
 
 In this way, we will have:
 \begin{equation}
@@ -19,11 +19,32 @@ In this way, we will have:
     \rho^{(B)} = \sum_{r'} p_{r'}^{(B)}\ket{\phi_{r'}^{(B)}}\bra{\phi_{r'}^{(B)}}.
 \end{equation}
 The steady-state density matrix of the \emph{merged block} constituted of the block A and the block B will be the following:
-\begin{equation}
+\begin{align}
 \label{rhoAUB}
-    \rho^{(AUB)} = \rho^{(A)} \otimes \rho^{(B)}.
+    \rho^{(AUB)} &= \rho^{(A)} \otimes \rho^{(B)} = \\
+    \label{rhoAUB_explicit}
+    &= \sum_{r} \sum_{r'} p_r^{(A)}p_{r'}^{(B)}\ket{\phi_r^{(A)}}\ket{\phi_{r'}^{(B)}} \otimes \bra{\phi_{r'}^{(B)}}\bra{\phi_{r}^{(A)}}
+\end{align}
+At this point, the CSR method suggests to delineate the \emph{corner-space}; for this purpose, we consider the $M$ most probable product states coming from~\ref{rhoAUB} of the form $\ket{\phi_{r}^{(A)}}\ket{\phi_{r'}^{(B)}}$, i.e. we rank the~\ref{rhoAUB_explicit} according to the joint probability $p_r^{(A)}p_{r'}^{(B)}$. The $M$ states form an orthonormal basis that generates a subspace
+\begin{equation}
+\label{basis_corner}
+    \Bigl\{\ket{\phi_{r_1}^{(A)}}\ket{\phi_{r_1'}^{(B)}}, \ket{\phi_{r_2}^{(A)}}\ket{\phi_{r_2'}^{(B)}}, \dots, \ket{\phi_{r_M}^{(A)}}\ket{\phi_{r_M'}^{(B)}} \Bigl\},
 \end{equation}
-At this point, the CSR method suggests to delineate the \emph{corner-space}; for this purpose, we consider the $M$ most probable product states coming from~\ref{rhoAUB} of the form $\ket{\phi_{r'}^{(A)}}\ket{\phi_{r'}^{(B)}}$. 
+called \emph{corner-space}, with
+\begin{equation*}
+    p_r_1^{(A)}p_{r_1'}^{(B)} \geq p_r_2^{(A)}p_{r_2'}^{(B)} \geq \dots \geq p_r_M^{(A)}p_{r_M'}^{(B)}.
+\end{equation*}
+So, now it becomes necessary doing a change of basis to the new block $A \cup B$, that is:
+\begin{equation}
+    H' = \tilde{O} H_{A\cup B} \tilde{O}^\dagger,
+\end{equation}
+where $\tilde{O}$ is a pseudo-orthogonal\footnote{The matrix $\tilde{O}$ is called pseudo-orthogonal because it is not a square matrix.} $M\times N$ matrix, where $N$ is the dimension of $H_{A\cup B}$; $\tilde{O}$ is formed by the $M$ eigenvectors of $\rho_{A\cup B}$ living in the corner-space. This density matrix can now be used to calculate the expectation values of observable.
+
+The more $M$ is large, the more the results are exact, because the basis~\ref{basis_corner} spans a larger part of the Hilbert space. Therefore, at this point the value of $M$ should be increased until the convergence is reached.
+
+In the work of~\cite{PhysRevLett.115.080604}, as in the present thesis, has been proved that convergence can be achieved with a number of states $M$ much smaller than the dimension of the Hilbert space.
+
+%The resulting dimension of the space in which, from now on - re-iterating the procedure - the system will be studied, is made smaller.
 
 \medskip
 In short, the algorithm is structured in the following stages, as sketched in the FIG:
@@ -34,6 +55,8 @@ In short, the algorithm is structured in the following stages, as sketched in th
     \item[selection] of the M most probable states as a basis for the so-called \emph{corner-space};
     \item[increase] of the dimension M of the corner-space until the convergence of the observable is achieved.
 \end{description}
+
+A detailed description of the implementation of the algorithm can be seen in~\ref{AppendixA}.
 
 
 \section{The Quantum Trajectories (QT) Method}
