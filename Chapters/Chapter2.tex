@@ -1,13 +1,24 @@
 \chapter{Numerical Methods for Open Quantum Systems}
 \label{Chapter2}
-To study an open quantum system consisting of $m$ subsystems, each of them characterized by an Hilbert space of dimension $N$, it is necessary to determine $N^{2m}$ variables, i.e. the square of the size of the Hilbert space. 
+As we have seen in the previous chapter, the study of an open quantum system requires the knowloedge of its density matrix, solution of the Lindblad master equation~\cite{presk:quant_info}:
+\begin{equation*}
+    \dot{\rho} = \mathcal{L}[\rho],
+\end{equation*}
+where
+\begin{equation}
+\label{eqn:lindblad_eqn}
+    \mathcal{L}[\rho] \equiv -i[H, \rho] +\sum_{a>0}\Bigl(L_a\rho L_a^{\dagger} - \frac{1}{2}L_a^{\dagger}L_a\rho - \frac{1}{2}\rho L_a^{\dagger}L_a\Bigl).
+\end{equation}
+In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ and we can say that the \emph{liouvillian space} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the ~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
+
+So, it becomes undeniable that new numerical techniques are required to solve these problems. 
 
 \section{The Corner-Space Renormalization (CSR) Method}
 \label{chapter2_csr}
 The numerical methods based on renormalization group à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
-Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be the central topic). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that:
+Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be one of the central topics). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that:
 \begin{equation}
     \frac{d\rho}{dt} = \mathcal{L} \rho.
 \end{equation}
@@ -152,9 +163,9 @@ and eventually the MPDO $\rho$ is obtained tracing over the indices referred to 
 \end{equation}
 this density matrix can be used to compute the expectation values of observables.
 
-***********
+%***********
 
-Another way of viewing the MPDO method is through the super-operatorial formalism.~\cite{PhysRevLett.93.207205}
+%Another way of viewing the MPDO method is through the super-operatorial formalism.~\cite{PhysRevLett.93.207205}
 
 
-***********
+%***********
