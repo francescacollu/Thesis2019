@@ -1,8 +1,10 @@
 \chapter{Numerical Methods for Open Quantum Systems}
+\label{Chapter2}
 To study an open quantum system consisting of $m$ subsystems, each of them characterized by an Hilbert space of dimension $N$, it is necessary to determine $N^{2m}$ variables, i.e. the square of the size of the Hilbert space. 
 
 \section{The Corner-Space Renormalization (CSR) Method}
-The numerical methods based on renormalization à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
+\label{chapter2_csr}
+The numerical methods based on renormalization group à la Wilson present a calculation problem due to the increase of the dimensions of the Hilbert space, while the blocks are merged; the fundamental aim of the corner-space renormalization method~\cite{PhysRevLett.115.080604} is to treat this problem. \\
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
 Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be the central topic). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that:
@@ -46,7 +48,7 @@ In the work of~\cite{PhysRevLett.115.080604}, as in the present thesis, has been
 
 %The resulting dimension of the space in which, from now on - re-iterating the procedure - the system will be studied, is made smaller.
 
-\medskip
+\bigskip
 In short, the algorithm is structured in the following stages, as sketched in the FIG:
 \begin{description}
     \item[calculation] of the steady-state density matrix of a single block of the system;
