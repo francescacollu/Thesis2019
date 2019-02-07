@@ -7,15 +7,18 @@ As we have seen in the previous chapter, the study of an open quantum system req
 where
 \begin{equation}
 \label{eqn:lindblad_eqn}
-    \mathcal{L}[\rho] \equiv -i[H, \rho] +\gamma \sum_{a>0}\Bigl(L_a\rho L_a^{\dagger} - \frac{1}{2}L_a^{\dagger}L_a\rho - \frac{1}{2}\rho L_a^{\dagger}L_a\Bigl),
+    \mathcal{L}[\rho] \equiv -i[H, \rho] -\gamma \sum_{a>0}\Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl),
 \end{equation}
 setting $\hbar = 1$.
 
 In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ while the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the equation~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
 
-So, it becomes undeniable that numerical techniques are required to solve these problems; in this section we will examine some of them.
+%The numerical methods employed in open quantum system problems can be classified in those that have a wave-function approach (quantum trajectories method, mean field method) and those that decompose the system into blocks (corner-space renormalization method, matrix product density operators method). 
+In this section, we will examine some of the numerical techniques used for studying open quantum systems with very different approaches.
 
-The numerical methods employed in open quantum system problems can be classified in those that have a wave-function approach (quantum trajectories method, mean field method) and those that decompose the system into blocks (corner-space renormalization method, matrix product density operators method). 
+Two of the numerical methods analyzed in this chapter are essentially based on the Wilson's \emph{renormalization group} approach~\cite{RevModPhys.47.773} combined with the fundamental contribution of the White's \emph{density matrix renormalization group} (DMRG) method~\cite{s_white:dmrg} and are the \emph{corner-space renormalization} and the \emph{matrix product density operators} methods. They both use the idea of a system decomposition into blocks; even if the basic idea is the same, the developed approaches are actually different.
+
+The third numerical method analyzed in the section~\ref{chapt2_qtm} is the \emph{quantum trajectories} method, based on the evolution of a Monte Carlo wave function.
 
 \section{The Corner-Space Renormalization (CSR) Method}
 \label{chapter2_csr}
@@ -23,11 +26,13 @@ The numerical methods based on renormalization group à la Wilson present a calc
 
 The name of this method refers to the idea of selecting a \emph{corner} of the Hilbert space for a lattice system, using eigenvectors of the steady-state density matrix of smaller lattices.
 
-Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites arranged to forming a 1D chain (the dimension of the system is not important at this stage, but in this thesis it will be one of the central topics). The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that:
+Let us start considering two blocks of a quantum system consisting in a certain number $N$ of sites. The CSR approach is a recursive process that begins with the calculation of the steady-state density matrix of a small block (the first \emph{block} will be a single site, in the second iteration it will be a small lattice constituted of the two blocks emerged in the previous iteration, and so on); this calculation can be done studying the spectrum of the eigenvalue of the Liouvillian and taking the zero value, considered that
 \begin{equation}
-    \frac{d\rho}{dt} = \mathcal{L} \rho.
+    \frac{d\rho}{dt} = \mathcal{L} \rho
 \end{equation}
-We now consider two spatially adjacent sites; the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to spatially merge these two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
+can be seen as an eigenvalue equation.
+
+We now consider two spatially adjacent sites: the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to spatially merge these two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
 
 In this way, we will have:
 \begin{equation}
@@ -85,21 +90,22 @@ A detailed description of the implementation of the algorithm can be seen in~\re
 
 
 \section{The Quantum Trajectories (QT) Method}
-A completely different approach is reached in the \emph{quantum trajectories method}, in which pure states are the subjects of the study, instead of density matrices. This means that a vector of length $N$ (where $N$ is the dimension of the Hilbert space) is stored, rather than a matrix of dimensions $NxN$.
+\label{chapt2_qtm}
+A completely different approach is reached in the \emph{quantum trajectories method}, in which pure states are the subjects of the study, instead of density matrices. This means that, if the Hilbert space has dimension $N$, the number of involved parameters ($\sim N$) is much smaller than the one required in calculations with density matrices ($\sim N^2$).
 
 The idea of this method can be summarised in the following way.
 
 First of all, given the~\ref{eqn:lindblad_eqn}, let us note that the \textbf{first three terms} of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
 \[
-H_{eff} = H_s + \rm{i}K,
+H_{\rm{eff}} = H_s + \rm{i}K,
 \]
 with
 \[
-K = -\frac{\hbar}{2}\sum_\mu L_{\mu}^{\dagger}L_{\mu}.
+K = -\frac{1}{2}\sum_\mu L_{\mu}^{\dagger}L_{\mu}.
 \]
-In fact, we see that:
+Indeed, we see that:
 \[
-    -\frac{\rm{i}}{\hbar}[H_{eff}, \rho] = -\frac{\rm{i}}{\hbar}[H_s, \rho] - \frac{1}{2}\sum_\mu \{L_{\mu}^{\dagger}L_{\mu}, \rho\}.
+    -i[H_{eff}, \rho] = -i[H_s, \rho] - \frac{1}{2}\sum_\mu \{L_{\mu}^{\dagger}L_{\mu}, \rho\}.
 \]
 
 The \textbf{last term} of the~\ref{eqn:lindblad_eqn}, is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the~\ref{eqn:lindblad_eqn} is called \emph{quantum jump picture}~\cite{PhysRevA.69.062317}. 
@@ -123,7 +129,7 @@ is the probability that a jump occurs; in this case, the system evolves in the s
 \end{equation}
 Otherwise, if no jump happens, the system evolves according to the effective Hamiltonian $H_{eff}$ in the following way:
 \begin{equation}
-    \ket{\phi_0} = \frac{(1-\textrm{i}H_{eff}dt/\hbar)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
+    \ket{\phi_0} = \frac{(1-\textrm{i}H_{eff}dt)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
 \end{equation}
 
 In order to decide if the jump occurs or not, a Monte Carlo method will be integrated in this picture. Namely, an uniform distribution in the unit interval $[0,1]$ is taken under consideration; for every experiment, a pseudo-random number $\epsilon$ is chosen from this uniform distribution, i.e. a coin is tossed: depending on the result of the throw, the possible situations are the following:
@@ -137,20 +143,20 @@ In order to decide if the jump occurs or not, a Monte Carlo method will be integ
     \item if $\epsilon > \sum_\mu dp_\mu$, the system evolves to the state $\ket{\phi_0}$.
 \end{itemize}
 
-This process has to be repeated as many times as $n = \frac{T}{dt}$, where $T$ is the whole elapsed time during the evolution. Let us note that $dt$ must be taken much smaller than the evolution time of the system.
+This process has to be repeated as many times as $n = \frac{T}{dt}$, where $T$ is the whole elapsed time during the evolution. Let us note that $dt$ must be taken much smaller than the scales relevant for the evolution of the system.
 
 Every \emph{experiment}, i.e. every throw of the coin, gives a different \emph{quantum trajectory}, which can be used to calculate the mean value of an observable $A$ at a certain time $t$, in this way:
 \begin{equation}
     \langle A(t)\rangle = \bra{\phi_i(t)}A\ket{\phi_i(t)}.
 \end{equation}
-Since this is a result of a Monte Carlo process, a good idea to obtain a reasonable outcome is to repeat the \emph{experiment} a number $N$ of times and to take the mean value of the results:
+Since this results from a Monte Carlo process, we can consider the mean value over $N$ \emph{experiments}:
 \begin{equation}
     \langle A(t)\rangle = \lim_{N\to\infty} \frac{1}{N}\sum_{i=1}^{N}\bra{\phi_i(t)}A\ket{\phi_i(t)}.
 \end{equation}
 
 
 \section{The Matrix Product Density Operators (MPDO) Method}
-The last numerical method analyzed in this overview, is the \emph{matrix product density operators method} (MPDOM).
+Finally, we will analyze the \emph{matrix product density operators} (MPDO) method.
 This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg}. The reason why the DMRG is a powerful method is because the many-body states of some 1D problems can be described in terms of the so-called \emph{matrix product states} (MPS)~\cite{PhysRevLett.93.207204, PhysRevLett:from_dmrg_to_mps}:
 \begin{equation}
     \ket{\psi_{MPS}} = \sum_{i_1, ..., i_N = 1}^{d} \Tr(A^{[1]i_N}...A^{[N]i_N}) \ket{i_1,...,i_N},
@@ -185,10 +191,11 @@ we recall that $\hat{\mathcal{L}}$ is a Liouvillian super-operator defined in eq
 \begin{equation}
     \hat{\mathcal{L}}[\rho] = \sum_l \hat{\mathcal{L}}_{l,l+1}[\rho].
 \end{equation}
-At this point, the decomposition will be complete on  the~\ref{eqn:lindblad_dinamics}, with the support of the Trotter-Suzuki formula; for every time step $\tau$, we will have:
+For every time step $\tau$, we use the Trotter-Suzuki formula:
 \begin{equation*}
-    e^{\hat{\mathcal{L}}\tau} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^2).
+    e^{\hat{\mathcal{L}}\tau} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
 \end{equation*}
+with $p$ depending on the required accuracy.
 
 
 %\noindent\rule[0.5ex]{\linewidth}{1pt}
