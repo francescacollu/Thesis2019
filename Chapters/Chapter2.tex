@@ -7,13 +7,15 @@ As we have seen in the previous chapter, the study of an open quantum system req
 where
 \begin{equation}
 \label{eqn:lindblad_eqn}
-    \mathcal{L}[\rho] \equiv -i[H, \rho] +\sum_{a>0}\Bigl(L_a\rho L_a^{\dagger} - \frac{1}{2}L_a^{\dagger}L_a\rho - \frac{1}{2}\rho L_a^{\dagger}L_a\Bigl).
+    \mathcal{L}[\rho] \equiv -i[H, \rho] +\gamma \sum_{a>0}\Bigl(L_a\rho L_a^{\dagger} - \frac{1}{2}L_a^{\dagger}L_a\rho - \frac{1}{2}\rho L_a^{\dagger}L_a\Bigl),
 \end{equation}
-In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ and we can say that the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the ~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
+setting $\hbar = 1$.
 
-So, it becomes undeniable that numerical techniques are required to solve these problems; in this section we will examine some of the most used at this time.
+In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ while the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the equation~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
 
-The numerical methods employed in open quantum system problems can be classified in  
+So, it becomes undeniable that numerical techniques are required to solve these problems; in this section we will examine some of them.
+
+The numerical methods employed in open quantum system problems can be classified in those that have a wave-function approach (quantum trajectories method, mean field method) and those that decompose the system into blocks (corner-space renormalization method, matrix product density operators method). 
 
 \section{The Corner-Space Renormalization (CSR) Method}
 \label{chapter2_csr}
@@ -63,7 +65,7 @@ In the work of~\cite{PhysRevLett.115.080604}, as in the present thesis, has been
 %The resulting dimension of the space in which, from now on - re-iterating the procedure - the system will be studied, is made smaller.
 
 \bigskip
-In short, the algorithm is structured in the following stages, as sketched in the FIG:
+In short, the algorithm is structured in the following stages, as sketched in the figure~\ref{fig:csr_sketch}:
 \begin{description}
     \item[calculation] of the steady-state density matrix of a single block of the system;
     \item[merger] of two predetermined blocks;
@@ -71,6 +73,13 @@ In short, the algorithm is structured in the following stages, as sketched in th
     \item[selection] of the M most probable states as a basis for the so-called \emph{corner-space};
     \item[increase] of the dimension M of the corner-space until the convergence of the observable is achieved.
 \end{description}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{Figures/csr_method_sketch.png}
+    \caption{Sketch of the corner space renormalization method.}
+    \label{fig:csr_sketch}
+\end{figure}
 
 A detailed description of the implementation of the algorithm can be seen in~\ref{AppendixA}.
 
@@ -146,19 +155,19 @@ This method is rooted in one of the first and most efficient numerical methods: 
 \begin{equation}
     \ket{\psi_{MPS}} = \sum_{i_1, ..., i_N = 1}^{d} \Tr(A^{[1]i_N}...A^{[N]i_N}) \ket{i_1,...,i_N},
 \end{equation}
-where the $A$'s are matrices with dimensions $\chi$ and $d$ is the dimension of the Hilbert space of every sub-system $i_k$. The total number of parameters turns out to be $N \times d \times \chi^2$, i.e. linear in $N$.
+where the $A$'s are matrices with dimensions D and $d$ is the dimension of the Hilbert space of every sub-system $i_k$. The total number of parameters turns out to be $N \times d \times D^2$, i.e. it is linear in $N$.
 
 The matrix product \emph{density operators} (MPDO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. 
 \begin{equation}
 \label{eqn:mpdo}
     \rho = \sum_{i_1, \dots ,i_N = 1}^{d} \sum_{j_1, \dots ,j_N = 1}^{d} \Tr\Bigl(A^{[1]i_1,j_1} \dots A^{[N]i_N,j_N}\Bigl) \ket{i_1, \dots ,i_N}\bra{j_1, \dots ,j_N},
 \end{equation}
-where $A^{[k]i_k,j_k}$ are $\chi^2 \times \chi^2$ matrices that can be written in this way:
+where $A^{[k]i_k,j_k}$ are $D^2 \times D^2$ matrices that can be written in this way:
 \begin{equation}
     A^{[k] i,j} = \sum_{a = 1}^{d_k} B_k^{i,a} \otimes (B_k^{j,a})^*.
 \end{equation}
 
-Another way of considering the expression~\ref{eqn:mpdo} is the graphical notation to represent a tensor $A^{[k] i,j}$ sketched in figure~\ref{fig:tensor_network}. Here, every tensor is represented by a square with 4 links: two for the bonds with the neighbours, two are the physical indices instead (the "bras" and "kets"). 
+Another way of considering the expression~\ref{eqn:mpdo} is the graphical notation to represent a tensor $A^{[k] i,j}$ sketched in figure~\ref{fig:tensor_network}. Here, every tensor is represented by a square with 4 legs: there are two of them for the bonds with the neighbours, the other two for the physical indices (the "bras" and "kets"). 
 
 \begin{figure}[H]
     \centering
@@ -167,7 +176,19 @@ Another way of considering the expression~\ref{eqn:mpdo} is the graphical notati
     \label{fig:tensor_network}
 \end{figure}
 
-
+As regards dynamics, the formal solution of~\ref{eqn:lindblad_eqn} can be written as
+\begin{equation}
+\label{eqn:lindblad_dinamics}
+    \rho(t) = e^{\hat{\mathcal{L}}t}\rho(0);
+\end{equation}
+we recall that $\hat{\mathcal{L}}$ is a Liouvillian super-operator defined in equation~\ref{eqn:lindblad_eqn}. As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ can be decomposed into terms that involve two contiguous sites, as
+\begin{equation}
+    \hat{\mathcal{L}}[\rho] = \sum_l \hat{\mathcal{L}}_{l,l+1}[\rho].
+\end{equation}
+At this point, the decomposition will be complete on  the~\ref{eqn:lindblad_dinamics}, with the support of the Trotter-Suzuki formula; for every time step $\tau$, we will have:
+\begin{equation*}
+    e^{\hat{\mathcal{L}}\tau} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^2).
+\end{equation*}
 
 
 %\noindent\rule[0.5ex]{\linewidth}{1pt}
