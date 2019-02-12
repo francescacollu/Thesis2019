@@ -1,10 +1,5 @@
-% Chapter 1
-
-\chapter{Open Quantum Systems} % Main chapter title
-
-\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
-
-%----------------------------------------------------------------------------------------
+\chapter{Open Quantum Systems}
+\label{Chapter1}
 
 % Define some commands to keep the formatting separated from the content 
 \newcommand{\keyword}[1]{\textbf{#1}}
@@ -14,6 +9,39 @@
 \newcommand{\option}[1]{\texttt{\itshape#1}}
 
 %----------------------------------------------------------------------------------------
+The world we live in is constituted by parts that communicate with each other and exchange information \textcolor{red}{[EXAMPLES]}. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome these problems, simplifications and mathematical representation have been brought about in this field: in the following we will see some of them. 
+
 \section{Closed and Open Quantum Systems}
+Before we explore the field of open quantum systems, let us observe what are the differences between a closed and an open quantum system and why different approaches are required to treat these two distinct kinds of system. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
+
+In this section, we will briefly look at the different approaches in the study of the dynamics in closed and open quantum systems. 
+
+\subsection{Pure and mixed states}
+First of all, it is useful consider another formalism in addition to that used normally for handling pure states. We now introduce the \emph{density matrix} formalism for managing the so-called mixed states. The essential difference between this two kind of states 
+
+\subsection{Closed Quantum Systems}
+Quantum mechanics establishes that the time evolution of a state vector $\ket{\psi(t)}$ is predicted by the Schrödinger equation:
+\begin{equation}
+\label{eqn:schrod_eq}
+    i\frac{d}{dt}\ket{\psi(t)} = H(t)\ket{\psi(t)},
+\end{equation}
+where $H(t)$ is the Hamiltonian of the closed system and Planck's constant $\hbar$ has been set equal to 1.
+The solution of this equation can be written in terms of the unitary time-evolution operator $U(t, t_0)$:
+\begin{equation}
+\label{eqn:schrod_u}
+    \ket{\psi(t)} = U(t, t_0)\ket{\psi(t_0)},
+\end{equation}
+where $t_0 < t$. If we substitute the equation~\ref{eqn:schrod_u} into the~\ref{eqn:schrod_eq}, we obtain:
+\begin{equation}
+    i\frac{d}{dt}U(t, t_0) = H(t)U(t, t_0),
+\end{equation}
+subject to the initial condition
+\begin{equation}
+    U(t_0, t_0) = \mathds{1}.
+\end{equation}
+
+\subsection{Open Quantum Systems}
+
+
 \section{Open Quantum Systems: the Liouvillian-von Neumann \\Master Equation}
 \section{Many-Body Open Quantum Systems}
