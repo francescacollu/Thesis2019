@@ -140,33 +140,133 @@ i.e. an equation of motion for the density matrix, often called the \emph{Liouvi
 
 
 \subsection{Open Quantum Systems}
-Now we can go into a more specific definition of open quantum systems. It can be defined as a system $S$ coupled with another quantum system $B$, called the \emph{environment}. Usually, the total system $S+B$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems cause an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, when the reservoir is in thermal equilibrium state, is called \emph{bath}.
+Now we can go into a more specific definition of open quantum systems. It can be defined as a system $S$ coupled with another quantum system $E$, called the \emph{environment}. Usually, the total system $S+E$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems cause an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, when the reservoir is in thermal equilibrium state, is called \emph{bath}.
 
-Let us call $\mathcal{H}_S$ and $\mathcal{H}_B$ the Hilbert spaces of the system and the environment, respectively. The Hilbert space of the combined system is given by the tensor product $\mathcal{H}_{S+B} = \mathcal{H}_S \otimes \mathcal{H}_B$. So, the total Hamiltonian can be written in this way:
+Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system and the environment, respectively. The Hilbert space of the combined system is given by the tensor product $\mathcal{H}_{S+E} = \mathcal{H}_S \otimes \mathcal{H}_E$. So, the total Hamiltonian can be written in this way:
 \begin{equation}
-    H(t) = H_S \otimes \mathds{1}_B + \mathds{1}_S \otimes H_B + H_I(t),
+    H(t) = H_S \otimes \mathds{1}_E + \mathds{1}_S \otimes H_E + H_I(t),
 \end{equation}
-where $H_S$ and $H_B$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $B$.
+where $H_S$ and $H_E$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $E$.
 
 At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\textcolor{red}{[PROOF?]}:
 \begin{equation}
-    \rho_S = \Tr_B(\rho).
+    \rho_S = \Tr_E(\rho).
 \end{equation}
 This can help us in the study of the dynamics of the so-called \emph{reduced} density matrix $\rho_S$. Indeed, we can write:
 \begin{equation}
-    \rho_S(t) = \Tr_B\{\rho(t)\};
+    \rho_S(t) = \Tr_E\{\rho(t)\};
 \end{equation}
 observing that we assumed the total system to be \emph{closed}, it evolves unitarily so we have:
 \begin{equation}
     \rho_S(t) = \Tr_B\{U(t, t_0)\rho(t_0)U(t, t_0)^\dagger\},
 \end{equation}
-where $U(t, t_0)$ is the time-evolution operator of the combined system $S+B$. So we can use the equation of motion~\ref{eqn:motion_closed_dm} and trace over the degrees of freedom of the environment, in order to obtain the equation of motion for the $\rho_S(t)$:
+where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. So we can use the equation of motion~\ref{eqn:motion_closed_dm} and trace over the degrees of freedom of the environment, in order to obtain the equation of motion for the $\rho_S(t)$:
 \begin{equation}
+\label{eqn:motion_open}
     \frac{d}{dt}\rho_S(t) = -i \Tr_B[H(t), \rho(t)].
 \end{equation}
 
 \section{Approximate Dynamics of Open Quantum Systems}
+Since solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because \textcolor{red}{WHY} of the complexity of the environment.
 
-\subsection{The Dynamical Map}
+\subsection{Quantum Dynamical Semigroups}
+For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
+\begin{equation}
+    \matcal{\varepsilon}_{(t_1, t_0)}: \hspace{1cm} \rho_S(t_0) \mapsto \rho_S(t_1).
+\end{equation}
+In order to obtain the way in which this map acts on the states, we consider a system consisting in two sub-systems $S+E$, that are uncorrelated\textcolor{red}{[FOOTNOTE]} at the initial time $t=0$, so that 
+\begin{equation}
+    \rho(0) = \rho_S(0) \otimes \rho_E,
+\end{equation}
+where $\rho_S(0)$ is the initial state of the system $S$, $\rho_E$ represents the state of the environment \textcolor{red}{[QUESTION]}. The evolution of the system $S$ from the time $t=0$ to the time $t>0$ is governed by the map, in this way:
+\begin{equation}
+    \rho_S(0) \mapsto \rho_S(t) = \matcal{\varepsilon}(t)\rho_S(0) \equiv \Tr_E \{U(t, 0)[\rho_S(0) \otimes \rho_E] U^\dagger(t,0)\}.
+\end{equation}
+As explained by~\cite{presk:quant_info} \textcolor{red}{[EXPLAIN]}, the dynamical map can be expressed in terms of the following so-called \emph{operator-sum} representation:
+\begin{equation}
+    \varepsilon(\rho) = \sum_a M_a \rho M_a^\dagger,
+\end{equation}
+where the $\{M_a\}$ obey the completeness relation
+\begin{equation}
+\label{compl_rel_kraus}
+    \sum_a M_a^\dagger M_a = \mathds{1}
+\end{equation}
+and are called \emph{Kraus operators}. This object has some essential features that give it the name \emph{trace-preserving completely positive map} or \emph{TPCP map}; as its name suggests, its properties are:
+\begin{itemize}
+    \item linearity: 
+    \begin{equation*}
+        \varepsilon(\alpha\rho_1 + \beta\rho_2) = \alpha\varepsilon(\rho_1) + \beta\varepsilon(\rho_2);
+    \end{equation*}
+    \item preserves Hermiticity: 
+    \begin{equation*}
+        \rho = \rho^\dagger \implies \varepsilon(\rho) = \varepsilon(\rho)^\dagger;
+    \end{equation*}
+    \item preserves positivity\footnote{In fact, the map satisfies a stronger property, i.e. it is completely positive; this means that if $\varepsilon$ has an operator-sum representation with Kraus operators $\{M_a\}$, then $\varepsilon \otimes \mathds{1}$ has an operator-sum representation with Kraus operators $\{M_a \otimes \mathds{1}\}$.}:
+    \begin{equation*}
+        \rho \geq 0 \implies \varepsilon(\rho) \geq 0;
+    \end{equation*}
+    \item preserves trace:
+    \begin{equation*}
+        \Tr [\varepsilon(\rho)] = \Tr (\rho).
+    \end{equation*}
+\end{itemize}
+\textcolor{red}{[PROOF?]}
+
+The TPCP maps are called by other names; one of them is \emph{super-operator}, due to its function of connecting operators with operators, rather than vectors with vectors. Another name used in the field of Quantum Information is \emph{quantum channel}, that originates from communication theory and gives the image of the "channel" throughout the state $\rho$ travels to reach its destination as $\varepsilon(\rho)$.
+
+There is a reason why we can say that the TPCP maps form a \emph{dynamical semigroup}: that is because the associative property is satisfied. Indeed, if $\varepsilon_1$ is a TPCP map with $N$ Kraus operators $\{A_a\}$ and $\varepsilon_2$ is a TPCP map with $M$ Kraus operators $\{B_b\}$, than $\varepsilon_1 \circ \varepsilon_2$ has an operator-sum representation with $NM$ Kraus operators $\{A_aB_b\}$.
+
+\subsection{The Markovian Evolution}
+With a view to expressing the evolution of the density operator by a differential equation,  let us analyze if the evolution of an open quantum system can be described as a Markovian process\footnote{Let us recall what a Markovian process is: a stochastic process is a Markovian process if the probability that the random variable $X$ takes the value $x_n$ at an arbitrary time $t_n$, is conditioned only by the value $x_{n-1}$ that it took at time $t_{n-1}$ and does not depend on the values at earlier times.}, i.e. \emph{local in time}. The reasons of this lie in the fact that if we want that a (first order) differential equation in $t$ governs the evolution of $\rho(t)$, $\rho(t+dt)$ must be completely determined by $\rho(t)$.
+
+So, a problem emerges: an open system is \emph{dissipative}, in the sense that information can flow from the system into the environment but also can flow back from the environment into the system, causing non-Markovian fluctuations. This fact seems to outdistance the possibility of applying the Markovian model.  A possible solution is neglecting the typical correlation time of the fluctuations respect to the time scale of the evolution that we want to study.
+
 \subsection{The Lindblad Master Equation}
-\section{Many-Body Open Quantum Systems}
+Once we take for granted that the dynamics is Markovian, we can write the evolution for the infinitesimal time interval $dt$:
+\begin{equation}
+    \rho(t+dt) = \varepsilon_{dt}[\rho(t)].
+\end{equation}
+Expanding $\varepsilon_{dt}$ to first order, we get:
+\begin{equation}
+\label{expantion_eps}
+    \varepsilon_{dt} = \mathds{1} + dt\mathcal{L},
+\end{equation}
+and we find
+\begin{equation}
+    \Dot{\rho} = \mathcal{L}[\rho],
+\end{equation}
+where the linear map generating time evolution $\mathcal{L}$ is called \emph{Liouvillian} or \emph{Linbladian}. 
+The quantum channel~\ref{expantion_eps} has the operator-sum representation
+\begin{equation}
+\label{op_sum_repr}
+    \varepsilon_{dt}[\rho(t)] = \sum_a M_a \rho(t) M_a^\dagger = \rho(t) + \mathcal{O}(dt).
+\end{equation}
+So we may assume that $M_0 = \mathds{1} + \mathcal{O}(dt)$ and the $M_a$ is of order $\sqrt{dt}$ for $a>0$. In particular, we can write:
+\begin{align}
+    M_0 &= \mathds{1} + (-iH+K)dt \\
+    M_a &= \sqrt{dt}L_a,
+\end{align}
+where $H$, $K$ are both hermitian and $L_a$, H, K are zeroth order in $dt$.
+Now, we can determine $K$ using the completeness relation~\ref{compl_rel_kraus}:
+\begin{align}
+    \mathds{1} &= \sum_{a=0}^N M_a^\dagger M_a \\
+               &= M_0^\dagger M_0 + \sum_{a=1}^N L_a^\dagger L_a dt \\
+               &= \mathds{1} +2Kdt + \sum_{a=1}^N L_a^\dagger L_a dt + \mathcal{O}(dt^2),
+\end{align}
+so, keeping terms up to linear order in $dt$ we have:
+\begin{equation*}
+    K = \frac{1}{2} \sum_{a=1}^N L_a^\dagger L_a.
+\end{equation*}
+Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}:
+\begin{equation}
+\label{eqn:lindblad_eqn}
+    \dot{\rho} = \mathcal{L}[\rho] \equiv -i[H, \rho] - \sum_{a=1}^? \gamma_a \Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl).
+\end{equation}
+This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The non-negative quantities $\gamma_a$ have the dimension of an inverse time and have the physical meaning of dissipation rate.
+
+It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents the unitary part of the dynamics generated by the Hamiltonian; the second part, instead, describes the possible evolution that the system may endure due to the interaction with the environment. Indeed, the $L_a$ are called \emph{quantum jump operators} or \emph{Lindblad operators}.
+
+
+
+\section{Open Many-Body Quantum Systems}
+
