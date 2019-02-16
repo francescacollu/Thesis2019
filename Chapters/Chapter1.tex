@@ -244,7 +244,7 @@ The quantum channel~\ref{expantion_eps} has the operator-sum representation
 So we may assume that $M_0 = \mathds{1} + \mathcal{O}(dt)$ and the $M_a$ is of order $\sqrt{dt}$ for $a>0$. In particular, we can write:
 \begin{align}
     M_0 &= \mathds{1} + (-iH+K)dt \\
-    M_a &= \sqrt{dt}L_a,
+    M_a &= \sqrt{dt}L_a, \hspace{1cm} a = 1,\dots,?
 \end{align}
 where $H$, $K$ are both hermitian and $L_a$, H, K are zeroth order in $dt$.
 Now, we can determine $K$ using the completeness relation~\ref{compl_rel_kraus}:
@@ -269,4 +269,23 @@ It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents th
 
 
 \section{Open Many-Body Quantum Systems}
+Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields. In this section, we will examine some of the phenomena and tools useful to better understand such systems. For now, let us recall that the Hilbert space of a composite quantum system is the tensor product of the Hilbert spaces of the sub-systems that constitute the system.
 
+\subsection{Schmidt Decomposition and Entanglement}
+A very useful tool is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
+\newtheorem{theo}{Theorem}[section]
+\begin{theo}
+    Let us suppose that $\ket{\Psi}$ is a pure state of a composite system $AB$, that lives in the Hilbert space given by the tensor product $\mathcal{H}_A \otimes \mathcal{H}_B$. Then there exist orthonormal bases, the Schmidt bases, $\{\chi_i^{(A)}\}$ and $\{\chi_j^{(B)}\}$, in $\mathcal{H}_A$ and $\mathcal{H}_B$, respectevely, such that
+    \begin{equation}
+        \ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}.
+    \end{equation}
+    The $\alpha_i$ are complex numbers called Schmidt coefficients.
+\end{theo}
+\begin{proof}
+Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
+Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
+\end{proof}
+
+
+
+\subsection{Entropy}
