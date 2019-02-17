@@ -279,13 +279,13 @@ A very useful tool is the \emph{Schmidt decomposition}, that we present here fol
     \begin{equation}
         \ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}.
     \end{equation}
-    The $\alpha_i$ are complex numbers called Schmidt coefficients.
+    The $\alpha_i$ are complex numbers called Schmidt coefficients and the number of non-zero $\alpha_i$ is called Schmidt number.
 \end{theo}
 \begin{proof}
 Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
 Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
 \end{proof}
 
-
+A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it \textbf{cannot} be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ \textbf{can} be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
 
 \subsection{Entropy}
