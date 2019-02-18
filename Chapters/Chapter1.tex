@@ -1,5 +1,6 @@
 \chapter{Open Quantum Systems}
 \label{Chapter1}
+\epigraph{The motivation for studying open systems is that all realistic systems are open.}{John Preskill}
 
 % Define some commands to keep the formatting separated from the content 
 \newcommand{\keyword}[1]{\textbf{#1}}
@@ -9,12 +10,13 @@
 \newcommand{\option}[1]{\texttt{\itshape#1}}
 
 %----------------------------------------------------------------------------------------
-The world we live in is constituted by parts that communicate with each other and exchange information \textcolor{red}{[EXAMPLES]}. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome these problems, simplifications and mathematical representation have been brought about in this field: in the following we will see some of them. 
+The world we live in is constituted by parts that communicate with each other and exchange information. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome these complexity, simplifications and easier mathematical representations have been developed: in the following we will see some of them.
 
-Several resources have been helpful in the \dots
+This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
 
 \section{Closed and Open Quantum Systems}
-Before we explore the field of open quantum systems, let us observe what are the differences between a closed and an open quantum system and why different approaches are required to treat these two distinct kinds of system. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
+\label{cl_open_qs}
+Before we explore the field of open quantum systems, we now observe what the differences between a closed and an open quantum system are and why different approaches are required to treat these two distinct kinds of system. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
 
 In this section, we will briefly look at the different approaches in the study of the dynamics in closed and open quantum systems. 
 
@@ -27,7 +29,7 @@ Quantum systems for which the maximum possible information is not available, are
 
 Let us consider a system consisting of an ensemble of N sub-systems $\alpha = 1, 2, \dots , N$. We suppose that every sub-system is in a pure state $\ket{\psi_\alpha}$. Then, we choose a complete set of basis vectors $\ket{n}$, such that $\sum_n \ket{n}\bra{n} = \mathds{1}$. Let us expand the pure states in the basis $\{\ket{n}\}$:
 \begin{equation*}
-    \ket{\psi_\alpha} = \sum_n c_n^{\alpha}\ket{n},
+    \ket{\psi_\alpha} = \sum_n c_n^{(\alpha)}\ket{n},
 \end{equation*}
 where the coefficients $c_n^{(\alpha)}$ are such that
 \begin{equation*}
@@ -148,11 +150,11 @@ Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system
 \end{equation}
 where $H_S$ and $H_E$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $E$.
 
-At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\textcolor{red}{[PROOF?]}:
+At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., by ref.~\cite{nielsen_chuang}.}:
 \begin{equation}
     \rho_S = \Tr_E(\rho).
 \end{equation}
-This can help us in the study of the dynamics of the so-called \emph{reduced} density matrix $\rho_S$. Indeed, we can write:
+This helps us in the study of the dynamics of the so-called \emph{reduced} density matrix $\rho_S$. Indeed, we can write:
 \begin{equation}
     \rho_S(t) = \Tr_E\{\rho(t)\};
 \end{equation}
@@ -166,23 +168,39 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
     \frac{d}{dt}\rho_S(t) = -i \Tr_B[H(t), \rho(t)].
 \end{equation}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Approximate Dynamics of Open Quantum Systems}
-Since solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because \textcolor{red}{WHY} of the complexity of the environment.
+\label{appr_dynam_oqs}
+Solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
 
 \subsection{Quantum Dynamical Semigroups}
 For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
 \begin{equation}
-    \matcal{\varepsilon}_{(t_1, t_0)}: \hspace{1cm} \rho_S(t_0) \mapsto \rho_S(t_1).
+    \matcal{\varepsilon}_{(t_1, t_0)}: \quad \rho_S(t_0) \mapsto \rho_S(t_1).
 \end{equation}
-In order to obtain the way in which this map acts on the states, we consider a system consisting in two sub-systems $S+E$, that are uncorrelated\textcolor{red}{[FOOTNOTE]} at the initial time $t=0$, so that 
+In order to obtain the way in which this map acts on the states, we consider a system consisting in two sub-systems $S+E$, that are uncorrelated\footnote{Initial correlations between environment and the open system play significant role in the dynamics of open systems~\cite{PhysRevA.64.062106}.} at the initial time $t=0$, so that 
 \begin{equation}
-    \rho(0) = \rho_S(0) \otimes \rho_E,
+    \rho(0) = \rho_S(0) \otimes \rho_E(0),
 \end{equation}
-where $\rho_S(0)$ is the initial state of the system $S$, $\rho_E$ represents the state of the environment \textcolor{red}{[QUESTION]}. The evolution of the system $S$ from the time $t=0$ to the time $t>0$ is governed by the map, in this way:
+where $\rho_S(0)$ is the initial state of the system $S$ and $\rho_E(0)$ represents the state of the environment at time $t=0$. The evolution of the system $S$ from the time $t=0$ to the time $t>0$ is governed by the map, in this way:
 \begin{equation}
-    \rho_S(0) \mapsto \rho_S(t) = \matcal{\varepsilon}(t)\rho_S(0) \equiv \Tr_E \{U(t, 0)[\rho_S(0) \otimes \rho_E] U^\dagger(t,0)\}.
+\label{dynam_map}
+    \rho_S(0) \mapsto \rho_S(t) = \matcal{\varepsilon}(t)\rho_S(0) \equiv \Tr_E \{U(t, 0)[\rho_S(0) \otimes \rho_E(0)] U^\dagger(t,0)\}.
 \end{equation}
-As explained by~\cite{presk:quant_info} \textcolor{red}{[EXPLAIN]}, the dynamical map can be expressed in terms of the following so-called \emph{operator-sum} representation:
+Using the spectral decomposition of the density matrix $\rho_E$ of the environment
+\begin{equation*}
+    \rho_E = \sum_i \lambda_i \ket{\psi_i}\bra{\psi_i},
+\end{equation*}
+we can perform the partial trace of~\ref{dynam_map} in this basis, obtaining:
+\begin{equation}
+\begin{split}
+    \rho_S(t) &= \sum_{ij} \lambda_i \bra{\psi_j}U(t,0)\ket{\psi_i}\rho_S(0) \bra{\psi_i}U^\dagger(t,0)\ket{\psi_j}\\
+                &= \sum_a M_a \rho_S(0) M_a^\dagger.
+\end{split}
+\end{equation}
+So, the dynamical map can be expressed in terms of the following so-called \emph{operator-sum} representation:
 \begin{equation}
     \varepsilon(\rho) = \sum_a M_a \rho M_a^\dagger,
 \end{equation}
@@ -191,7 +209,11 @@ where the $\{M_a\}$ obey the completeness relation
 \label{compl_rel_kraus}
     \sum_a M_a^\dagger M_a = \mathds{1}
 \end{equation}
-and are called \emph{Kraus operators}. This object has some essential features that give it the name \emph{trace-preserving completely positive map} or \emph{TPCP map}; as its name suggests, its properties are:
+and are called \emph{Kraus operators} and are defined as
+\begin{equation}
+    M_a = \sqrt{\lambda_i} \bra{\psi_j}U(t,0)\ket{\psi_i}_a.
+\end{equation}
+This object has some essential features that give it the name \emph{trace-preserving completely positive map} or \emph{TPCP map}; as its name suggests, its properties\footnote{A detailed proof of the properties can be found in ref.~\cite{presk:quant_info}.} are:
 \begin{itemize}
     \item linearity: 
     \begin{equation*}
@@ -199,7 +221,7 @@ and are called \emph{Kraus operators}. This object has some essential features t
     \end{equation*}
     \item preserves Hermiticity: 
     \begin{equation*}
-        \rho = \rho^\dagger \implies \varepsilon(\rho) = \varepsilon(\rho)^\dagger;
+        \rho = \rho^\dagger \implies \varepsilon(\rho) = \varepsilon^\dagger(\rho);
     \end{equation*}
     \item preserves positivity\footnote{In fact, the map satisfies a stronger property, i.e. it is completely positive; this means that if $\varepsilon$ has an operator-sum representation with Kraus operators $\{M_a\}$, then $\varepsilon \otimes \mathds{1}$ has an operator-sum representation with Kraus operators $\{M_a \otimes \mathds{1}\}$.}:
     \begin{equation*}
@@ -210,7 +232,6 @@ and are called \emph{Kraus operators}. This object has some essential features t
         \Tr [\varepsilon(\rho)] = \Tr (\rho).
     \end{equation*}
 \end{itemize}
-\textcolor{red}{[PROOF?]}
 
 The TPCP maps are called by other names; one of them is \emph{super-operator}, due to its function of connecting operators with operators, rather than vectors with vectors. Another name used in the field of Quantum Information is \emph{quantum channel}, that originates from communication theory and gives the image of the "channel" throughout the state $\rho$ travels to reach its destination as $\varepsilon(\rho)$.
 
@@ -244,34 +265,40 @@ The quantum channel~\ref{expantion_eps} has the operator-sum representation
 So we may assume that $M_0 = \mathds{1} + \mathcal{O}(dt)$ and the $M_a$ is of order $\sqrt{dt}$ for $a>0$. In particular, we can write:
 \begin{align}
     M_0 &= \mathds{1} + (-iH+K)dt \\
-    M_a &= \sqrt{dt}L_a, \hspace{1cm} a = 1,\dots,?
+    M_a &= \sqrt{dt}L_a, \hspace{1cm} a = 1,\dots,N^2-1
 \end{align}
-where $H$, $K$ are both hermitian and $L_a$, H, K are zeroth order in $dt$.
+where $H$, $K$ are both hermitian, $L_a$, H, K are zeroth order in $dt$ and $N$ is the dimension of the Hilbert space.
 Now, we can determine $K$ using the completeness relation~\ref{compl_rel_kraus}:
-\begin{align}
-    \mathds{1} &= \sum_{a=0}^N M_a^\dagger M_a \\
-               &= M_0^\dagger M_0 + \sum_{a=1}^N L_a^\dagger L_a dt \\
-               &= \mathds{1} +2Kdt + \sum_{a=1}^N L_a^\dagger L_a dt + \mathcal{O}(dt^2),
-\end{align}
+\begin{equation}
+\begin{split}
+    \mathds{1} &= \sum_{a=0}^{N^2-1} M_a^\dagger M_a \\
+               &= M_0^\dagger M_0 + \sum_{a=1}^{N^2-1} L_a^\dagger L_a dt \\
+               &= \mathds{1} +2Kdt + \sum_{a=1}^{N^2-1} L_a^\dagger L_a dt + \mathcal{O}(dt^2),
+\end{split}
+\end{equation}
 so, keeping terms up to linear order in $dt$ we have:
 \begin{equation*}
-    K = \frac{1}{2} \sum_{a=1}^N L_a^\dagger L_a.
+    K = \frac{1}{2} \sum_{a=1}^{N^2-1} L_a^\dagger L_a.
 \end{equation*}
 Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}:
 \begin{equation}
 \label{eqn:lindblad_eqn}
-    \dot{\rho} = \mathcal{L}[\rho] \equiv -i[H, \rho] - \sum_{a=1}^? \gamma_a \Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl).
+    \dot{\rho} = \mathcal{L}[\rho] \equiv -i[H, \rho] - \sum_{a=1}^{N^2-1} \gamma_a \Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl).
 \end{equation}
-This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The non-negative quantities $\gamma_a$ have the dimension of an inverse time and have the physical meaning of dissipation rate.
+This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The quantities $\gamma_a$ are non-negative numbers that have the dimension of an inverse time and have the physical meaning of dissipation rate\footnote{For a more detailed derivation of the~\ref{eqn:lindblad_eqn}, ref.~\cite{pet_breuer:open_quantum} is suggested.}.
 
 It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents the unitary part of the dynamics generated by the Hamiltonian; the second part, instead, describes the possible evolution that the system may endure due to the interaction with the environment. Indeed, the $L_a$ are called \emph{quantum jump operators} or \emph{Lindblad operators}.
 
 
 
 \section{Open Many-Body Quantum Systems}
-Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields. In this section, we will examine some of the phenomena and tools useful to better understand such systems. For now, let us recall that the Hilbert space of a composite quantum system is the tensor product of the Hilbert spaces of the sub-systems that constitute the system.
+\label{many_body_oqs}
+Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields as, e.g., Quantum Information. In this section, we will examine some of the phenomena and tools useful to better understand such systems. 
 
-\subsection{Schmidt Decomposition and Entanglement}
+\subsection{Bipartite Pure States}
+In the study of open many-body systems, 
+
+\subsubsection{Schmidt Decomposition and Entanglement}
 A very useful tool is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
 \newtheorem{theo}{Theorem}[section]
 \begin{theo}
@@ -283,9 +310,31 @@ A very useful tool is the \emph{Schmidt decomposition}, that we present here fol
 \end{theo}
 \begin{proof}
 Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
-Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
+Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{\chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{\chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
 \end{proof}
 
 A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it \textbf{cannot} be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ \textbf{can} be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
 
-\subsection{Entropy}
+\subsubsection{Von Neumann Entropy}
+A crucial tool useful to measure the entanglement of a bipartite pure state is the quantum entropy, defined by von Neumann in this way:
+\begin{equation}
+    S(\rho) \equiv -\Tr ( \rho \log_2\rho),
+\end{equation}
+where $\rho$ is the state of the system. If $\lambda_i$ are the eigenvalues of $\rho$, we can write:
+\begin{equation*}
+    S(\rho) = -\sum_i \lambda_i \log_2 \lambda_i.
+\end{equation*}
+Let us highlight some important properties of the von Neumann entropy~\cite{nielsen_chuang, pet_breuer:open_quantum}:
+\begin{itemize}
+    \item $S(\rho) \geq 0$, where the equality sign holds if and only if $\rho$ is a pure state;
+    \item in a D-dimensional Hilbert space, the entropy is $S(\rho) \leq log_2 D$, where the equality sign holds if and only if the system in the completely mixed state $\rho = \mathds{1}/D$;
+    \item if a composite system $AB$ is in a pure state, $S(A) = S(B)$;
+    \item it is a concave functional $\rho \mapsto S(\rho)$ on the space of density matrices. This means that for any collection of $\rho_i$ and numbers $\lambda_i$ satisfying $\sum_i \lambda_i = 1$, one has $S(\sum_i \lambda_i \rho_i) \geq \sum_i \lambda_i S(\rho_i)$, where the equal sign holds if and only if all $\rho_i$ are equal to each other. This property means that the uncertainty of the state $\rho = \sum_i \lambda_i \rho_i$ is greater or equal to the average uncertainty of the states $\rho_i$ that constitute the total mixture;
+    \item if $\rho$ associated to Hilbert space $ \mathcal{H} = \matcal{H}_A \otimes \matcal{H}_B$ is the state of a system and $\rho^{(A)} = \Tr_B \rho$ and $\rho^{(B)} = \Tr_A \rho$ are the states of its sub-systems, the von Neumann entropy obeys the so-called subadditivity condition, i.e.
+    \begin{equation*}
+        S(\rho) \leq S(\rho^{(A)}) + S(\rho^{(B)}),
+    \end{equation*}
+    where the equality sign holds if and only if $\rho$ describes an uncorrelated state. This means that the uncertainty about the product state is greater than that of the total system; this is because the operation of trace over the sub-systems causes a loss of information on correlations between the sub-systems, therefore the increase of entropy.
+\end{itemize}
+
+A comprehensive review that explains several kind of measures of entanglement in many-body systems is the ref.~\cite{RevModPhys.80.517}.
