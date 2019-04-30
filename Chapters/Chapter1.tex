@@ -1,6 +1,6 @@
 \chapter{Open Quantum Systems}
 \label{Chapter1}
-\epigraph{The motivation for studying open systems is that all realistic systems are open.}{John Preskill}
+\epigraph{The motivation for studying open systems is that all realistic systems are open.}{\textit{John Preskill}}
 
 % Define some commands to keep the formatting separated from the content 
 \newcommand{\keyword}[1]{\textbf{#1}}
@@ -11,6 +11,14 @@
 
 %----------------------------------------------------------------------------------------
 The world we live in is constituted by parts that communicate with each other and exchange information. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome these complexity, simplifications and easier mathematical representations have been developed: in the following we will see some of them.
+
+However, before getting into the topic, it is worth to discuss \emph{why} the field of open quantum systems have become of great physical interest.
+
+One of the main goals in scientific research is coming up to quantum simulation; this is due to the fact that in several physical fields there are mechanisms that cannot be simulated by classical computers: the essential aim is using a controlled quantum device to investigate another quantum system. Experiments have shown that superconducting circuits are able to manipulate and measure at the level of a few qubits and microwave photons, as a quantum simulator~\cite{Nat.Phys2012}. They can be treated as open systems because of the loss of photons, coupled to the feeding in additional photons through continuous external driving. Moreover, they are greatly flexible, because of their nanofabricated nature and almost every parameter involved is widely tunable. In~\cite{PhysRevX.7.011016}, it has been demonstrated that QED cavity lattices act as a controllable platform guiding understanding of non-equilibrium physics. \textcolor{red}{Figura da qui.}
+
+Another approach to quantum simulation has been developed by means of ultracold atoms, useful in the study of strongly correlated ground states~\cite{nphys1073}. 
+
+As explained in~\cite{Noh_2016}, an important contribution has been done with the introduction of coupled resonator arrays (CRA)\dots
 
 This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
 
@@ -296,7 +304,6 @@ It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents th
 Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields as, e.g., Quantum Information. In this section, we will examine some of the phenomena and tools useful to better understand such systems. 
 
 \subsection{Bipartite Pure States}
-In the study of open many-body systems, 
 
 \subsubsection{Schmidt Decomposition and Entanglement}
 A very useful tool is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
