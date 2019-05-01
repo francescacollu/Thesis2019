@@ -2,17 +2,31 @@
 \label{Chapter3}
 
 \section{The Model}
-Now we are going to consider a Heisenberg XYZ chain of N $\frac{1}{2}$-spin, coupled to two external reservoirs positioned at the boundaries of the chain. The density matrix describing the chain evolves according to the Lindblad master equation
+We are going to consider a Heisenberg XYZ chain of N $\frac{1}{2}$-spin, coupled to two external reservoirs positioned at the boundaries of the chain. The density matrix describing the chain evolves according to the Lindblad master equation
 \begin{equation}
     \frac{d\rho}{dt} = -i[H, \rho] - \sum_{a=1}^{2}\gamma_a\Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl),
 \end{equation}
 $H$ being the Hamiltonian of the model:
 \begin{equation}
 \label{ham_chain}
-    H = \sum_{i = 1}^{N-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + \Delta \sigma_i^z \sigma_{i+1}^z)
+    H = \sum_{i = 1}^{N-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + \Delta \sigma_i^z \sigma_{i+1}^z),
 \end{equation}
-and 
+and the $\gamma_a$ being bath-coupling strength parameters. The $L_a$ are the Lindblad operators representing the single-spin bath coupled to the first and the last spin of the chain:
+\begin{equation}
+    L_1 = \frac{1}{2}(\sigma_x + i\sigma_y), \quad L_2 = \frac{1}{2}(\sigma_x - i\sigma_y).
+\end{equation}
 
+As disclosed previously, we are going to study this physical system through three numerical method: the QT method, the CSR method and the MPO method. We will see how everyone of these methods will be useful until they reach their own limits; examining these limits will be interesting and advantageous to set a benchmark [for numerical methods].
+
+\section{Convergence}
+We want the nonequilibrium steady-state (NESS) solution to describe the system; to do so, we have to analyze the convergence of the expectation values of the observables we want to study. 
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 \section{Magnetization Profile}
 The first observable we are going to examine is the so-called magnetization profile of the chain, i.e. the expectation value of the Pauli spin- matrix $\sigma^z$ for each site of the chain. 
