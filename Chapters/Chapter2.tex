@@ -3,10 +3,36 @@
 \chapter{Open Many-Body Quantum Systems Coupled to External Baths}
 
 \section{Basics of Dynamics}
-As expressed in the previous chapter, an open quantum system can be described in terms of $\rho$, the reduced matrix given by averaging over the environment: 
+As expressed in the previous chapter, an open quantum system can be described in terms of $\rho_S$, the reduced matrix given by averaging over the environment: 
 \begin{equation}
     \rho_S = \Tr_E(\rho).
 \end{equation}
+Under certain conditions discussed in section~\ref{appr_dynam_oqs}, the evolution of $\rho_S$ is delineated by the Lindblad master equation:
+\begin{equation}
+    \dot{\rho_S} = -i[H_{sys}, \rho_S] - \sum_{a=1}^{N^2-1} \gamma_a\mathcal{D}[L_a]\rho_S,
+\end{equation}
+where the first term expresses the usual unitary evolution under the system Hamiltonian $H_sys$ and the second term represents the influence of the environment over the system through the dissipation rate $\gamma_a$ and the dissipators
+\begin{equation*}
+    \mathcal{D}[L_a]\rho_S \equiv \frac{1}{2} \Bigl( [L_a\rho_S, L_a^{\dagger}] + [L_a, \rho_S L_a^{\dagger}] \Bigl).
+\end{equation*}
+The Linblad operators determine the nature of the decoherence process, e.g. photon loss ($a$), qubit relaxation ($\sigma^-$), qubit dephasing ($\sigma^z$), and so on.
+The steady-state solution can be found rewriting this equation in terms of a linear algebra problem. First of all, the Hilbert space for a system consisting of N spins, has an orthonormal Fock-state basis such as $\ket{\phi_1, \phi_2, \dots \phi_N}$.
+For solving the equation
+\begin{equation*}
+    \dot{\rho}_S = 0,
+\end{equation*}
+one can re-arrange the matrix elements $\rho_S_{(mn)} = \bra{m} \rho_S \ket{n}$ to form a vector $\vec{\rho_S} = (\rho_{11}, \rho_{12}, \dots)$, having $N^2$ components.
+
+This way, the steady-state equation can be rewritten as an eigenvalue equation:
+\begin{equation}
+    \textbf{L}\vec{\rho_S} = \vec{0},
+\end{equation}
+\textcolor{red}{v. se è il caso di indicare che è un 'superket' eccetera}
+
+the solution of which can be obtained computing the eigenvector of the $N^2 \times N^2$ super-operator \textbf{L} corresponding to the null eigenvalue.
+
+It is important to stress the enormous size of the matrix even for rather small systems sizes. For example, a system characterized by \textcolor{red}{FINIRE}
+
 % go girl! Take it all from pag.5 Nphys
 
 \textcolor{red}{This section will conclude saying that the complexity of the systems become unmanageable, eventually.}
@@ -28,7 +54,7 @@ QED cavities are mathematically described by the Jaynes-Cummings model~\cite{sho
 where $a_l (a_l^{\dagger})$ annihilates (creates) a quantum of light in the mode of the l-th cavity.
 An array of cavities sufficiently close to allow for photon hopping, can be described by eq.~\ref{eqn:single_cavity} to which the following term should be added:
 \begin{equation*}
-    \mathcal{H}_{hopping} = -J (a^{\dagger}_la_l + h.c.),
+    \mathcal{H}_{hop} = -J (a^{\dagger}_la_l + h.c.),
 \end{equation*}
 where J is associated with the tunneling rate.
 Now, if the light-matter interaction is introduced, the Hamiltonian can be written in this way:
@@ -41,7 +67,7 @@ where the term $\mathcal{H}_l^{(0)}$ describes the light-matter interaction. In 
     \mathcal{H}_{l,JC}^{(0)} = \varepsilon \sigma^z_l + \omega a^{\dagger}_la_l + g(\sigma^+_l a_l + \sigma^-_l a_l^{\dagger}),
 \end{equation}
 where $\sigma^\pm_l$ are the raising/lowering operators for the two-level system and $\varepsilon$ states the transition energy between the two levels.
-The spectrum of the Hamiltonian~\ref{eqn:Jaynes-Cummings} is anharmonic, meaning the presence of the two-level system induces a repulsion between the photons in the cavity, so that in the cavity can be present only a photon at the same time. Qualitatively, this can be explained by the fact that a single photon in the cavity modifies the effective resonance frequency, so that the injection of another photon is inhibited. This phenomenon is known as \emph{photon blockade}.
+The spectrum of the Hamiltonian~\ref{eqn:Jaynes-Cummings} is anharmonic, meaning the presence of the two-level system induces a repulsion between the photons in the cavity, so that in the cavity can be present only a photon at the same time. Qualitatively, this can be explained by the fact that a single photon in the cavity modifies the effective resonance frequency, so that the injection of another photon is inhibited. This phenomenon is known as \emph{photon blockade} and has been named after the Coulomb blockade.
 % QED cavities
     % sketch of QED cavities
     % optical cavities: photon blockade effect
@@ -56,5 +82,13 @@ The spectrum of the Hamiltonian~\ref{eqn:Jaynes-Cummings} is anharmonic, meaning
     \label{fig:QED_cavities}
 \end{figure}
 
-\section{Spin Systems as Quantum Simulators}
-% pag.5 Tomadin-Fazio
+% pag.5 Tomadin-Fazio per optical lattices vs cavity arrays
+
+\section{Quantum Simulation on Spin Systems}
+Interacting two level systems, either spins or qubits, are of central importance in Quantum Information and Condensed Matter Physics. \textcolor{red}{In magnetic compounds where spin lattices appear naturally the addressability of individual spins is unfortunately extremely hard to achieve because the spatial separation between neighboring spins is very small and the timescales of interesting processes can be very short.}
+
+Since the discover of the \emph{photon blockade}~\cite{ph_blockade} arose the fact that the cavity mode is well described by a spin-$1/2$ Hamiltonian. Few years later, the Jaynes-Cummings model in the Mott regime \textcolor{red}{was shown to simulate} a XY spin model~\cite{angelakis}. In particular, the studied system consisted of coupled electromagnetic cavities doped with single two-level system; it is shown the possibility of observing an insulator phase of total (atomic plus photonic, i.e. \emph{polaritonic}) excitations. From such a system, an effective XY Hamiltonian arises, with spin up (down) corresponding to the presence (absence) of a polariton.
+
+A scheme for realizing the Ising spin-spin interaction has been proposed in~\cite{LiGuGong}, where a system consisting in trapped two-level atoms in a one dimensional coupled microcavities. 
+
+A more complicated system has been investigated in~\cite{Hartmann_XYZ}, which uses three-level atoms in micro-cavities coupled to each other via the exchange of virtual photons; it is shown that it can model an anisotropic Heisenberg spin-1/2 chain in an external magnetic field. The two spin polarizations $\ket{\uparrow}$ and $\ket{\downarrow}$ are represented by two long-lived atomic levels of a $\Lambda$ level-structure; let us see why. The quantized mode of the cavity together with external lasers can induce Raman transition between these two lowest-lying states.  With appropriately chosen detunings, the dominant Raman transition between the two lowest-lying states involves one laser and one cavity photon. This implies that the emission and absorption of virtual photons in the cavity is confined to only two states per atom, the long-lived ones, so that can be described by a spin-1/2 Hamiltonian. The coupling of virtual photons between neighbouring cavities simulates $\sigma^x\sigma^x$ and $\sigma^y\sigma^y$ interactions; the effective spin can be coupled to an effective magnetic field $\sigma^z$; using the same atomic level configuration but a different set-up of the external sources an effective $\sigma^z\sigma^z$ interaction is obtained.
