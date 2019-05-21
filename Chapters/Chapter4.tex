@@ -209,6 +209,58 @@ Now let us study in greater detail this curves. In particular we can see in figu
     \label{fig:PeakLMvsGamma_J1051}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/FIT_8sites_PeakLMvsGamma_J1051.pdf}
+    \caption{The red line shows the fit $\langle\sigma^z\rangle_{max} = p_0\tanh{(p_1\gamma)}$.}
+    \label{fig:FIT_PeakLMvsGamma_J1051}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/FITexp_8sites_PeakLMvsGamma_J1051.pdf}
+    \caption{The red line shows the fit $\langle\sigma^z\rangle_{max} = p_0(1-e^{-p_1\gamma})$.}
+    \label{fig:FIT_PeakLMvsGamma_J1051}
+\end{figure}
+
+Now: $\langle\sigma^z_{L/4}\rangle$ for 8, 12, 16 sites.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites_comparison/8sites_LM_2ndSiteVSgamma.pdf}
+    \caption{8sites, $\langle\sigma^z_2\rangle$ versus $gamma$}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/12sites/12sites_3rdSiteVSgamma.pdf}
+    \caption{12 sites, $\langle\sigma^z_3\rangle$ versus $gamma$}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites_comparison/FIT8sites_LM_2ndSiteVSgamma.pdf}
+    \caption{8 sites, The red line shows the fit $\langle\sigma^z\rangle_{max} = p_0\tanh{(p_1\gamma)}$.}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/12sites/FIT12sites_3rdSiteVSgamma.pdf}
+    \caption{12 sites, The black line shows the fit $\langle\sigma^z\rangle_{max} = p_0\tanh{(p_1\gamma)}$.}
+    \label{fig:my_label}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_4thSiteVSgamma.pdf}
+    \caption{16 sites, $\langle\sigma^z_4\rangle$ versus $gamma$}
+    \label{fig:my_label}
+\end{figure}
+
 Now let us study the gradient of magnetization for some site of the chain, for different lengths, varying $\gamma$.
 
 \begin{figure}[H]
@@ -334,8 +386,22 @@ Let us see how variation on $\gamma$ value affects the bulk correlation function
 
 \begin{figure}[H]
     \centering
+    \includegraphics[scale=0.7]{Figures/8sites_CBulkConnVSgamma.pdf}
+    \caption{8-sites chain, $\langle\sigma_i\sigma_j \rangle - \langle\sigma_i \rangle\langle\sigma_j \rangle$}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[scale=0.7]{Figures/12sites/12sites_CFBulkVSgamma.pdf}
     \caption{}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/12sites/12sites_CFBulkCONNVSgamma.pdf}
+    \caption{12-sites chain, $\langle\sigma_i\sigma_j \rangle - \langle\sigma_i \rangle\langle\sigma_j \rangle$}
     \label{fig:my_label}
 \end{figure}
 
@@ -346,11 +412,18 @@ Let us see how variation on $\gamma$ value affects the bulk correlation function
     \label{fig:my_label}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_CFBulkCONNVSgamma.pdf}
+    \caption{16-sites chain, $\langle\sigma_i\sigma_j \rangle - \langle\sigma_i \rangle\langle\sigma_j \rangle$}
+    \label{fig:my_label}
+\end{figure}
+
 Let us see how the bulk correlation function changes varying in the chain size.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/CFBulkVSSizeGamma1J1051.pdf}
+    \includegraphics[scale=0.7]{Figures/CBulkwConnTermVSsize_J1051.pdf}
     \caption{}
     \label{fig:my_label}
 \end{figure}
@@ -430,6 +503,11 @@ Let us see what happens in the case of a \textbf{12-sites} chain.
     \label{fig:my_label}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Varying J\textsubscript{z}}
+
 Let us have a look to the spin current while varying $J_z$.
 
 \begin{figure}[H]
@@ -449,6 +527,21 @@ An interesting behaviour is shown for $J_z < 0.5$. Let us go into detail.
     \label{fig:my_label}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites_LMvsJz.pdf}
+    \caption{8-sites chain.}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites_LMvsLowJz.pdf}
+    \caption{8-sites chain.}
+    \label{fig:my_label}
+\end{figure}
+
+
 Let us see if this behaviour still remains in longer chains.
 
 \begin{figure}[H]
@@ -458,5 +551,30 @@ Let us see if this behaviour still remains in longer chains.
     \label{fig:my_label}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsJz.pdf}
+    \caption{12-sites chain.}
+    \label{fig:my_label}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsLOWJz.pdf}
+    \caption{12-sites chain.}
+    \label{fig:my_label}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVsLOWJz.pdf}
+    \caption{16-sites chain.}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsLOWJz.pdf}
+    \caption{16-sites chain.}
+    \label{fig:my_label}
+\end{figure}
