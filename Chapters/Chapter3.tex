@@ -217,7 +217,7 @@ Finally, we analyze the \emph{matrix product density operators} (MPO) method.
 This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
 \textcolor{red}{MENTION DMRG?}
 
-The MPO method is the generalization of the \emph{matrix product states} (MPS) method~\cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS method lies in Wilson's renormalization group; in particular, let us consider a 1D-system made up by $N$ spins. The NRG method suggests to take two spins and consider a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; then, one adds a spin and consider the subset of the Hilbert space of three spins $\mathcal{H}_3 \subset \mathcal{H}_2 \otimes \mathcal{H}_1$ of dimension $d_3 \leq d_2d_1$, and so on until one arrives to consider the subset of Hilbert space $\mathcal{H}_N \subset \mathcal{H}_{N-1} \otimes \mathcal{H}_1$ with dimension $d_N \leq d_{N-1}d1$. So, one can approximate the Hamiltonian with $P_NHP_N$, where the $P_N$ is the projector onto $\mathcal{H}_N$. If one chooses $d_N$ sufficiently small, one can diagonalize the Hamiltonian and find eigenvalues and eigenvectors. A good thing to do is fixing for all the dimensions $d_n$ the so-called \emph{bond dimension} such that 
+The MPO method is the generalization of the \emph{matrix product states} (MPS) method~\cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS method lies in Wilson's renormalization group; in particular, let us consider a 1D-system made up by $N$ spins. The NRG method suggests to take two spins and consider a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; then, one adds a spin and consider the subset of the Hilbert space of three spins $\mathcal{H}_3 \subset \mathcal{H}_2 \otimes \mathcal{H}_1$ of dimension $d_3 \leq d_2d_1$, and so on until one arrives to consider the subset of Hilbert space $\mathcal{H}_N \subset \mathcal{H}_{N-1} \otimes \mathcal{H}_1$ with dimension $d_N \leq d_{N-1}d_1$. So, one can approximate the Hamiltonian with $P_NHP_N$, where the $P_N$ is the projector onto $\mathcal{H}_N$. If one chooses $d_N$ sufficiently small, one can diagonalize the Hamiltonian and find eigenvalues and eigenvectors. A good thing to do is fixing for all the dimensions $d_n$ the so-called \emph{bond dimension} such that 
 \begin{equation*}
     d_n \leq D \quad \forall \quad n. 
 \end{equation*}
@@ -269,31 +269,49 @@ Another way of considering the expression~\ref{eqn:mpdo} is the graphical notati
     \label{fig:tensor_network}
 \end{figure}
 
+As regards dynamics, the long-time limit of eq.~\ref{eqn:lindblad_eqn} can be reached using a MPO ansatz for the density matrix. The steady-state solution $\rho$ is found using an algorithm based on the \emph{time evolution block decimation} (TEBD)~\cite{PhysRevLett.91.147902} scheme adapted to open systems. It is useful, for instance, to efficiently compute time-dependent properties of 1D closed quantum many-body systems as done in~\cite{PhysRevLett.93.040502}. 
 
-As regards dynamics, the temporal evolution of MPOs can be simulated using the \emph{time evolution block decimation} (TEBD) method, developed by Vidal in~\cite{PhysRevLett.91.147902}; it is useful, for instance, to efficiently compute time-dependent properties of 1D closed quantum many-body systems as done in~\cite{PhysRevLett.93.040502}. 
-Here, we can briefly see how it works in the case of open many-body systems, i.e. in the MPO formalism. First of all, let us consider the~\ref{eqn:mpo_gen}: repeated single-value decomposition (SVD) of the tensor $C_{i_1,\dots, i_N; j_1,\dots, j_N}$ can lead to
+Here, we can briefly see how it works~\cite{jin_biella_ross} in the case of open many-body systems in the MPO formalism. 
+
+First of all, let us consider the~\ref{eqn:mpdo}: repeated single-value decomposition of the tensor $C_{i_1,\dots, i_N; j_1,\dots, j_N}$ can lead to
 \begin{equation*}
+\label{mpo_ansatz}
 \begin{split}
-    \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad \sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi &(\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) \ket{i_1, \dots ,i_N}\bra{j_1, \dots ,j_N}.
+    \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad \sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi &(\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) ||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle.
     \end{split}
 \end{equation*}
+where the superoperator formalism is been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discounting the smallest single values; moreover, it is proportional to the amount of quantum correlation between the system sites that can be embedded in $\rho_{MPO}$.
 
-
-So, the formal solution of~\ref{eqn:lindblad_eqn} can be written as
+%As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ %can be decomposed into terms that involve two contiguous sites, as
+%\begin{equation}
+%    \hat{\mathcal{L}}[\rho] = \sum_l \hat{\mathcal{L}}_{l,l+1}[\rho].
+%\end{equation}
+Formally, the solution of~\ref{eqn:lindblad_eqn} can be written as
 \begin{equation}
 \label{eqn:lindblad_dinamics}
-    \rho(t) = e^{\hat{\mathcal{L}}t}\rho(0);
+    \rho(t) = e^{\hat{\mathcal{L}}t}\rho(0).
 \end{equation}
-we recall that $\hat{\mathcal{L}}$ is a Liouvillian super-operator defined in equation~\ref{eqn:lindblad_eqn}. As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ can be decomposed into terms that involve two contiguous sites, as
+Following the Vidal's work~\cite{PhysRevLett.93.040502}, the liouvillian superoperator $\hat{\mathcal{L}}$ can be decomposed in this way:
 \begin{equation}
-    \hat{\mathcal{L}}[\rho] = \sum_l \hat{\mathcal{L}}_{l,l+1}[\rho].
+    \hat{\mathcal{L}} = \hat{F} + \hat{G},
 \end{equation}
-For every time step $\tau$, we use the Trotter-Suzuki formula:
+where
+\begin{equation}
+    \begin{split}
+        \hat{F} &\equiv \sum_{\text{even } l} \hat{F}^{[l]} \equiv \sum_{\text{even } l} (\hat{\mathcal{L}}_2^{l, l+1}) \\
+        \hat{G} &\equiv \sum_{\text{odd } l} \hat{G}^{[l]} \equiv \sum_{\text{odd } l} (\hat{\mathcal{L}}_2^{l, l+1}), \\
+        l  &= 1, \dots N-1
+    \end{split}
+\end{equation}
+having considered a Liouvillian made of arbitrary nearest-neighbouring interaction terms.
+
+For every small time step $\tau > 0$, the Trotter-Suzuki expansion of order $p$ for $\exp{(\hat{\mathcal{L}} t)}$ reads:
 \begin{equation*}
-    e^{\hat{\mathcal{L}}\tau} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
+    e^{\hat{\mathcal{L}}t} = e^{(\hat{F}+ \hat{G})t} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
 \end{equation*}
 with $p$ depending on the required accuracy.
 
+\textcolor{red}{VEDI PRESENTAZIONE GARNET CHAN - RIVEDERE \\ AGGIUNGERE FORMALISMO SUPEROPERATORIALE}
 
 %\noindent\rule[0.5ex]{\linewidth}{1pt}
 %\noindent\rule[0.5ex]{\linewidth}{1pt}

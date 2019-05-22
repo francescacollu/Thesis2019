@@ -12,31 +12,18 @@
 %----------------------------------------------------------------------------------------
 The world we live in is constituted by parts that communicate with each other and exchange information. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome this problem, simplifications and easier mathematical representations have been developed: in the following we will see some of them.
 
-However, before getting into the topic, it is worth to discuss \emph{why} the field of open quantum systems have become of great physical interest.
-
-%One of the main goals in scientific research is coming up to quantum simulation; this %is due to the fact that in several physical fields there are mechanisms that cannot be %simulated by classical computers: the essential aim is using a controlled quantum %device to investigate another quantum system. Experiments have shown that %superconducting circuits are able to manipulate and measure at the level of a few %qubits and microwave photons, as a quantum simulator~\cite{Nat.Phys2012}. They can be %treated as open systems because of the loss of photons, coupled to the feeding in %additional photons through continuous external driving. Moreover, they are greatly %flexible, because of their nanofabricated nature and almost every parameter involved is %widely tunable. In~\cite{PhysRevX.7.011016}, it has been demonstrated that QED cavity %lattices act as a controllable platform guiding understanding of non-equilibrium %physics. 
-%
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=0.5]{Figures/PhysRevX_image_7011016.pdf}
-%    \caption{Caption}
-%    \label{fig:my_label}
-%\end{figure}
-%
-%Another approach to quantum simulation has been developed by means of ultracold atoms, %useful in the study of strongly correlated ground states~\cite{nphys1073}. 
-%
-%As explained in~\cite{Noh_2016}, an important contribution has been done with the %introduction of coupled resonator arrays (CRA)\dots
-
 This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
+
+%Da qualche parte devo dire che nella tesi mi occupo solo di spazi di Hilbert a dimensione finita.
 
 \section{Closed and Open Quantum Systems}
 \label{cl_open_qs}
-Before we explore the field of open quantum systems, we now observe what the differences between a closed and an open quantum system are and why different approaches are required to treat these two distinct kinds of system. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
+Before we explore the field of open quantum systems, we now assess the basic differences between a closed and an open quantum system are and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
 
 In this section, we will briefly look at the different approaches in the study of the dynamics in closed and open quantum systems. 
 
 \subsection{Pure and mixed states: the density matrix formalism}
-First of all, it is useful consider another formalism in addition to that used normally for handling pure states, i.e. states that can be described by a single wave function. We now introduce the \emph{density matrix} formalism for managing the so-called mixed states, although - as we will see - it can be used also for pure states.
+First of all, it is useful to consider another formalism in addition to that used normally for handling pure states, i.e. states that can be described by a single wave function. We now introduce the \emph{density matrix} formalism for managing the so-called mixed states, although - as we will see - it can be used also for pure states~\cite{bransden_qm}.
 
 Quantum systems prepared in such a way that their state vector being obtained performing a \emph{maximal measurement}, in the sense that the maximum possible information has been acquired (all values of a complete set of commuting observables have been ascertained), are in a pure state. 
 
@@ -122,7 +109,7 @@ Quantum mechanics establishes that the time evolution of a state vector $\ket{\p
 \label{eqn:schrod_eq}
     i\frac{d}{dt}\ket{\psi(t)} = H(t)\ket{\psi(t)},
 \end{equation}
-where $H(t)$ is the Hamiltonian of the closed system and Planck's constant $\hbar$ has been set equal to 1.
+where $H(t)$ is the Hamiltonian of the closed system; from now on, the Planck's constant $\hbar$ is set equal to 1.
 The solution of this equation can be written in terms of the unitary time-evolution operator $U(t, t_0)$:
 \begin{equation}
 \label{eqn:schrod_u}
@@ -153,11 +140,95 @@ Differentiating with respect to time the last equation we have
 \label{eqn:motion_closed_dm}
     \frac{d}{dt}\rho(t) = -i[H(t), \rho(t)]
 \end{equation}
-i.e. an equation of motion for the density matrix, often called the \emph{Liouville-von Neumann equation}.
+i.e. an equation of motion for the density matrix, often called the \emph{Liouville-von Neumann equation}~\cite{pet_breuer:open_quantum}.
 
 
 \subsection{Open Quantum Systems}
-Now we can go into a more specific definition of open quantum systems. It can be defined as a system $S$ coupled with another quantum system $E$, called the \emph{environment}. Usually, the total system $S+E$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems cause an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, when the reservoir is in thermal equilibrium state, is called \emph{bath}.
+Now we can go into a more specific definition of open quantum systems. It can be defined as a system $S$ coupled with another quantum system $E$, called the \emph{environment}. Usually, the total system $S+E$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems induce an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, a reservoir in a thermal equilibrium state is called \emph{bath}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Figures/openSystems_sketch.png}
+    \caption{Schematic representation of an open quantum system.}
+    \label{fig:openSystems_sketch}
+\end{figure}
+
+Since $S$ and $E$ are in thermal contact, energy can be exchanged between them; however the interaction is supposed to be weak, so that both $S$ and $E$ at any time can be considered to be in definite energy eigenstates with energies $E_S$ and $E_E$ respectively. Naming $E$ one of the eigenenergies of the combined system, for the conservation of energy we have:
+\begin{equation*}
+    E = E_S + E_E.
+\end{equation*}
+Let $d\Gamma(E)$ be the total number of distinct states of the combined system with energies in the range $[E, E+dE]$. So, the probability the probability of finding the combined system with an energy in this range will be\footnote{This is true because of the postulate of equal \emph{a priori} probabilities, since the combined system is supposed to be close, so it is well described by a micro-canonical ensemble.}:
+\begin{equation}
+    dP = C d\Gamma(E), \quad E_0 \leq E \leq E_0 + \Delta
+\end{equation}
+and zero otherwise; C is a constant.
+
+If we call $d\Gamma_S$ and $d\Gamma_E$ the number of states for the system and the environment, respectively, we have:
+\begin{equation}
+        d\Gamma = d\Gamma_S d\Gamma_E, 
+\end{equation}
+so that:
+\begin{equation}
+    dP = C d\Gamma_S(E_S) d\Gamma_E(E_E) \delta(E-E_S-E_E),
+\end{equation}
+where the delta function expresses the conservation of energy.
+
+The probability $dP_n$ that the combined system is in a state such that the system S has an energy $E_S$, without regard to the state of the reservoir, can be obtained integrating over the states of the reservoir:
+\begin{equation}
+\begin{split}
+\label{eqn:prob_energy_system}
+    dP_n &= Cd\Gamma_S(E_n) \int \delta(E-E_n-E_E) d\Gamma_E(E_E) \\
+         &= Cd\Gamma_S(E_n) \Delta\Gamma_E(E-E_n),
+\end{split}
+\end{equation}
+where $\Delta\Gamma_E(E-E_n)$ is the total number of states of the environment, that can be written in terms of the entropy $S_E$ of the reservoir:
+\begin{equation*}
+    \Delta\Gamma_E = \exp{(S_E/k)}.
+\end{equation*}
+
+Since $E_n \ll E$, we can write:
+\begin{equation*}
+    S_E(E_E) = S_E (E-E_n) \simeq S_E(E) - \frac{\partial S_E(E)}{\partial E} E_n = S_E(E) -\frac{E_n}{T},
+\end{equation*}
+where the temperature $T$ has been defined as:
+\begin{equation*}
+    \frac{1}{T} = \frac{\partial S}{\partial E}.
+\end{equation*}
+Substituting in eq.~\ref{eqn:prob_en_system}, we find that
+\begin{equation}
+\label{eqn:prob_en_system2}
+    dP_n = A \exp{(-E_n/kT)} d\Gamma_S(E_n),
+\end{equation}
+where $A$ is defined as
+\begin{equation}
+    A = C \exp{(S_E(E)/k)}.
+\end{equation}
+
+The probability~\ref{eqn:prob_en_system2} can be written in terms of the density matrix, in this way:
+\begin{equation*}
+    \rho_{nm} = A \exp{(-E_n/kT)} \delta_{nm}.
+\end{equation*}
+Using the normalization condition $\Tr(\rho) = 1$, we can find $A^{-1} \equiv Q_S$:
+\begin{equation*}
+    Q_S(T) = \sum_n \exp{(-E_n/kT)} = \Tr[\exp{(-\beta H_S)}],
+\end{equation*}
+where
+\begin{equation*}
+    \beta = \frac{1}{kT}
+\end{equation*}
+$H_S$ is the Hamiltonian of the system $S$ and $Q_S$ is the \emph{partition function}.
+
+So, we can write the density operator in the \emph{canonical ensemble} as:
+\begin{equation}
+    \rho = \frac{1}{Q_S(T)} \exp{(-\beta H_S)}.
+\end{equation}
+The average value of an observable O over the ensemble is 
+\begin{equation}
+\begin{split}
+    \langle O \rangle &= \Tr(\rho O) = \frac{1}{Q_S} \Tr[\exp{(-\beta H_S)}O] \\
+                      &= \frac{\Tr[\exp{(-\beta H_S)}O]}{\Tr[\exp{(-\beta H_S)}]}.
+\end{split}
+\end{equation}
 
 Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system and the environment, respectively. The Hilbert space of the combined system is given by the tensor product $\mathcal{H}_{S+E} = \mathcal{H}_S \otimes \mathcal{H}_E$. So, the total Hamiltonian can be written in this way:
 \begin{equation}
@@ -165,7 +236,7 @@ Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system
 \end{equation}
 where $H_S$ and $H_E$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $E$.
 
-At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., by ref.~\cite{nielsen_chuang}.}:
+At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., in~\cite{nielsen_chuang}.}:
 \begin{equation}
     \rho_S = \Tr_E(\rho).
 \end{equation}
@@ -188,7 +259,7 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Approximate Dynamics of Open Quantum Systems}
 \label{appr_dynam_oqs}
-Solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
+If one consider a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
 
 \subsection{Quantum Dynamical Semigroups}
 For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
@@ -228,7 +299,7 @@ and are called \emph{Kraus operators} and are defined as
 \begin{equation}
     M_a = \sqrt{\lambda_i} \bra{\psi_j}U(t,0)\ket{\psi_i}_a.
 \end{equation}
-This object has some essential features that give it the name \emph{trace-preserving completely positive map} or \emph{TPCP map}; as its name suggests, its properties\footnote{A detailed proof of the properties can be found in ref.~\cite{presk:quant_info}.} are:
+This object has some essential features that give it the name \emph{completely positive trace-preserving map} or \emph{CPTP map}; as its name suggests, its properties\footnote{A detailed proof of the properties can be found in~\cite{presk:quant_info}.} are:
 \begin{itemize}
     \item linearity: 
     \begin{equation*}
@@ -257,6 +328,9 @@ With a view to expressing the evolution of the density operator by a differentia
 
 So, a problem emerges: an open system is \emph{dissipative}, in the sense that information can flow from the system into the environment but also can flow back from the environment into the system, causing non-Markovian fluctuations. This fact seems to outdistance the possibility of applying the Markovian model.  A possible solution is neglecting the typical correlation time of the fluctuations respect to the time scale of the evolution that we want to study.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Lindblad Master Equation}
 Once we take for granted that the dynamics is Markovian, we can write the evolution for the infinitesimal time interval $dt$:
 \begin{equation}
@@ -271,7 +345,7 @@ and we find
 \begin{equation}
     \Dot{\rho} = \mathcal{L}[\rho],
 \end{equation}
-where the linear map generating time evolution $\mathcal{L}$ is called \emph{Liouvillian} or \emph{Linbladian}. 
+where the linear map generating time evolution $\mathcal{L}$ is called \emph{Liouvillian} or \emph{Lindbladian}. 
 The quantum channel~\ref{expantion_eps} has the operator-sum representation
 \begin{equation}
 \label{op_sum_repr}
@@ -295,12 +369,12 @@ so, keeping terms up to linear order in $dt$ we have:
 \begin{equation*}
     K = \frac{1}{2} \sum_{a=1}^{N^2-1} L_a^\dagger L_a.
 \end{equation*}
-Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}:
+Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}\footnote{The derivation of the master equation developed is not formally rigorous; for a more mathematically accurate derivation we refer to~\cite{pet_breuer:open_quantum}.}:
 \begin{equation}
 \label{eqn:lindblad_eqn}
     \dot{\rho} = \mathcal{L}[\rho] \equiv -i[H, \rho] - \sum_{a=1}^{N^2-1} \gamma_a \Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl).
 \end{equation}
-This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The quantities $\gamma_a$ are non-negative numbers that have the dimension of an inverse time and have the physical meaning of dissipation rate\footnote{For a more detailed derivation of the~\ref{eqn:lindblad_eqn}, ref.~\cite{pet_breuer:open_quantum} is suggested.}.
+This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The quantities $\gamma_a$ are non-negative numbers that have the dimension of an inverse time and have the physical meaning of dissipation rate.
 
 It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents the unitary part of the dynamics generated by the Hamiltonian; the second part, instead, describes the possible evolution that the system may endure due to the interaction with the environment. Indeed, the $L_a$ are called \emph{quantum jump operators} or \emph{Lindblad operators}.
 
