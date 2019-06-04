@@ -12,11 +12,12 @@
 %----------------------------------------------------------------------------------------
 The world we live in is constituted by parts that communicate with each other and exchange information. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome this problem, simplifications and easier mathematical representations have been developed: in the following we will see some of them.
 
-This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
+This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some important technical concept that we will use effectively in the original part of the present work.
+%properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
 
 %Da qualche parte devo dire che nella tesi mi occupo solo di spazi di Hilbert a dimensione finita.
 
-\section{Closed and Open Quantum Systems}
+\section{Mathematical Backgroud}
 \label{cl_open_qs}
 Before we explore the field of open quantum systems, we now assess the basic differences between a closed and an open quantum system are and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
 
@@ -41,7 +42,7 @@ Now let us consider an observable represented by an operator $A$; its expectatio
 \begin{align}
     \braket{A}_\alpha &= \bra{\psi_\alpha}A\ket{\psi_\alpha} \\
                       \label{braket_A}
-                      &= \sum_n \sum_{n'} c_{n'}^{(\alpha)*} c_n^{(\alpha)} \bra{n'}A\ket{n} \\
+                      &= \sum_n \sum_{n'} c_n^{(\alpha)}c_{n'}^{(\alpha)*} \bra{n'}A\ket{n} \\
                       &= \sum_n \sum_{n'} \braket{n|\psi_\alpha}\braket{\psi_\alpha|n'} \bra{n'}A\ket{n}.
 \end{align}
 The average value of A over the ensemble is
@@ -87,7 +88,7 @@ that is true if we make the assumption that the $\ket{\psi_\alpha}$ are normaliz
 \begin{equation}
     \braket{A} = \frac{\Tr(\rho A)}{\Tr(\rho)}.
 \end{equation}
-The second characteristic of the density matrix is that it is Hermitian, namely
+The second characteristic of the density matrix is that it is Hermitian, namely:
 \begin{equation}
     \bra{n}\rho\ket{n'} = \bra{n'}\rho\ket{n}^*.
 \end{equation}
@@ -148,7 +149,7 @@ Now we can go into a more specific definition of open quantum systems. It can be
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{Figures/openSystems_sketch.png}
+    \includegraphics[scale=0.5]{Figures/openSystems_sketch.png}
     \caption{Schematic representation of an open quantum system.}
     \label{fig:openSystems_sketch}
 \end{figure}
@@ -194,7 +195,7 @@ where the temperature $T$ has been defined as:
 \begin{equation*}
     \frac{1}{T} = \frac{\partial S}{\partial E}.
 \end{equation*}
-Substituting in eq.~\ref{eqn:prob_en_system}, we find that
+Substituting in eq.~\ref{eqn:prob_energy_system}, we find that
 \begin{equation}
 \label{eqn:prob_en_system2}
     dP_n = A \exp{(-E_n/kT)} d\Gamma_S(E_n),
@@ -236,13 +237,13 @@ Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system
 \end{equation}
 where $H_S$ and $H_E$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $E$.
 
-At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., in~\cite{nielsen_chuang}.}:
+At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}_{S+E}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., in~\cite{nielsen_chuang}.}:
 \begin{equation}
     \rho_S = \Tr_E(\rho).
 \end{equation}
 This helps us in the study of the dynamics of the so-called \emph{reduced} density matrix $\rho_S$. Indeed, we can write:
 \begin{equation}
-    \rho_S(t) = \Tr_E\{\rho(t)\};
+    \rho_S(t) = \Tr_E[\rho(t)];
 \end{equation}
 observing that we assumed the total system to be \emph{closed}, it evolves unitarily so we have:
 \begin{equation}
@@ -257,7 +258,7 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Approximate Dynamics of Open Quantum Systems}
+\section{Approximate Description of Open Quantum Systems}
 \label{appr_dynam_oqs}
 If one consider a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
 
@@ -380,7 +381,7 @@ It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents th
 
 
 
-\section{Open Many-Body Quantum Systems}
+\section{Quantifying Correlations in Quantum Systems}
 \label{many_body_oqs}
 Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields as, e.g., Quantum Information. In this section, we will examine some of the phenomena and tools useful to better understand such systems. 
 

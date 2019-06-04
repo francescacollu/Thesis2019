@@ -34,11 +34,11 @@ The first numerical method analyzed in the section~\ref{chapt2_qtm} is the \emph
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Quantum Trajectories (QT) Method}
 \label{chapt2_qtm}
-The \emph{quantum trajectories method} is an \textcolor{red}{estabilished} numerical method, in which pure states are the subjects of the study, instead of density matrices. This means that, if the Hilbert space has dimension $N$, the number of involved parameters ($\sim N$) is much smaller than the one required in calculations with density matrices ($\sim N^2$). This method was originally proposed in 1992 by Dalibard, Castin and Mølmer in~\cite{PhysRevLett.68.580}, then generalized in~\cite{Molmer:93}, as a stochastic unraveling of the master equation, namely a stochastic evolution for the wave function of a system coupled to a reservoir. It has been proved~\cite{PhysRevLett.68.580, Molmer:93} the equivalence of this \emph{Monte Carlo wave-function} approach with the master equation treatment.
+The \emph{quantum trajectories method} is an estabilished numerical method, in which pure states are the subjects of the study, instead of density matrices. This means that, if the Hilbert space has dimension $N$, the number of involved parameters ($\sim N$) is much smaller than the one required in calculations with density matrices ($\sim N^2$). This method was originally proposed in 1992 by Dalibard, Castin and Mølmer in~\cite{PhysRevLett.68.580}, then generalized in~\cite{Molmer:93}, as a stochastic unraveling of the master equation, namely a stochastic evolution for the wave function of a system coupled to a reservoir. It has been proved~\cite{PhysRevLett.68.580, Molmer:93} the equivalence of this \emph{Monte Carlo wave-function} approach with the master equation treatment.
 
 The idea of this method can be summarised in the following way.
 
-First of all, given the~\ref{eqn:lindblad_eqn}, let us note that the \textbf{first three terms} of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
+First of all, given the~\ref{eqn:lindblad_eqn}, let us note that the first three terms of this equation can be regarded as the evolution performed by an effective non-Hermitian Hamiltonian, that is~\cite{PhysRevA.69.062317}:
 \begin{equation*}
     H_{\text{eff}} = H_s + \text{i}K,
 \end{equation*}
@@ -113,7 +113,14 @@ The numerical methods based on renormalization group à la Wilson present a comp
     \label{fig:wilson}
 \end{figure}
 
-First of all, it is important to mention Wilson's numerical renormalization group (NRG) procedure, in which the CSR method is rooted. We consider a one-dimensional spin chain;  the NRG method requires to break the chain into a set of identical blocks A (see fig.~\ref{fig:wilson}). So, one diagonalizes the Hamiltonian matrix $H_{AA}$ for two neighboring blocks $A$ and uses its lowest $m$ eigenstates (ordered by energy) to form a pseudo-unitary matrix $O$, employed to change the basis and make up the Hamiltonian $H_{A'}$ representing the block $A'$ twice as large (see fig.~\ref{fig:wilson}), in this way:
+First of all, it is important to mention Wilson's numerical renormalization group (NRG) procedure, in which the CSR method is rooted. 
+
+Let us consider a 1D-system made up by $N$ spins. The NRG method suggests to take two spins and consider a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; then, one adds a spin and consider the subset of the Hilbert space of three spins $\mathcal{H}_3 \subset \mathcal{H}_2 \otimes \mathcal{H}_1$ of dimension $d_3 \leq d_2d_1$, and so on until one arrives to consider the subset of Hilbert space $\mathcal{H}_N \subset \mathcal{H}_{N-1} \otimes \mathcal{H}_1$ with dimension $d_N \leq d_{N-1}d_1$. So, one can approximate the Hamiltonian with $P_NHP_N$, where the $P_N$ is the projector onto $\mathcal{H}_N$. If one chooses $d_N$ sufficiently small, one can diagonalize the Hamiltonian and find eigenvalues and eigenvectors. A good thing to do is fixing for all the dimensions $d_n$ the so-called \emph{bond dimension} such that 
+\begin{equation*}
+    d_n \leq D \quad \forall \quad n. 
+\end{equation*}
+
+We consider a one-dimensional spin chain;  the NRG method requires to break the chain into a set of identical blocks A (see fig.~\ref{fig:wilson}). So, one diagonalizes the Hamiltonian matrix $H_{AA}$ for two neighboring blocks $A$ and uses its lowest $m$ eigenstates (ordered by energy) to form a pseudo-unitary matrix $O$, employed to change the basis and make up the Hamiltonian $H_{A'}$ representing the block $A'$ twice as large (see fig.~\ref{fig:wilson}), in this way:
 \begin{equation*}
     H_{A'} = OH_{AA}O^\dagger,
 \end{equation*}
@@ -185,7 +192,7 @@ where $\widetilde{O}$ is a pseudo-unitary\footnote{The matrix $\widetilde{O}$ is
 
 The more $M$ is large, the more the results are exact, because the basis~\ref{basis_corner} spans a larger part of the Hilbert space. Therefore, at this point the value of $M$ should be increased until the convergence is reached.
 
-In the work of~\cite{PhysRevLett.115.080604}, as in the present thesis, it has been proved that convergence can be achieved with a number of states $M$ much smaller than the dimension of the Hilbert space. In the following, we will see how many of them are sufficient to describe the system as compared with the entire dimension of the Hilbert space.
+In the work of~\cite{PhysRevLett.115.080604} it has been proved that convergence can be achieved with a number of states $M$ much smaller than the dimension of the Hilbert space. In the present thesis, it will be shown that this method can not be used for the analysis of systems described by a model such as that under consideration in the present work.
 
 %The resulting dimension of the space in which, from now on - re-iterating the procedure - the system will be studied, is made smaller.
 
@@ -209,18 +216,26 @@ In short, the algorithm is structured in the following stages, as sketched in fi
 A detailed description of the implementation of the algorithm can be seen in Appendix~\ref{AppendixA}.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Matrix Product Density Operators (MPO) Method}
 Finally, we analyze the \emph{matrix product density operators} (MPO) method.
 This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
-\textcolor{red}{MENTION DMRG?}
 
-The MPO method is the generalization of the \emph{matrix product states} (MPS) method~\cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS method lies in Wilson's renormalization group; in particular, let us consider a 1D-system made up by $N$ spins. The NRG method suggests to take two spins and consider a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; then, one adds a spin and consider the subset of the Hilbert space of three spins $\mathcal{H}_3 \subset \mathcal{H}_2 \otimes \mathcal{H}_1$ of dimension $d_3 \leq d_2d_1$, and so on until one arrives to consider the subset of Hilbert space $\mathcal{H}_N \subset \mathcal{H}_{N-1} \otimes \mathcal{H}_1$ with dimension $d_N \leq d_{N-1}d_1$. So, one can approximate the Hamiltonian with $P_NHP_N$, where the $P_N$ is the projector onto $\mathcal{H}_N$. If one chooses $d_N$ sufficiently small, one can diagonalize the Hamiltonian and find eigenvalues and eigenvectors. A good thing to do is fixing for all the dimensions $d_n$ the so-called \emph{bond dimension} such that 
+Essentially, the DMRG is a generalization of Wilson's NRG method; the core of the method lies in the construction of the so-called \emph{superblock}, a block made up by 
+
+the core of the DMRG method goes as follows: after the construction of a portion of the system, one enlarges it and in order to keep the size of the Hilbert space manageable, truncates its basis, keeping only the most relevant states, according to
 \begin{equation*}
-    d_n \leq D \quad \forall \quad n. 
+    \rho = \Tr_{E}()
 \end{equation*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{Figures/DMRG_superblockSketch.png}
+    \caption{Sketch of blocks configuration in DMRG method. The rectangles represent block of $l$ and $l'$ sites respectively, while the circles represent single sites.}
+    \label{fig:DMRG_superblockSketch}
+\end{figure}
+
+The MPO method is the generalization of the \emph{matrix product states} (MPS) method \cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS method lies in Wilson's renormalization group; in particular, 
 So, let us consider the Hilbert space $\mathcal{H}_2$; we write an arbitrary orthonormal basis $\{\ket{\beta\}}_{\beta=1}^{d_2}$ as
 \begin{equation*}
     \ket{\beta}_2 = \sum_{n_1, n_2}^d_1 B_\beta^{n_1, n_2} \ket{n_1}_1 \otimes \ket{n_2}_1,
@@ -242,7 +257,7 @@ i.e.
 \label{mps_general}
     \ket{\psi_{MPS}} = \sum_{n_1,\dots,n_N=1}^{d_1} A_1^{n_1}A_2^{n_2}\dots A_N^{n_N} \ket{n_1,\dots,n_N}.
 \end{equation}
-Because of the form of , this vectors are called \emph{matrix product states}(MPS). \textcolor{red}{FIGURA DAL CIRAC2009 PAGINA 16}
+Because of the form of , this vectors are called \emph{matrix product states} (MPS). %\textcolor{red}{FIGURA DAL CIRAC2009 PAGINA 16}
 
 For periodic boundary conditions the form of the~\ref{mps_general} is obtained performing the trace over their product~\cite{SCHOLLWOCK201196, PhysRevLett.93.207204}:
 \begin{equation}
@@ -250,7 +265,7 @@ For periodic boundary conditions the form of the~\ref{mps_general} is obtained p
 \end{equation}
 One should note that the total number of parameters turns out to be $N \times d \times D^2$, i.e. it is linear in $N$.
 
-The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. The physical index is now doubled, as illustrated in fig.~\ref{fig:tensor_network}\textcolor{red}{FIGURA}:
+The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. The physical index is now doubled, as illustrated in fig.~\ref{fig:tensor_network}%\textcolor{red}{FIGURA}:
 \begin{equation}
 \label{eqn:mpdo}
     \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d} \sum_{j_1, \dots ,j_N = 1}^{d} \Tr\Bigl(A_1^{i_1,j_1} \dots A_N^{i_N,j_N}\Bigl) \ket{i_1, \dots ,i_N}\bra{j_1, \dots ,j_N}.
@@ -311,7 +326,7 @@ For every small time step $\tau > 0$, the Trotter-Suzuki expansion of order $p$ 
 \end{equation*}
 with $p$ depending on the required accuracy.
 
-\textcolor{red}{VEDI PRESENTAZIONE GARNET CHAN - RIVEDERE \\ AGGIUNGERE FORMALISMO SUPEROPERATORIALE}
+%\textcolor{red}{VEDI PRESENTAZIONE GARNET CHAN - RIVEDERE \\ AGGIUNGERE FORMALISMO SUPEROPERATORIALE}
 
 %\noindent\rule[0.5ex]{\linewidth}{1pt}
 %\noindent\rule[0.5ex]{\linewidth}{1pt}

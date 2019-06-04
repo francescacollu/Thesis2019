@@ -77,22 +77,60 @@ In order to confirm the limitations of this method, the same comparison is done 
     \label{fig:8sites_MPOvsCORNER_4U4D}
 \end{figure}
 
-In conclusion, in fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile of a 16-sites chain obtained by CSR and MPO methods. It is clear that 
+In conclusion, in fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile of a 16-sites chain obtained by CSR and MPO methods.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/16sites/LMComparison16s1051.pdf}
-    \caption{Spin profile for a 16-sites chain for the model described in section~\ref{sec:model}. Data in red are obtained from MPO method, with m = 80 and T = 2000 and data in blue are obtained from CSR method, with M = 65. It is self-evident the inadequacy of the corner-space size: the complete Hilbert space for such a system has a dimension of $2^{16} \times 2^{16}$.}
+    \caption{Spin profile for a 16-sites chain for the model described in section~\ref{sec:model}. Data in red are obtained from MPO method, with m = 80 and T = 2000 and data in blue are obtained from CSR method, with M = 65. It is self-evident the inadequacy of the corner-space method, for the model under study.}
     \label{fig:LMComparison16s1051}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8U8D_comparisonCSRvsMPO.pdf}
+    \caption{Spin profile for a 16-sites chain in which every spin of the chain is coupled to a dissipator. The dimension of the corner-space is $M=65$.}
+    \label{fig:LMComparison16s1051}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Convergence and Errors}
-In order to obtain plausible results, one should make sure of using data 
+Before we examine the results obtained from the numerical methods, in this section a brief discussion on the convergence of the data, error calculus and the choice of parameters is done.
+
+\subsection{Quantum Trajectories Method}
+The QT method, explained in section~\ref{chapt2_qtm}, doing the stochastic unraveling of the master equation, builds the quantum trajectories after which it is named.  Every quantum trajectory corresponds to a simulated experiment and for the model under consideration, has an oscillatory profile as that displayed in fig.~\ref{fig:SS_s8J10511}. In order to stabilize the solution, for every quantum trajectory, the average in time is considered, starting from the end of the transient (needed for a solution of the Lindblad equation to converge into the stationary one).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/SS_s8J10511.pdf}
+    \caption{Example of quantum trajectory; in particular, this is the expectation value of the magnetization of the first site of the chain, for $J_z = 1.1$ and $\gamma = 1$. The total elapsed time is $T=500$, while the time step $dt = 0.1$.}
+    \label{fig:SS_s8J10511}
+\end{figure}
+
+For the same case considered in fig.~\ref{fig:SS_s8J10511}, the convergence of the mean values is shown in fig.~\ref{fig:Convergence_s8J10511}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/Convergence_s8J10511.pdf}
+    \caption{Study of the convergence of the mean values of the quantum trajectories. For the case under consideration the number of events is $N = 1000$.}
+    \label{fig:Convergence_s8J10511}
+\end{figure}
+
+The study of the 8-sites chain was done with an elapsed time for every event of $T = 500$ and time-step $dt = 0.1$. The total number of simulated experiment is $N = 1000$.
+
+As an error has been consider the standard deviation of the mean, i.e.
+\begin{equation*}
+    \sigma_{\text{mean}} = \frac{\sigma}{\sqrt{N}},
+\end{equation*}
+where $\sigma$ is the standard deviation of the mean in time in the quantum trajectory.
+
+\subsection{Matrix Product Density Operators Method}
+The convergence of MPO method depends essentially on the setting of two parameters: the bond dimension and the number of Trotter steps. The fig.~\ref{fig:convergenceMPO_8sites} shows the convergence profile for a 8-sites chain for $J_z = 1$ and $\gamma = 1$. The same quantity can reach convergence in different times if, for example, $J_z$ assumes another value. 
+
+In the present work, for 8-sites chain it was considered a bond dimension $m = 100$ and Trotter steps in the range $[1200, 1500]$; for 12-sites chain was considered a bond dimension $m = 60$ and Trotter steps in the range $[1000, 2000]$; for 16-sites chain was considered a bond dimension $m = 80, 100$ and Trotter steps in the range $[1000, 1500]$.
 
 \begin{figure}[H]
     \label{fig:convergence_mpo_8sites}
@@ -102,29 +140,16 @@ In order to obtain plausible results, one should make sure of using data
     \label{fig:convergenceMPO_8sites}
 \end{figure}
 
-\begin{figure}[H]
-    \label{fig:convergence_mpo_8sites}
-    \centering
-    \includegraphics[scale=0.7]{Figures/convergence/Convergence_s8J10505.pdf}
-    \caption{Study of convergence of the QT method for a 8-sites chain, for time step $dt=0.1$, T being the whole elapsed time.}
-    \label{fig:convergenceMPO_8sites}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/12sites/ConvergenceLML012m060Time002000_J10505.pdf}
-    \caption{Study of convergence of the MPO method for a 12-sites chain, for bond dimension m = 60 and T = 2000.}
-    \label{fig:my_label}
-\end{figure}
-
-\textcolor{red}{NUMERICAL ERRORS?}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Magnetization Profile}
 \label{sec:magn_profile}
-The first observable examined is the magnetization of the chain, i.e. the expectation value $\langle \sigma^z \rangle$ of the Pauli matrix $\sigma^z$ for each site. 
+The first observable examined is the magnetization of the chain, i.e. the expectation value $\langle \sigma^z \rangle$ of the Pauli matrix $\sigma^z$ for each site:
+\begin{equation*}
+    \langle \sigma^z \rangle = \Tr(\sigma^z \rho_s),
+\end{equation*}
+being $\rho_s$ the steady-state density matrix.
 
 \subsection{MPO and QT Comparison}
 First of all, a comparison between MPO and QT methods can be done for a 8-sites chain. As it can seen in 
@@ -145,9 +170,9 @@ First of all, a comparison between MPO and QT methods can be done for a 8-sites 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/8sites/LM_8s_J10515.pdf}
+    \includegraphics[scale=0.7]{Figures/8sites/LMComparison_8sJ10515.pdf}
     \caption{Spin profile for a 8-sites chain characterized by $\gamma~=~1, J_x=1, J_y=0.5, J_z=1.5$.}
-    \label{fig:my_label}
+    \label{fig:LMComparison_8sJ10515}
 \end{figure}
 
 It can be interesting seeing if the magnetization changes its profile for different chain lengths; now let us see the case of a \textbf{12-sites} chain for different values of $J_z$ as done previously. The following data are obtained from MPO method.
@@ -205,7 +230,7 @@ In order to analyze these properties, we see how the behaviour of curves in fig.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/LMcomparisonVSsizeANDdissipationRate.pdf}
-    \caption{Spin profile for the model under study at $J_z = 1$ for several values of dissipation rate $\gamma$. It seems clear that while $\gamma$ decreases the profile gets flatter. Data are obtained from MPO method.\textcolor{red}{\\DO IT AGAIN!}}
+    \caption{Spin profile for the model under study at $J_z = 1$ for several values of dissipation rate $\gamma$. It seems clear that while $\gamma$ decreases the profile gets flatter. Data are obtained from MPO method.}
     \label{fig:LMcompVSsizeANDdissRate}
 \end{figure}
 
@@ -243,7 +268,7 @@ As said previously, the peak value of $\langle\sigma^z\rangle$ varies with $\gam
     \label{fig:FIT_PeakLMvsGamma_J1051}
 \end{figure}
 
-It is interesting noting that the same dependence is keep also by $\langle\sigma^z\rangle$ of spins lying in the $\frac{N}{4}$-th site, as shown in fig.\ref{fig:FIT8sites_LM_2ndSiteVSgamma}, \ref{fig:FIT12sites_3rdSiteVSgamma}, \textcolor{red}{16SITES IS MISSING, TO DO}
+It is interesting noting that the same dependence is keep also by $\langle\sigma^z\rangle$ of spins lying in the $\frac{N}{4}$-th site, as shown in fig.\ref{fig:FIT8sites_LM_2ndSiteVSgamma}, \ref{fig:FIT12sites_3rdSiteVSgamma}, \ref{fig:FIT_16sites_4thSiteVSgamma}.
 
 \begin{figure}[H]
     \centering
@@ -259,57 +284,57 @@ It is interesting noting that the same dependence is keep also by $\langle\sigma
     \label{fig:FIT12sites_3rdSiteVSgamma}
 \end{figure}
 
-Now let us study the gradient of magnetization for some site of the chain varying $\gamma$. The plots shown below are \textcolor{red}{WHAT}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/FIT_16sites_4thSiteVSgamma.pdf}
+    \caption{16 sites, the black line shows the fit \\$\langle\sigma^z\rangle_{peak}(\gamma) = p_0(1-e^{-p_1\gamma})$.}
+    \label{fig:FIT_16sites_4thSiteVSgamma}
+\end{figure}
+
+In the following, we study the gradient of magnetization for the middle sites in the 8-sites chain. In fig.~\ref{fig:FIT_8sites_gradLM23VSgamma}, \ref{fig:FIT_12sites_gradLM34VSgamma}, \ref{fig:FIT_16sites_gradLM45VSgamma} the gradient of magnetization between the spin lying in the $\frac{N}{4}$-th site and the neighbouring site. The profile here shown, seems to confirm the fits in fig.\ref{fig:FIT8sites_LM_2ndSiteVSgamma}, \ref{fig:FIT12sites_3rdSiteVSgamma}, \ref{fig:FIT_16sites_4thSiteVSgamma}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/8sites_comparison/8sites_gradLM_centerChainVSgamma.pdf}
-    \caption{\textcolor{red}{FIT}}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/8sites/FIT_8sites_gradLMcenterVSgamma.pdf}
+    \caption{8 sites, the red line shows the fit \\$\nabla \langle\sigma^z\rangle_{center}(\gamma) = -p_0+p_1\exp{(-p_2\gamma)}$.}
+    \label{fig:FIT_8sites_gradLMcenterVSgamma}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/8sites_comparison/8sites_gradLM_2and3VSgamma.pdf}
-    \caption{\textcolor{red}{FIT}}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/8sites/FIT_8sites_gradLM23VSgamma.pdf}
+    \caption{8 sites, the red line shows the fit \\$\nabla \langle\sigma^z\rangle_{2-3}(\gamma) = -p_0+p_1\exp{(-p_2\gamma)}$.}
+    \label{fig:FIT_8sites_gradLM23VSgamma}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/12sites/12sites_gradLM_centerChainVSgamma.pdf}
-    \caption{\textcolor{red}{FIT}}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/12sites/FIT_12sites_gradLM34VSgamma.pdf}
+    \caption{12 sites, the orange line shows the fit \\$\nabla \langle\sigma^z\rangle_{3-4}(\gamma) = -p_0+p_1\exp{(-p_2\gamma)}$.}
+    \label{fig:FIT_12sites_gradLM34VSgamma}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/12sites/12sites_gradLM_3and4VSgamma.pdf}
-    \caption{\textcolor{red}{FIT}}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/16sites/FIT_16sites_gradLM45VSgamma.pdf}
+    \caption{16 sites, the black line shows the fit \\$\nabla \langle\sigma^z\rangle_{4-5}(\gamma) = -p_0+p_1\exp{(-p_2\gamma)}$.}
+    \label{fig:FIT_16sites_gradLM45VSgamma}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_gradLM_3and4VSgamma.pdf}
-    \caption{\textcolor{red}{FIT}}
-    \label{fig:my_label}
-\end{figure}
-
-\textcolor{red}{COMMENT}
+In the following, a comparison between the profiles of the chain of different size.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/gradLMvsGammavsSize.pdf}
-    \caption{}
-    \label{fig:my_label}
+    \caption{Gradient of magnetization for the middle sites in 8, 12, 16-sites chain versus $\gamma$.}
+    \label{fig:gradLMvsGammavsSize}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/gradLMvsGammavsSize_firstQuarterChain.pdf}
-    \caption{}
-    \label{fig:my_label}
+    \caption{Gradient of magnetization for the sites lying in the $\frac{N}{4}$-th site in 8, 12, 16-sites chain versus $\gamma$.}
+    \label{fig:gradLMvsGammavsSize_firstQuarterChain}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,7 +347,6 @@ where $\langle \sigma^z_i \sigma^z_j \rangle = \Tr(\sigma^z_i \sigma^z_j \rho_{s
 
 First of all, as done in the last section, a comparison of the data obtained from MPO and QT method is shown; in particular, the spin-spin correlation function in relation to the first site $C(1, j)$ is displayed. In the following, the two-point correlation function will be studied considering the system symmetry, using the so-called \emph{bulk} correlation function; that is, starting from the middle sites of the chain, the correlation function will be calculated between equidistant sites from the center of the chain. 
 
-\textcolor{red}{ATTENTION. THESE THREE PLOTS ARE JUST <SIGMASIGMA> WITHOUT THE CONNECTION TERM. TODO}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/8sites/CorrFunc1_8s_J10505.pdf}
@@ -386,8 +410,15 @@ In the fig.~\ref{fig:8sites_CBulkConnVSgamma}, \ref{fig:12sites_CFBulkCONNVSgamm
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/16sites/16sites_CFBulkCONNVSgamma.pdf}
-    \caption{Bulk correlation function for a 16-sites spin chain. Data are obtained from MPO method. \textcolor{red}{TODO: FIT}}
+    \caption{Bulk correlation function for a 16-sites spin chain. Data are obtained from MPO method.}
     \label{fig:16sites_CFBulkCONNVSgamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/FIT_16sites_CFBulkCONN.pdf}
+    \caption{Bulk correlation function for a 16-sites spin chain for several values of $\gamma$. It is shown the fit $C_{\text{bulk}} = p_0 \exp{(-p_1 r)}$. The fit parameters are show in the same order of the legend for $\gamma$.}
+    \label{fig:FIT_16sites_CFBulkCONN}
 \end{figure}
 
 Let us see how the bulk correlation function changes varying in the chain size.
@@ -418,7 +449,7 @@ where $S_k^z \equiv \sigma_k^z/2$ and where $H$ is the Hamiltonian written in~\r
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/8sites/SpinCurr_8s_J10505.pdf}
-    \caption{Spin current of the chain, characterized by $\gamma=1, J_x=1, J_y=0.5, J_z=0.5$; \emph{i} stands for the site index.\textcolor{red}{DA RIVEDERE ERRORE}}
+    \caption{Spin current of the chain, characterized by $\gamma=1, J_x=1, J_y=0.5, J_z=0.5$; \emph{i} stands for the site index.}
     \label{fig:my_label}
 \end{figure}
 
@@ -464,7 +495,7 @@ As done previously for the observables already studied, we can see how the spin 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/NORM_SpinCurr_comparisonVSsize.pdf}
-    \caption{Spin current for the model at $J_z = 1$. Data for different chain lengths are shown. They are obtained from MPO method. \textcolor{red}{SE RIESCI MODIFICARE PER COLORI}}
+    \caption{Spin current for the model at $J_z = 1$. Data for different chain lengths are shown. They are obtained from MPO method.}
     \label{fig:NORM_SpinCurr_comparisonVSsize}
 \end{figure}
 
@@ -488,82 +519,103 @@ An aspect worth considering is the common peak value of the spin current, indepe
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Varying J\textsubscript{z}}
+So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this section, the behaviour of the chains under a variation of $J_z$ will be investigated.
 
-Let us have a look to the spin current while varying $J_z$.
+In fig.~\ref{fig:8sites_spinCurrVSJz} arises an alteration of the behaviour of the spin current: whereas for $J_z \geq 0.5$ it follows a polynomial trend, with the peak values corresponding to the ends of the chain, i.e. where the dissipators are, for $J_z \leq 0.5$ the curve is almost constant. 
+
+This behaviour is confirmed by the data obtained from QT method (fig.~\ref{fig:8sites_spinCurrVSJzQT}).
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/8sites_spinCurrVSJz.pdf}
-    \caption{8-sites chain.}
-    \label{fig:my_label}
+    \caption{Spin current of a 8-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:8sites_spinCurrVSJz}
 \end{figure}
-
-
-An interesting behaviour is shown for $J_z < 0.5$. Let us go into detail.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/8sites_spinCurrVsLOWJz.pdf}
-    \caption{8-sites chain.}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_spinCurrVSJzQT.pdf}
+    \caption{Spin current of a 8-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from QT method.}
+    \label{fig:8sites_spinCurrVSJzQT}
 \end{figure}
+
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/8sites_LMvsJz.pdf}
-    \caption{8-sites chain.}
-    \label{fig:my_label}
+    \caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:8sites_LMvsJz}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/8sites_LMvsLowJz.pdf}
-    \caption{8-sites chain.}
-    \label{fig:my_label}
+    \caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for $J_z \leq 0.7$. Data obtained from MPO method.}
+    \label{fig:8sites_LMvsLowJz}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_LMvsJzQT.pdf}
+    \caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from QT method.}
+    \label{fig:8sites_LMvsJzQT}
+\end{figure}
 
-Let us see if this behaviour still remains in longer chains.
+In order to analyze why the spin current changes the trend, also the bulk correlation function for both a 8-sites chain (fig.~\ref{fig:8sites_CFBulkvsLowJz_QT}) and a 12-sites chain (fig.~\ref{fig:12sites_CFBulkVSLowJz}) is examined.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_CFBulkvsLowJz_QT.pdf}
+    \caption{Bulk correlation function of a 8-sites chain, with $\gamma = 1$ for several values of $J_z \leq 1$. Data obtained from QT method.}
+    \label{fig:8sites_CFBulkvsLowJz_QT}
+\end{figure}
+
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/12sites_spinCurrVSJz.pdf}
-    \caption{12-sites chain.}
-    \label{fig:my_label}
+    \caption{Spin current of a 12-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:12sites_spinCurrVSJz}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsJz.pdf}
-    \caption{12-sites chain.}
+    \caption{Magnetization profile of a 12-sites chain, with $\gamma = 1$ for $J_z \leq 0.7$. Data obtained from MPO method.}
     \label{fig:my_label}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsLOWJz.pdf}
-    \caption{12-sites chain.}
+    \caption{Magnetization profile of a 12-sites chain, with $\gamma = 1$ for $J_z \leq 0.7$. Data obtained from MPO method.}
     \label{fig:my_label}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVsLOWJz.pdf}
-    \caption{16-sites chain.}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/12sites/12sites_CFBulkVSLowJz.pdf}
+    \caption{Bulk correlation function of a 12-sites chain, with $\gamma = 1$ for several values of $J_z \leq 1$. Data obtained from MPO method.}
+    \label{fig:12sites_CFBulkVSLowJz}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
+    \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:16sites_SpinCurrVaryingJz}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsLOWJz.pdf}
-    \caption{16-sites chain.}
-    \label{fig:my_label}
+    \caption{Magnetization profile of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:16sites_LMvsLOWJz}
 \end{figure}
 
-\textcolor{red}{$J_z > 1.5$}It is interesting how the profile of correlation changes from an exponential behaviour to a linear one. In the following, we will see how this linear profile changes with respect to $\Delta$. The following fits, as all those performed in this thesis, are done by~\cite{root_cern}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/8sites/FIT8sCorrFunc1_MPO_over15.pdf}
-    \caption{Data are obtained from QT method.}
-    \label{fig:my_label}
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_LMvsJz_gtOneQT.pdf}
+    \caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for several values of $J_z \geq 1.1$. Data obtained from QT method.}
+    \label{fig:8sites_LMvsJz_gtOneQT}
 \end{figure}

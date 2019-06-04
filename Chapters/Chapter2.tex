@@ -1,7 +1,9 @@
 %One of the main goals in scientific research is coming up to quantum simulation; this is due to the fact that in several physical fields there are mechanisms that cannot be simulated by classical computers: the essential aim is using a controlled quantum device to investigate another quantum system. Experiments have shown that superconducting circuits are able to manipulate and measure at the level of a few qubits and microwave photons, as a quantum simulator~\cite{Nat.Phys2012}. They can be treated as open systems because of the loss of photons, coupled to the feeding in additional photons through continuous external driving. Moreover, they are greatly flexible, because of their nanofabricated nature and almost every parameter involved is widely tunable. In~\cite{PhysRevX.7.011016}, it has been demonstrated that QED cavity lattices act as a controllable platform guiding understanding of non-equilibrium physics. 
 
 \chapter{Quantum Simulators of Open Many-Body Quantum Systems}
-Open many-body quantum systems are difficult to study, due to the exponential growth of the number of freedom degrees with respect to the number of the constituent particles. The scientific community has built many strategies to overcome this obstacle, by developing and refining several analytical and numerical methods. In addition to these, another approach was proposed, based on the use of quantum simulators.
+\epigraph{}{\textit{}}
+
+Open many-body quantum systems represent a challenging area of study, due to the exponential growth of the number of freedom degrees with respect to the number of the constituent particles. The scientific community has built many strategies to overcome this obstacle, by developing and refining several analytical and numerical methods. In addition to these, another approach was proposed, based on the use of quantum simulators.
 
 In the present chapter it is reported a review of some of the most relevant idea in the field of quantum simulators; in particular, the last section focuses on the simulation of spin systems, of remarkable interest in view of the model studied in this work.
 
@@ -39,15 +41,47 @@ In the present chapter it is reported a review of some of the most relevant idea
 
 %It is important to stress that the number of elements of the matricial representation of the superoperator grows with $N^4$. So, straightforward brute-force integration methods become unfeasible even for small system sizes.
 
+\section{Quantum Many-Body Systems}
+Quantum many-body systems are systems made up by a certain number of interacting particles. Typical quantum many-body systems are represented by Hubbard-like models or spin chains. 
+A prototype of these systems is described by the non-dissipative Bose-Hubbard model~\cite{Greiner_bose_hubbard}: an interacting boson gas in a lattice potential. The hamiltonian reads:
+\begin{equation}
+    H = -J\sum_{\langle i,j \rangle} \hat{a}^{\dagger}_i \hat{a}_j + \sum_i \epsilon_i \hat{n}_i+ \frac{1}{2} U \sum_i \hat{n}_i(\hat{n}_i -1 ),
+\end{equation}
+where $\hat{a}_i$ and $\hat{a}^{\dagger}_i$ are the bosonic creation and annihilation operators respectively, on the i-th site; $\hat{n}_i$ is the number operator, which counts the number of bosons in the i-th site; $\epsilon_i$ is the energy due to the external harmonic confinement to which the bosons are undergone. The $J$ term is the one responsible for the hopping between adjacent sites due to the tunnel coupling; it is the matrix element:
+\begin{equation*}
+    J = -\int d^3x \quad w(\Vec{x}-\Vec{x_i})(-\frac{\nabla^2}{2m}+V(\Vec{x}))w(\Vec{x}-\Vec{x_j}),
+\end{equation*}
+where $w(\Vec{x}-\Vec{x_i})$ is a single particle Wannier function localized to the i-th site, $V(\Vec{x}))$ is the lattice potential and $m$ is the mass of a single boson.
+$U$ is instead the matrix element for the interaction between bosons in the same site; it is:
+\begin{equation*}
+    U = \frac{4\pi a}{m} \int d^3x \quad |w(\Vec{x})|^4, 
+\end{equation*}
+$a$ being the scattering length. 
+
+If the tunnel coupling term $J$ dominates the hamiltonian, the ground-state energy is minimized if the single-particle wavefunctions of the $N$ bosons is spread out over the entire $M$ sites of the lattice; so the many-body ground state reads:
+\begin{equation*}
+    \ket{\Psi_{SF}} \propto \Bigl( \sum_{i=1}^M \hat{a}^{\dagger}_i \Bigl)^N \ket{0},
+\end{equation*}
+i.e. all bosons occupy the same extended Bloch state. As pointed out by~\cite{Greiner_bose_hubbard}, an important feature of this state is that the probability distribution of the occupation $n_i$ of bosons on a single site is poissonian, so that its variance is given by $\langle n_i \rangle$; this means that it is well described by a macroscopic wavefunction with long-range phase coherence throughout the lattice.
+
+If the on-site intraction term $U$ dominates the hamiltonian, the ground state of the system will instead consist of localized wavefunctions with a fixed number of bosons per site that minimized the energy; the many-body ground state will be a product of local Fock states for each site:
+\begin{equation*}
+    \ket{\Psi_{MI}} \propto \prod_{i=1}^M \Bigl( \hat{a}^{\dagger}_i\Bigl)^N \ket{0}.
+\end{equation*}
+
+The two kind of ground state have been labeled with the subscripts "SF" and "MI", specifying the two phases to which the system may do the transition: superfluid and Mott insulator phases.
+
+
 \section{Quantum Simulators: Controllable Many-Body Systems}
 In order to overcome the mentioned problem, over the years several analytical and numerical methods have been developed. In addition to these more "traditional" approaches, during the last years it arose the idea of studying a quantum system by using a properly designed quantum device. The essential aim of this new strategy lies in the employment of controlled quantum devices called \emph{quantum simulators}; they are systems able to experimentally emulate the Hamiltonian model bearing the non-trivial properties of the system under study. The usefulness of this approach is twofold~\cite{Tomadin_Fazio}:  not only it allows to explore properties of the model in regions that are elusive to the analytical and numerical studies, but also it consents to test to which limits the Hamiltonian model is appropriate to describe the system or whether additional ingredients are required.
 
 Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably the first quantum simulators in Physics History, much progress have been made especially with the advent of cold atoms in optical lattices.
 
-\subsection{Cold Atoms in Optical Lattice}
+\subsection{Cold Atoms in Optical Lattices}
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{Figures/optical_lattice.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Optical lattices are crystals made of light: lasers beams interfere to form a periodic potential in which ultracold atoms are trapped. Figure taken from LENS website.}
     \label{fig:optical_lattice}
 \end{figure}
@@ -68,6 +102,7 @@ In fig.~\ref{fig:optical_lattice_dissipation}, a sketch of the implementation of
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{Figures/optical_lattice_dissipation.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Schematic realization of the effective dissipative process with ultracold atoms in an optical superlattice. Figure taken from~\cite{diehl_wEbsite}.}
     \label{fig:optical_lattice_dissipation}
 \end{figure}
@@ -79,9 +114,9 @@ An interesting study over the possibility of using cold atoms to simulate dissip
 where $\mathcal{H}_0$ represents the kinetic energy of bosons hopping between
 adjacent lattice sites with amplitude J, V is the onsite interaction
 with strength U and $a_i$ ($a_i^{\dagger}$) are bosonic destruction (creation)
-operators for atoms at i-th site. At this point, an appropriate choice of jump operators allows to couple the system to a bath so that it is driven to a pure many-body state by quasi-local dissipation. Applying standard linearization schemes in the weakly interacting situations led to obtain the solution of the master equation~\ref{eqn:SS_masterEq}. The steady-state solution seems to have properties similar to those of bosons in thermal contact to a heat bath.
+operators for atoms at i-th site. At this point, an appropriate choice of jump operators allows to couple the system to a bath so that it is driven to a pure many-body state by quasi-local dissipation. Applying standard linearization schemes in the weakly interacting situations led to obtain the solution of the master equation~\ref{eqn:lindblad_eqn}. The steady-state solution seems to have properties similar to those of bosons in thermal contact to a heat bath.
 
-Another strategy involves trapping Rydberg atoms in optical lattices. Rydberg atoms are alkali-like atoms with a single electron promoted into a highly excited orbital~\cite{carusotto_ciuti}. The presence of this atoms enhances photon-photon interaction; the presence of a single photon in the system is able to drive away from resonance condition all atoms contained in a surrounding volume. If the optical density is sufficiently high, a second photon travelling across this volume can be absorbed or suffer a phase shift; this can be use to obtain an effective blockade effect. \textcolor{red}{See ref. Lee Haffner Cross}
+Another strategy involves trapping Rydberg atoms in optical lattices. Rydberg atoms are alkali-like atoms with a single electron promoted into a highly excited orbital~\cite{carusotto_ciuti}. The presence of this atoms enhances photon-photon interaction; the presence of a single photon in the system is able to drive away from resonance condition all atoms contained in a surrounding volume. If the optical density is sufficiently high, a second photon travelling across this volume can be absorbed or suffer a phase shift; this can be use to obtain an effective blockade effect.
 
 \subsection{QED-Cavity Arrays}
 In the last few decades the field of quantum simulators has been enriched by a new idea, based on arrays of QED cavities~\cite{Tomadin_Fazio} (sketched in fig.~\ref{fig:QED_cavities}), in which light resonates and interacts with matter contained therein.  A compelling aspect of this kind of devices is the competition between two phenomena: while on the one hand light-matter interaction inside the cavity leads to photon blockade, on the other photon hopping between neighbouring cavities favors delocalization.
@@ -115,7 +150,7 @@ The spectrum of the Hamiltonian~\ref{eqn:Jaynes-Cummings} is anharmonic, meaning
 % pag. 55 Carusotto-Ciuti
 % fig.10 di Noh2016
 
-An array of cavities in the impenetrable photon regime has been theoretically studied~\cite{carusotto_ciuti}. As sketched in fig.~\ref{fig:cavities_ring}, a continuous pumping is considered. The transmission and/or absorption spectrum of the system shows the Tonks-Girardeau nature of the steady-state of photon gas, i.e. the fermionization of photons. \textcolor{red}{FINIRE DI SPIEGARE}
+An array of cavities in the impenetrable photon regime has been theoretically studied~\cite{carusotto_ciuti}. As sketched in fig.~\ref{fig:cavities_ring}, a continuous pumping is considered. The transmission and/or absorption spectrum of the system shows the Tonks-Girardeau nature of the steady-state of photon gas, i.e. the fermionization of photons.
 
 \begin{figure}
     \centering
