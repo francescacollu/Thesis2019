@@ -1,12 +1,19 @@
 \chapter{Case Study: a 1/2-spin XYZ Heisenberg Chain Coupled to Two External Baths}
 \label{Chapter3}
+\epigraph{It from a bit.}{\textit{J.A. Wheeler}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Model}
 \label{sec:model}
-The model under consideration is a Heisenberg XYZ chain of N $\frac{1}{2}$-spin, coupled to two external reservoirs positioned at its boundaries. The density matrix describing the chain evolves according to the Lindblad master equation
+Non-equilibrium dynamics of quantum many-body systems have become a subject of great interest, due especially to the breakthrough in the experimental methods in the field of ultracold atoms. As already mentioned in chapter~\ref{chapter2}, several platforms, which have been theorised or implemented~\cite{exp_spinChain}, can realize one-dimensional spin chains with great accuracy. 
+
+One of the oldest and paradigmatic model of interacting quantum particles is the Heisenberg model. Despite being exactly solvable by the Bethe ansatz, calculating its properties is not trivial. 
+
+\textcolor{red}{add a sketch of the model}
+
+In the present work, we have chosen to consider the anisotropic Heisenberg model: the Heisenberg XYZ chain of N $\frac{1}{2}$-spin, coupled to two external reservoirs positioned at its boundaries. The density matrix describing the chain evolves according to the Lindblad master equation
 \begin{equation}
     \frac{d\rho}{dt} = -i[H, \rho] - \sum_{a=1}^{N}\gamma_a\Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl),
 \end{equation}
@@ -14,7 +21,26 @@ where the bath-coupling strength parameters $\gamma_a \neq 0$ only for $a = 1, N
 $H$ being the Hamiltonian of the model:
 \begin{equation}
 \label{ham_chain}
-    H = \sum_{i = 1}^{N-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + J_z \sigma_i^z \sigma_{i+1}^z).
+    H = \sum_{i = 1}^{N-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + J_z \sigma_i^z \sigma_{i+1}^z),
+\end{equation}
+where $\sigma^x$, $\sigma^y$ and $\sigma^z$ are the Pauli matrices, which are defined as follows:
+\begin{equation}
+\sigma^x = 
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix}
+    , \quad \sigma^y = 
+    \begin{pmatrix}
+        0 & -i \\
+        i & 0
+    \end{pmatrix}
+    , \quad \sigma^z = 
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}
+    .
 \end{equation}
 The coupling constant are choose to be $J_x = 1$, $J_y = 0.5$ all over the dissertation, while $J_z$ will be varied as it will see in the following sections.
 The $L_a$ are the Lindblad operators representing the single-spin bath coupled to the first and the last spin of the chain:
@@ -31,125 +57,15 @@ All fits in the present chapter are made by~\cite{root_cern} with Minuit/Migrad 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The CSR Method: Limitations and Usability}
-The CSR method, described in section~\ref{chapter3_csr}, has been studied and implemented in order to analyze the model described in the last section. The algorithm is written in pseudocode in appendix~\ref{AppendixA}.
-
-In this section, it is shown that the CSR method is not a suitable method for investigating systems described by a model such as the one under consideration.
-
-In order to reveal this, we can easily see the case of a 4-sites chain for the proposed model. In particular, we can study the magnetization profile of the chain, i.e. the steady-state expectation value $\langle \sigma^z \rangle$ of the Pauli spin- matrix $\sigma^z$ for each site:
-\begin{equation*}
-    \langle \sigma^z \rangle = \Tr(\sigma^z \rho),
-\end{equation*}
-being $\rho$ the steady-state density matrix of the system.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/4sites/4sites_LM_convergenceIncreasingM.pdf}
-    \caption{Spin profile of a 4-sites chain for the model described above with $J_z=1$ for several values of corner-space dimensions $M \times M$. The cyan markers are those representing the expectation value of the magnetization calculated by means of a complete set of states of Hilbert space (which has dimension $2^4$).}
-    \label{fig:4sites_LM_convergenceIncreasingM}
-\end{figure}
-
-As shown in figure~\ref{fig:4sites_LM_convergenceIncreasingM}, it is clear that for such a system the convergence has not been reached. Even for $M = 15$, that covers almost the total Hilbert space dimension, the results are not the convergent ones.
-
-On the other hand, if we consider a model in which every site is coupled to a dissipator, we can see how the magnetization profile gets to convergence starting from $M = 9$ already.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/4sites/4sites_totalDissipators.pdf}
-    \caption{Spin profile of a 4-sites chain in which every spin of the chain is coupled to a dissipator. In this case, the convergence is reached for $M<\text{dim}(\mathcal{H})$.}
-    \label{fig:4sites_totalDissipators}
-\end{figure}
-
-In order to confirm the limitations of this method, the same comparison is done for a longer chain, made up by 8 sites. In this case, the results of CSR method are compared to those of MPO method, since a brute-force diagonalization of the Liouvillian operator would not be possible: it would require a huge amount of memory. We have reason to believe that the results obtained from MPO method are plausible, as we will see in the next sections.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/8sites/1U1D_comparisonCSR_MPO_8site.pdf}
-    \caption{Spin profile of a 8-sites chain for the model described in sec.\ref{sec:model}. Significant differences between the data obtained for $M=50$ and $M=100$ are not noticed.}
-    \label{fig:1U1D_comparisonCSR_MPO_8site}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/8sites/8sites_MPOvsCORNER_4U4D.pdf}
-    \caption{Spin profile of a 8-sites chain in which every spin of the chain is coupled to a dissipator.}
-    \label{fig:8sites_MPOvsCORNER_4U4D}
-\end{figure}
-
-In conclusion, in fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile of a 16-sites chain obtained by CSR and MPO methods.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/16sites/LMComparison16s1051.pdf}
-    \caption{Spin profile for a 16-sites chain for the model described in section~\ref{sec:model}. Data in red are obtained from MPO method, with m = 80 and T = 2000 and data in blue are obtained from CSR method, with M = 65. It is self-evident the inadequacy of the corner-space method, for the model under study.}
-    \label{fig:LMComparison16s1051}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/8U8D_comparisonCSRvsMPO.pdf}
-    \caption{Spin profile for a 16-sites chain in which every spin of the chain is coupled to a dissipator. The dimension of the corner-space is $M=65$.}
-    \label{fig:LMComparison16s1051}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Convergence and Errors}
-Before we examine the results obtained from the numerical methods, in this section a brief discussion on the convergence of the data, error calculus and the choice of parameters is done.
-
-\subsection{Quantum Trajectories Method}
-The QT method, explained in section~\ref{chapt2_qtm}, doing the stochastic unraveling of the master equation, builds the quantum trajectories after which it is named.  Every quantum trajectory corresponds to a simulated experiment and for the model under consideration, has an oscillatory profile as that displayed in fig.~\ref{fig:SS_s8J10511}. In order to stabilize the solution, for every quantum trajectory, the average in time is considered, starting from the end of the transient (needed for a solution of the Lindblad equation to converge into the stationary one).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/SS_s8J10511.pdf}
-    \caption{Example of quantum trajectory; in particular, this is the expectation value of the magnetization of the first site of the chain, for $J_z = 1.1$ and $\gamma = 1$. The total elapsed time is $T=500$, while the time step $dt = 0.1$.}
-    \label{fig:SS_s8J10511}
-\end{figure}
-
-For the same case considered in fig.~\ref{fig:SS_s8J10511}, the convergence of the mean values is shown in fig.~\ref{fig:Convergence_s8J10511}. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/Convergence_s8J10511.pdf}
-    \caption{Study of the convergence of the mean values of the quantum trajectories. For the case under consideration the number of events is $N = 1000$.}
-    \label{fig:Convergence_s8J10511}
-\end{figure}
-
-The study of the 8-sites chain was done with an elapsed time for every event of $T = 500$ and time-step $dt = 0.1$. The total number of simulated experiment is $N = 1000$.
-
-As an error has been consider the standard deviation of the mean, i.e.
-\begin{equation*}
-    \sigma_{\text{mean}} = \frac{\sigma}{\sqrt{N}},
-\end{equation*}
-where $\sigma$ is the standard deviation of the mean in time in the quantum trajectory.
-
-\subsection{Matrix Product Density Operators Method}
-The convergence of MPO method depends essentially on the setting of two parameters: the bond dimension and the number of Trotter steps. The fig.~\ref{fig:convergenceMPO_8sites} shows the convergence profile for a 8-sites chain for $J_z = 1$ and $\gamma = 1$. The same quantity can reach convergence in different times if, for example, $J_z$ assumes another value. 
-
-In the present work, for 8-sites chain it was considered a bond dimension $m = 100$ and Trotter steps in the range $[1200, 1500]$; for 12-sites chain was considered a bond dimension $m = 60$ and Trotter steps in the range $[1000, 2000]$; for 16-sites chain was considered a bond dimension $m = 80, 100$ and Trotter steps in the range $[1000, 1500]$.
-
-\begin{figure}[H]
-    \label{fig:convergence_mpo_8sites}
-    \centering
-    \includegraphics[scale=0.7]{Figures/convergence/Convergence_s8T3000J1051.pdf}
-    \caption{Study of convergence of the MPO method for a 8-sites chain, for bond dimension m = 100 and T = 3000.}
-    \label{fig:convergenceMPO_8sites}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Magnetization Profile}
 \label{sec:magn_profile}
-The first observable examined is the magnetization of the chain, i.e. the expectation value $\langle \sigma^z \rangle$ of the Pauli matrix $\sigma^z$ for each site:
+The first observable we want examine is the magnetization profile of the chain, i.e. the expectation value $\langle \sigma^z \rangle$ of the Pauli matrix $\sigma^z$ for each site:
 \begin{equation*}
     \langle \sigma^z \rangle = \Tr(\sigma^z \rho_s),
 \end{equation*}
-being $\rho_s$ the steady-state density matrix.
+being $\rho_s$ the steady-state density matrix of the system.
+
+The magnetization profile is the first marker of the dynamics of the chain: it 
 
 \subsection{MPO and QT Comparison}
 First of all, a comparison between MPO and QT methods can be done for a 8-sites chain. As it can seen in 
@@ -618,4 +534,116 @@ In order to analyze why the spin current changes the trend, also the bulk correl
     \includegraphics[scale=0.7]{Figures/8sites/8sites_LMvsJz_gtOneQT.pdf}
     \caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for several values of $J_z \geq 1.1$. Data obtained from QT method.}
     \label{fig:8sites_LMvsJz_gtOneQT}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The CSR Method: Limitations and Usability}
+The CSR method, described in section~\ref{chapter3_csr}, has been studied and implemented in order to analyze the model described in the last section. The algorithm is written in pseudocode in appendix~\ref{AppendixA}.
+
+In this section, it is shown that the CSR method is not a suitable method for investigating systems described by a model such as the one under consideration.
+
+In order to reveal this, we can easily see the case of a 4-sites chain for the proposed model. In particular, we can study the magnetization profile of the chain, i.e. the steady-state expectation value $\langle \sigma^z \rangle$ of the Pauli spin- matrix $\sigma^z$ for each site:
+\begin{equation*}
+    \langle \sigma^z \rangle = \Tr(\sigma^z \rho),
+\end{equation*}
+being $\rho$ the steady-state density matrix of the system.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/4sites/4sites_LM_convergenceIncreasingM.pdf}
+    \caption{Spin profile of a 4-sites chain for the model described above with $J_z=1$ for several values of corner-space dimensions $M \times M$. The cyan markers are those representing the expectation value of the magnetization calculated by means of a complete set of states of Hilbert space (which has dimension $2^4$).}
+    \label{fig:4sites_LM_convergenceIncreasingM}
+\end{figure}
+
+As shown in figure~\ref{fig:4sites_LM_convergenceIncreasingM}, it is clear that for such a system the convergence has not been reached. Even for $M = 15$, that covers almost the total Hilbert space dimension, the results are not the convergent ones.
+
+On the other hand, if we consider a model in which every site is coupled to a dissipator, we can see how the magnetization profile gets to convergence starting from $M = 9$ already.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/4sites/4sites_totalDissipators.pdf}
+    \caption{Spin profile of a 4-sites chain in which every spin of the chain is coupled to a dissipator. In this case, the convergence is reached for $M<\text{dim}(\mathcal{H})$.}
+    \label{fig:4sites_totalDissipators}
+\end{figure}
+
+In order to confirm the limitations of this method, the same comparison is done for a longer chain, made up by 8 sites. In this case, the results of CSR method are compared to those of MPO method, since a brute-force diagonalization of the Liouvillian operator would not be possible: it would require a huge amount of memory. We have reason to believe that the results obtained from MPO method are plausible, as we will see in the next sections.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/1U1D_comparisonCSR_MPO_8site.pdf}
+    \caption{Spin profile of a 8-sites chain for the model described in sec.\ref{sec:model}. Significant differences between the data obtained for $M=50$ and $M=100$ are not noticed.}
+    \label{fig:1U1D_comparisonCSR_MPO_8site}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_MPOvsCORNER_4U4D.pdf}
+    \caption{Spin profile of a 8-sites chain in which every spin of the chain is coupled to a dissipator.}
+    \label{fig:8sites_MPOvsCORNER_4U4D}
+\end{figure}
+
+In conclusion, in fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile of a 16-sites chain obtained by CSR and MPO methods.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/LMComparison16s1051.pdf}
+    \caption{Spin profile for a 16-sites chain for the model described in section~\ref{sec:model}. Data in red are obtained from MPO method, with m = 80 and T = 2000 and data in blue are obtained from CSR method, with M = 65. It is self-evident the inadequacy of the corner-space method, for the model under study.}
+    \label{fig:LMComparison16s1051}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8U8D_comparisonCSRvsMPO.pdf}
+    \caption{Spin profile for a 16-sites chain in which every spin of the chain is coupled to a dissipator. The dimension of the corner-space is $M=65$.}
+    \label{fig:LMComparison16s1051}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Convergence and Errors}
+Before we examine the results obtained from the numerical methods, in this section a brief discussion on the convergence of the data, error calculus and the choice of parameters is done.
+
+\subsection{Quantum Trajectories Method}
+The QT method, explained in section~\ref{chapt2_qtm}, doing the stochastic unraveling of the master equation, builds the quantum trajectories after which it is named.  Every quantum trajectory corresponds to a simulated experiment and for the model under consideration, has an oscillatory profile as that displayed in fig.~\ref{fig:SS_s8J10511}. In order to stabilize the solution, for every quantum trajectory, the average in time is considered, starting from the end of the transient (needed for a solution of the Lindblad equation to converge into the stationary one).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/SS_s8J10511.pdf}
+    \caption{Example of quantum trajectory; in particular, this is the expectation value of the magnetization of the first site of the chain, for $J_z = 1.1$ and $\gamma = 1$. The total elapsed time is $T=500$, while the time step $dt = 0.1$.}
+    \label{fig:SS_s8J10511}
+\end{figure}
+
+For the same case considered in fig.~\ref{fig:SS_s8J10511}, the convergence of the mean values is shown in fig.~\ref{fig:Convergence_s8J10511}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/Convergence_s8J10511.pdf}
+    \caption{Study of the convergence of the mean values of the quantum trajectories. For the case under consideration the number of events is $N = 1000$.}
+    \label{fig:Convergence_s8J10511}
+\end{figure}
+
+The study of the 8-sites chain was done with an elapsed time for every event of $T = 500$ and time-step $dt = 0.1$. The total number of simulated experiment is $N = 1000$.
+
+As an error has been consider the standard deviation of the mean, i.e.
+\begin{equation*}
+    \sigma_{\text{mean}} = \frac{\sigma}{\sqrt{N}},
+\end{equation*}
+where $\sigma$ is the standard deviation of the mean in time in the quantum trajectory.
+
+\subsection{Matrix Product Density Operators Method}
+The convergence of MPO method depends essentially on the setting of two parameters: the bond dimension and the number of Trotter steps. The fig.~\ref{fig:convergenceMPO_8sites} shows the convergence profile for a 8-sites chain for $J_z = 1$ and $\gamma = 1$. The same quantity can reach convergence in different times if, for example, $J_z$ assumes another value. 
+
+In the present work, for 8-sites chain it was considered a bond dimension $m = 100$ and Trotter steps in the range $[1200, 1500]$; for 12-sites chain was considered a bond dimension $m = 60$ and Trotter steps in the range $[1000, 2000]$; for 16-sites chain was considered a bond dimension $m = 80, 100$ and Trotter steps in the range $[1000, 1500]$.
+
+\begin{figure}[H]
+    \label{fig:convergence_mpo_8sites}
+    \centering
+    \includegraphics[scale=0.7]{Figures/convergence/Convergence_s8T3000J1051.pdf}
+    \caption{Study of convergence of the MPO method for a 8-sites chain, for bond dimension m = 100 and T = 3000.}
+    \label{fig:convergenceMPO_8sites}
 \end{figure}
