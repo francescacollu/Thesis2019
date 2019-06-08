@@ -14,12 +14,13 @@ $N$ being the dimension of Hilbert space.
 
 In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ while the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the equation~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
 
-Nevertheless, some techniques for exact diagonalization of Liouvillian superoperator~\ref{eqn:lindblad_eqn} has been developed. To name but one, that devised by Prosen in ref.~\cite{Prosen_2008} for studying a quadratic system of interacting fermions coupled to a set of Markovian baths, prescribes to express the~\ref{eqn:lindblad_eqn} in terms of anticommuting super-operators which act on the Fock space of density operators. 
+Nevertheless, some techniques for exact diagonalization of Liouvillian superoperator~\ref{eqn:lindblad_eqn} has been developed. To name but one, that devised by Prosen in~\cite{Prosen_2008} for studying a system characterized by a quadratic Hamiltonian and linear Lindblad operators, prescribes to diagonalize the Liouville super-operator in terms of $2n$ normal master modes, i.e. anticommuting super-operators which act on the Fock space of density operators. This can be understood as a complex version of Bogoliubov transformation.
+
 %The numerical methods employed in open quantum system problems can be classified in those that have a wave-function approach (quantum trajectories method, mean field method) and those that decompose the system into blocks (corner-space renormalization method, matrix product density operators method).
 
 However, as seen previously, a direct integration of master equation for an open many-body system becomes unfeasible even for relatively small sizes, so conceiving numerical strategies seems to be necessary.
 
-One of them is based on the \emph{mean field} approach; the essential idea is considering the mean value of the Hamiltonian and, as suggested by Gutzwiller, factorizing the density matrix, defining a mean field density matrix $\rho_{MF} = \prod_j\rho_j$, where $\rho_j$ is the single site density matrix. In this way, all correlations and interactions between sites are neglected, so we can say it is a crude approximation for an interacting many-body system. In order to (partially) overcome this problem, the \emph{cluster mean field} method was developed: in this method a set of contiguous sites are isolated from the rest of the system. As explained in~\cite{PhysRevX.6.031011}, this method suggests to write the Hamiltonian as $H_{CMF} = H_\mathcal{C} + H_{\mathcal{B(C)}}$, where the first term describes the exact interactions inside the cluster while the second term represents the mean-field interactions between the cluster and the sites on its boundary $\mathcal{B(C)}$. The global density matrix will be $\rho_{CMF} = \bigotimes \rho_\mathcal{C}$, where the $\rho_\mathcal{C}$ is the density matrix of the $\mathcal{C}$th cluster. One should note that, when the cluster is made up by a single site, the method becomes the above-mentioned standard one. 
+One of them is based on the \emph{mean field} approach; the essential idea is considering the mean value of the Hamiltonian and, as suggested by Gutzwiller, factorizing the density matrix, defining a mean field density matrix $\rho_{MF} = \prod_j\rho_j$, where $\rho_j$ is the single site density matrix. In this way, all correlations and interactions between sites are neglected, so we can say it is a crude approximation for an interacting many-body system. In order to (partially) overcome this problem, the \emph{cluster mean field} method was developed: in this method a set of contiguous sites are isolated from the rest of the system. As explained in~\cite{jin_biella_ross}, this method suggests to write the Hamiltonian as $H_{CMF} = H_\mathcal{C} + H_{\mathcal{B(C)}}$, where the first term describes the exact interactions inside the cluster while the second term represents the mean-field interactions between the cluster and the sites on its boundary $\mathcal{B(C)}$. The global density matrix will be $\rho_{CMF} = \bigotimes \rho_\mathcal{C}$, where the $\rho_\mathcal{C}$ is the density matrix of the $\mathcal{C}$-th cluster. One should note that, when the cluster is made up by a single site, the method becomes the above-mentioned standard one. 
 
 Others important numerical methods are the ones essentially based on the \emph{linked cluster expansions}~\cite{oitmaa}, in which the quantities of interest are expressed as sums of contributions from a sequence of clusters of sites; in particular, only connected clusters contribute. In~\cite{PhysRevX.6.021037} an application of this idea to the Liouvillian is done.
 
@@ -51,7 +52,7 @@ Indeed, we see that:
     -\text{i}[H_\text{eff}, \rho] = -\text{i}[H_s, \rho] - \frac{1}{2}\sum_\mu \{L_{\mu}^{\dagger}L_{\mu}, \rho\}.
 \end{equation*}
 
-The \textbf{last term} of the~\ref{eqn:lindblad_eqn}, is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the~\ref{eqn:lindblad_eqn} is called \emph{quantum jump picture}~\cite{PhysRevA.69.062317}. 
+The summation term in the~\ref{eqn:lindblad_eqn}, is the one responsible for the so-called \emph{quantum jumps}; for this reason, the representation under which we have written the~\ref{eqn:lindblad_eqn} is called \emph{quantum jump picture}~\cite{PhysRevA.69.062317}. 
 
 At an initial time $t_0$, the density matrix of the system is in a pure state
 \[
@@ -109,6 +110,7 @@ The numerical methods based on renormalization group à la Wilson present a comp
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.3]{Figures/wilson.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Blocking scheme of Wilson's NRG method.}
     \label{fig:wilson}
 \end{figure}
@@ -120,7 +122,7 @@ Let us consider a 1D-system made up by $N$ spins. The NRG method suggests to tak
     d_n \leq D \quad \forall \quad n. 
 \end{equation*}
 
-We consider a one-dimensional spin chain;  the NRG method requires to break the chain into a set of identical blocks A (see fig.~\ref{fig:wilson}). So, one diagonalizes the Hamiltonian matrix $H_{AA}$ for two neighboring blocks $A$ and uses its lowest $m$ eigenstates (ordered by energy) to form a pseudo-unitary matrix $O$, employed to change the basis and make up the Hamiltonian $H_{A'}$ representing the block $A'$ twice as large (see fig.~\ref{fig:wilson}), in this way:
+Considering a one-dimensional spin chain,  the NRG method requires to break the chain into a set of identical blocks A (see fig.~\ref{fig:wilson}). So, one diagonalizes the Hamiltonian matrix $H_{AA}$ for two neighboring blocks $A$ and uses its lowest $m$ eigenstates (ordered by energy) to form a pseudo-unitary matrix $O$, employed to change the basis and make up the Hamiltonian $H_{A'}$ representing the block $A'$ twice as large (see fig.~\ref{fig:wilson}), in this way:
 \begin{equation*}
     H_{A'} = OH_{AA}O^\dagger,
 \end{equation*}
@@ -129,8 +131,9 @@ where $O$ is a $m\times n$ matrix (the rows of $O$ are the $m$ lowest eigenstate
 \begin{figure}[H]
 \centering
 %\begin{subfigure}{6cm}
-    \includegraphics[width=0.5\linewidth]{Figures/blocks_wilson}
-    \caption{Merging of the blocks in \\NRG procedure.}
+    \includegraphics[scale=0.5]{Figures/blocks_wilson}
+    \captionsetup{width=1.\linewidth}
+    \caption{Merging of the blocks in NRG procedure.}
     \label{fig:blocks_wilson}
 %\end{subfigure}\quad
 %\begin{subfigure}{6cm}
@@ -152,7 +155,7 @@ Let us start considering two blocks of a quantum system consisting in a certain 
 \end{equation}
 can be seen as an eigenvalue equation.
 
-We now consider two spatially adjacent sites: the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter. In order to spatially merge these two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
+We now consider two spatially adjacent sites: the site A and the site B. We now call $\rho^{(A)}$ the steady-state density matrix of the first site and $\rho^{(B)}$ of the latter site. In order to spatially merge these two sites, let us write $\rho^{(A)}$ and $\rho^{(B)}$ in terms of an orthonormal basis; if there is no degeneracy among eigevalues of $\rho^{(A)}$ and $\rho^{(B)}$, we can use the orthonormal basis formed by their eigenvectors. Instead, if there is degeneration, a Gram-Schmidt orthonormalization process can be used to obtain an orthonormal basis starting from the ensemble of eigenvectors.
 
 In this way, we will have:
 \begin{equation}
@@ -199,7 +202,8 @@ In the work of~\cite{PhysRevLett.115.080604} it has been proved that convergence
 \begin{figure}
     \centering
     \includegraphics[scale=0.55]{Figures/csr_sketch}
-    \caption{Sketch of the corner space renormalization method.}
+    \captionsetup{width=1.\linewidth}
+    \caption{Sketch of the corner-space renormalization method.}
     \label{fig:csr_sketch}
 \end{figure}
 
@@ -221,22 +225,32 @@ A detailed description of the implementation of the algorithm can be seen in App
 Finally, we analyze the \emph{matrix product density operators} (MPO) method.
 This method is rooted in one of the first and most efficient numerical methods: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
 
-Essentially, the DMRG is a generalization of Wilson's NRG method; the core of the method lies in the construction of the so-called \emph{superblock}, a block made up by 
-
-the core of the DMRG method goes as follows: after the construction of a portion of the system, one enlarges it and in order to keep the size of the Hilbert space manageable, truncates its basis, keeping only the most relevant states, according to
+Essentially, the DMRG is a generalization of Wilson's NRG method; its core lies in the construction of the so-called \emph{superblock} (see fig.~\ref{fig:DMRG_superblockSketch}): it is constructed in an iterative way, taking a portion of the system, then enlarging it until the desired size is reached; this superblock is usually indicated as $A \bullet \bullet B$. By numerical diagonalization of $H_{A \bullet \bullet B}$ one can find the ground state $\ket{\Psi_{GS}}$ that minimize the energy:
 \begin{equation*}
-    \rho = \Tr_{E}()
+    E = \bra{\Psi_{GS}} H_{A \bullet \bullet B}\ket{\Psi_{GS}}.
 \end{equation*}
+Since we do not want an exponential increase of the dimension of the Hilbert space, we choose the D most relevant states for block $A \bullet$ (similarly for $\bullet B$). So, having the reduced density operator for $A \bullet$:
+\begin{equation*}
+    \rho_{A \bullet} = \Tr_{\bullet B} \ket{\Psi_{GS}}\bra{\Psi_{GS}}.
+\end{equation*}
+one uses the D eigenstates with the largest weight (i.e. with the largest eigenvalues) to construct the pseudo-unitary matrix O, useful to truncate the basis:
+\begin{equation*}
+    H_{A'} = OH_{A\bullet}O^\dagger.
+\end{equation*}
+At this point, one can replace the first block with the new $A'$.
+\textcolor{red}{REVIEW}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.3]{Figures/DMRG_superblockSketch.png}
-    \caption{Sketch of blocks configuration in DMRG method. The rectangles represent block of $l$ and $l'$ sites respectively, while the circles represent single sites.}
+    \includegraphics[scale=0.5]{Figures/dmrg_superblock_sketch.png}
+    \captionsetup{width=1.\linewidth}
+    \caption{Sketch of superblocks formation in DMRG method.\textcolor{red}{TO DO: labels to blocks} %The rectangles represent block of $l$ and $l'$ sites respectively, while the circles represent single sites.
+    }
     \label{fig:DMRG_superblockSketch}
 \end{figure}
 
-The MPO method is the generalization of the \emph{matrix product states} (MPS) method \cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS method lies in Wilson's renormalization group; in particular, 
-So, let us consider the Hilbert space $\mathcal{H}_2$; we write an arbitrary orthonormal basis $\{\ket{\beta\}}_{\beta=1}^{d_2}$ as
+The MPO method is the generalization of the \emph{matrix product states} (MPS) method \cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS techniques lies in Wilson's renormalization group, already mentioned in sec.~\ref{chapter3_csr}.
+So, let us consider two spins and a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; we write an arbitrary orthonormal basis $\{\ket{\beta}\}_{\beta=1}^{d_2}$ as
 \begin{equation*}
     \ket{\beta}_2 = \sum_{n_1, n_2}^d_1 B_\beta^{n_1, n_2} \ket{n_1}_1 \otimes \ket{n_2}_1,
 \end{equation*}
@@ -244,7 +258,7 @@ where $B_\beta^{n_1, n_2}$ are the coefficients of the basis vectors in terms of
 \begin{equation*}
     B_\beta^{n_1, n_2} = \sum_{\alpha=1}^d_1 A[1]_\alpha^{n_1}A[2]_{\alpha,\beta}^{n_2},
 \end{equation*}
-where $A[1]_\alpha^{n_1} = \delta_{n1, \alpha}$ and $A[2]_{\alpha,\beta}^{n_2} = B_\beta^{\alpha, n_2}_\beta$. So, we can now write any orthonormal basis in $\mathcal{H}_3$ in terms of $\ket{\beta}_2\otimes \ket{\ket{n_3}}$ and go on iteratively. After M steps, we have:
+where $A[1]_\alpha^{n_1} = \delta_{n1, \alpha}$ and $A[2]_{\alpha,\beta}^{n_2} = B_\beta^{\alpha, n_2}$. So, we can now write any orthonormal basis in $\mathcal{H}_3$ in terms of $\ket{\beta}_2\otimes \ket{n_3}$ and go on iteratively. After M steps, we have:
 \begin{equation*}
     \ket{\beta}_M = \sum_{\alpha=1}^{d_{M-1}}\sum_{n_M=1}^{d_1} A[M]_{\alpha,\beta}^{n_M}\ket{\alpha}_{M-1}\otimes\ket{n_M}_1,
 \end{equation*}
@@ -295,7 +309,10 @@ First of all, let us consider the~\ref{eqn:mpdo}: repeated single-value decompos
     \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad \sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi &(\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) ||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle.
     \end{split}
 \end{equation*}
-where the superoperator formalism is been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discounting the smallest single values; moreover, it is proportional to the amount of quantum correlation between the system sites that can be embedded in $\rho_{MPO}$.
+where the superoperator formalism\footnote{Every linear operator $\hat{A}$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space:
+\begin{equation*}
+    \hat{A} = \sum_{ij} A_{ij} \ket{i}\bra{j} \quad \rightarrow \quad |A\rangle\rangle = \sum_{ij} A_{ij} \ket{i}\ket{j}.
+\end{equation*}} is been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discounting the smallest single values; moreover, it is proportional to the amount of quantum correlation between the system sites that can be embedded in $\rho_{MPO}$.
 
 %As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ %can be decomposed into terms that involve two contiguous sites, as
 %\begin{equation}
