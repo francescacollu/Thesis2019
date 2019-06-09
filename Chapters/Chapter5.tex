@@ -1,4 +1,4 @@
-\chapter{A Non-Equilibrium Phase Transition}
+\chapter{A Nonequilibrium Phase Transition}
 \label{chapter5}
 
 In an open system, the competition between unitary Hamiltonian evolution and dissipation can induce a dissipative phase transition for the steady state, as discussed for example in the case of spin systems by~\cite{phase_trans_spin_system}.
@@ -6,7 +6,7 @@ A phase transition is an important phenomenon in condensed-matter physics and ca
 
 So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, the behaviour of the chains under a variation of $J_z$ will be investigated.
 
-First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} arises an alteration of the behaviour of the spin current: whereas for $J_z \geq 0.5$ it follows a polynomial trend, with the peak values corresponding to the ends of the chain, i.e. where the dissipators are, for $J_z < 0.5$ the curve is almost constant. 
+First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} the spin current for several values of $J_z$ is displayed. Some consideration can be made in regards to this plots.
 
 %This behaviour is confirmed by the data obtained from QT method (fig.~\ref{fig:8sites_spinCurrVSJzQT}).
 
@@ -33,7 +33,11 @@ First of all, we have analyzed the spin current under the variation of the coupl
     \label{fig:16sites_SpinCurrVaryingJz}
 \end{figure}
 
-The profile seems to be definitely discontinuous around $J_z = 0.5$: while for $J_z \geq 0.5$ the trend is polynomial, for $J_z < 0.5$ the trend is almost constant \textcolor{red}{IS IT? SEE AFTER MORE PRECISE SIMULATIONS.}
+The spin current between the first and the last two sites is independent from $J_z$, for $J_z < 1$; this can be a sign of the prevalence of dissipation over the Hamiltonian dynamics. Otherwise, for $J_z \geq 1$ the peak values (i.e. the spin current between the first two and the last two sites of the chain) drop while $J_z$ increases; this can be a sign of the growing prevalence of the Hamiltonian over the dissipation, while the coupling $J_z$ grows.
+
+For the small values of $J_z$, i.e. for $J_z < 0.5$, the $\sigma_i^z\sigma_{i+1}^z$ term acts as a perturbation of the XY model. For this values, the spin current shows a discontinuous behaviour: the trend of spin current in the middle sites (i.e. all the sites excluding the first and the last) is almost constant. This is an additional sign of the prevalence of the role of dissipation.
+
+For values of $J_z \geq 0.5$, the trend of the spin current is polynomial, with smooth decrease and increase nearby the ends of the chain; while $J_z$ grows, in the middle sites the spin current is more and more constant, sign of the fact that the role of Hamiltonian is more and more predominant. 
 
 This irregular behaviour is suggestive of a phase transition; in order to get some numerical evidence of it, we have analyzed also the magnetization profile and the correlation function.
 
@@ -97,6 +101,7 @@ This irregular behaviour is suggestive of a phase transition; in order to get so
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsLOWJz.pdf}
+    \captionsetup{width=1.\linewidth}
     \caption{Magnetization profile of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
     \label{fig:16sites_LMvsLOWJz}
 \end{figure}
@@ -107,3 +112,4 @@ This irregular behaviour is suggestive of a phase transition; in order to get so
     %\caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for %several values of $J_z \geq 1.1$. Data obtained from QT method.}
     %\label{fig:8sites_LMvsJz_gtOneQT}
 %\end{figure}
+

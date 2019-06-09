@@ -252,7 +252,7 @@ At this point, one can replace the first block with the new $A'$.
 The MPO method is the generalization of the \emph{matrix product states} (MPS) method \cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS techniques lies in Wilson's renormalization group, already mentioned in sec.~\ref{chapter3_csr}.
 So, let us consider two spins and a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; we write an arbitrary orthonormal basis $\{\ket{\beta}\}_{\beta=1}^{d_2}$ as
 \begin{equation*}
-    \ket{\beta}_2 = \sum_{n_1, n_2}^d_1 B_\beta^{n_1, n_2} \ket{n_1}_1 \otimes \ket{n_2}_1,
+    \ket{\beta}_2 = \sum_{n_1, n_2}^{d_{1}} B_\beta^{n_1, n_2} \ket{n_1}_1 \otimes \ket{n_2}_1,
 \end{equation*}
 where $B_\beta^{n_1, n_2}$ are the coefficients of the basis vectors in terms of the original basis vectors $\ket{n} \in \mathcal{H}_1$ and can be expressed as
 \begin{equation*}
@@ -279,7 +279,17 @@ For periodic boundary conditions the form of the~\ref{mps_general} is obtained p
 \end{equation}
 One should note that the total number of parameters turns out to be $N \times d \times D^2$, i.e. it is linear in $N$.
 
-The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. The physical index is now doubled, as illustrated in fig.~\ref{fig:tensor_network}%\textcolor{red}{FIGURA}:
+Another way of considering the expression~\ref{mps_general} is the graphical notation to represent the operators $A^{[k]}_i$ sketched in figure~\ref{fig:mps_graphical}. Here, every operator is represented by a square with 3 legs: there are two of them for the bonds with the neighbouring operators, the other one for the physical index. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Figures/mps_graphical.png}
+    \captionsetup{width=1.\linewidth}
+    \caption{Graphical representation of an MPS in terms of tensor network.}
+    \label{fig:mps_graphical}
+\end{figure}
+
+The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. The physical index is now doubled, as illustrated in fig.~\ref{fig:mpo_graphical}
 \begin{equation}
 \label{eqn:mpdo}
     \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d} \sum_{j_1, \dots ,j_N = 1}^{d} \Tr\Bigl(A_1^{i_1,j_1} \dots A_N^{i_N,j_N}\Bigl) \ket{i_1, \dots ,i_N}\bra{j_1, \dots ,j_N}.
@@ -289,20 +299,21 @@ The $A^{[k]i_k,j_k}$ are $D^2 \times D^2$ tensors that can be decomposed in this
     A_k^{i,j} = \sum_{a = 1}^{d_k} M_k^{i,a} \otimes (M_k^{j,a})^*.
 \end{equation*}
 
-Another way of considering the expression~\ref{eqn:mpdo} is the graphical notation to represent a tensor $A^{[k] i,j}$ sketched in figure~\ref{fig:tensor_network}. Here, every tensor is represented by a square with 4 legs: there are two of them for the bonds with the neighbours, the other two for the physical indices (the "bras" and "kets"). 
+Also in this case, there is a graphical notation to represent the tensors $A^{[k]}_{i,j}$ sketched in figure~\ref{fig:mpo_graphical}. Here, every tensor is represented by a square with 4 legs: there are two of them for the bonds with the neighbouring tensors, the other two for the physical indices (the "bras" and "kets"). 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.30]{Figures/tensor_network.png}
-    \caption{Graphical notation of tensors in a 1D system.}
-    \label{fig:tensor_network}
+    \includegraphics[scale=0.4]{Figures/mpo_graphical.png}
+    \captionsetup{width=1.\linewidth}
+    \caption{Graphical representation of an MPO in terms of tensor network.}
+    \label{fig:mpo_graphical}
 \end{figure}
 
-As regards dynamics, the long-time limit of eq.~\ref{eqn:lindblad_eqn} can be reached using a MPO ansatz for the density matrix. The steady-state solution $\rho$ is found using an algorithm based on the \emph{time evolution block decimation} (TEBD)~\cite{PhysRevLett.91.147902} scheme adapted to open systems. It is useful, for instance, to efficiently compute time-dependent properties of 1D closed quantum many-body systems as done in~\cite{PhysRevLett.93.040502}. 
+As regards dynamics, the long-time limit of eq.~\ref{eqn:lindblad_eqn} can be reached using a MPO ansatz for the density matrix. The steady-state solution $\rho$ is found using an algorithm based on the \emph{time evolution block decimation} (TEBD)~\cite{PhysRevLett.91.147902} scheme adapted to open systems. It is useful to efficiently compute time-dependent properties of 1D closed quantum many-body systems as done in~\cite{PhysRevLett.93.040502}. 
 
 Here, we can briefly see how it works~\cite{jin_biella_ross} in the case of open many-body systems in the MPO formalism. 
 
-First of all, let us consider the~\ref{eqn:mpdo}: repeated single-value decomposition of the tensor $C_{i_1,\dots, i_N; j_1,\dots, j_N}$ can lead to
+First of all, let us consider the~\ref{eqn:mpdo}: repeated single-value decomposition of the tensor $A^{i_1,\dots, i_N; j_1,\dots, j_N}$ can lead to
 \begin{equation*}
 \label{mpo_ansatz}
 \begin{split}
@@ -330,8 +341,8 @@ Following the Vidal's work~\cite{PhysRevLett.93.040502}, the liouvillian superop
 where
 \begin{equation}
     \begin{split}
-        \hat{F} &\equiv \sum_{\text{even } l} \hat{F}^{[l]} \equiv \sum_{\text{even } l} (\hat{\mathcal{L}}_2^{l, l+1}) \\
-        \hat{G} &\equiv \sum_{\text{odd } l} \hat{G}^{[l]} \equiv \sum_{\text{odd } l} (\hat{\mathcal{L}}_2^{l, l+1}), \\
+        \hat{F} &\equiv \sum_{\text{even } l} (\hat{\mathcal{L}}^{l, l+1}) \\
+        \hat{G} &\equiv \sum_{\text{odd } l} (\hat{\mathcal{L}}^{l, l+1}), \\
         l  &= 1, \dots N-1
     \end{split}
 \end{equation}
@@ -339,9 +350,16 @@ having considered a Liouvillian made of arbitrary nearest-neighbouring interacti
 
 For every small time step $\tau > 0$, the Trotter-Suzuki expansion of order $p$ for $\exp{(\hat{\mathcal{L}} t)}$ reads:
 \begin{equation*}
-    e^{\hat{\mathcal{L}}t} = e^{(\hat{F}+ \hat{G})t} = \prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
+    e^{\hat{\mathcal{L}}t} = e^{(\hat{F}+ \hat{G})t} = e^{[(\hat{F}+ \hat{G})\tau]\frac{t}{\tau}} \approx [f_p(U_{F\tau}, U_{G\tau})]^{\frac{t}{\tau}},
+    %\prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
 \end{equation*}
-with $p$ depending on the required accuracy.
+%with $p$ depending on the required accuracy.
+where $U_{F\tau} \equiv e^{F\tau}$ and $U_{G\tau} \equiv e^{G\tau}$ and where
+\begin{equation*}
+    f_1(x,y) = xy, \quad f_2(x, y) = x^{1/2}yx^{1/2}
+\end{equation*}
+for the first and the second order expansions.
+The simulation of time evolution~\ref{eqn:lindblad_dinamics} can then be accomplished by iteratively applying $U_{F\tau}$ and $U_{G\tau}$ to $\rho(0)$ a number $\mathcal{O}(\frac{t}{\tau})$ of times.
 
 %\textcolor{red}{VEDI PRESENTAZIONE GARNET CHAN - RIVEDERE \\ AGGIUNGERE FORMALISMO SUPEROPERATORIALE}
 
