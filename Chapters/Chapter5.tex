@@ -100,11 +100,17 @@ This irregular behaviour is suggestive of a phase transition; in order to get so
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsLOWJz.pdf}
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsJz.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Magnetization profile of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
-    \label{fig:16sites_LMvsLOWJz}
+    \label{fig:16sites_LMvsJz}
 \end{figure}
+
+The magnetization profile (displayed in fig.~\ref{fig:16sites_LMvsJz}) for $J_z \geq 1$ shows a similar behaviour to the one seen in the previous chapter, when we considered variation of $\gamma$: the variation of the coupling constant $J_z$ has a similar effect of the one caused by the variation of the dissipation rate $\gamma$. 
+
+For small values of $J_z$, i.e. $J_z < 1$, a couple of things can be noted. First of all, for all the $J_z < 1$ the $\langle \sigma^z \rangle$ of the first and of the last spin of the chain is constant. This can be explained as an unimportance of the Hamiltonian terms in relation to dissipation. 
+
+It is worth noting that in the magnetization profile does not arise the discontinuity noticed in the trend of the spin current, for $J_z < 0.5$. Analyzing the two-point correlation function can be helpful in order to brighten this hypothesis.
 
 %\begin{figure}[H]
     %\centering
@@ -113,3 +119,14 @@ This irregular behaviour is suggestive of a phase transition; in order to get so
     %\label{fig:8sites_LMvsJz_gtOneQT}
 %\end{figure}
 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_CFBulkCONNvsJz.pdf}
+    \captionsetup{width=1.\linewidth}
+    \caption{Correlation function of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
+    \label{fig:16sites_CFBulkCONNvsJz}
+\end{figure}
+
+The two-point correlation function, displayed in fig.~\ref{fig:16sites_CFBulkCONNvsJz}, for $J_z \geq 0.5$ shows a behaviour similar to that seen in the previous chapter, with an exponential profile of the correlation function. In this case, however, there is a discontinuity in its behaviour for $J_z < 0.5$. Indeed, the plots show a null correlation function for such values of $J_z$, trend that is consistent with the profile of spin current in fig.~\ref{fig:16sites_SpinCurrVaryingJz}.
