@@ -1,6 +1,6 @@
 %One of the main goals in scientific research is coming up to quantum simulation; this is due to the fact that in several physical fields there are mechanisms that cannot be simulated by classical computers: the essential aim is using a controlled quantum device to investigate another quantum system. Experiments have shown that superconducting circuits are able to manipulate and measure at the level of a few qubits and microwave photons, as a quantum simulator~\cite{Nat.Phys2012}. They can be treated as open systems because of the loss of photons, coupled to the feeding in additional photons through continuous external driving. Moreover, they are greatly flexible, because of their nanofabricated nature and almost every parameter involved is widely tunable. In~\cite{PhysRevX.7.011016}, it has been demonstrated that QED cavity lattices act as a controllable platform guiding understanding of non-equilibrium physics. 
 
-\chapter{Quantum Simulators of Open Many-Body Quantum Systems}
+\chapter{Quantum Simulators of Open Quantum Many-Body Systems}
 \label{chapter2}
 \epigraph{Can a quantum system be probabilistically simulated by a classical universal computer? [\dots] \\The answer is certainly, no!}{\textit{Richard P. Feynman}}
 
@@ -43,16 +43,22 @@ In the present chapter it is reported a review of some of the most relevant idea
 %It is important to stress that the number of elements of the matricial representation of the superoperator grows with $N^4$. So, straightforward brute-force integration methods become unfeasible even for small system sizes.
 
 \section{Quantum Many-Body Systems}
+\label{hubb_model}
 Quantum many-body systems are systems made up by a certain number of interacting particles. Typical quantum many-body systems are represented by Hubbard-like models or spin chains. 
 A prototype of these systems is described by the non-dissipative Bose-Hubbard model~\cite{Greiner_bose_hubbard}: an interacting boson gas in a lattice potential. The hamiltonian reads:
 \begin{equation}
     H = -J\sum_{\langle i,j \rangle} \hat{a}^{\dagger}_i \hat{a}_j + \sum_i \epsilon_i \hat{n}_i+ \frac{1}{2} U \sum_i \hat{n}_i(\hat{n}_i -1 ),
 \end{equation}
-where $\hat{a}_i$ and $\hat{a}^{\dagger}_i$ are the bosonic creation and annihilation operators respectively, on the i-th site; $\hat{n}_i$ is the number operator, which counts the number of bosons in the i-th site; $\epsilon_i$ is the energy due to the external harmonic confinement to which the bosons are undergone. The $J$ term is the one responsible for the hopping between adjacent sites due to the tunnel coupling; it is the matrix element:
+where the notation $\langle i, j \rangle$ denotes the sum over nearest-neighbour sites; $\hat{a}_i$ and $\hat{a}^{\dagger}_i$ are the bosonic creation and annihilation operators respectively, on the i-th site; they obey the bosonic commutation relations:
+\begin{equation*}
+    [\hat{a}_i, \hat{a}_j^\dagger] = \delta_{ij}, \quad [\hat{a}_i, \hat{a}_j] = 0 = [\hat{a}_i^\dagger, \hat{a}_j^\dagger].
+\end{equation*}
+
+$\hat{n}_i$ is the number operator, which counts the number of bosons in the i-th site; $\epsilon_i$ is the energy due to the external harmonic confinement to which the bosons are undergone. The $J$ term is the one responsible for the hopping between adjacent sites due to the tunnel coupling; it is the matrix element:
 \begin{equation*}
     J = -\int d^3x \quad w(\Vec{x}-\Vec{x_i})(-\frac{\nabla^2}{2m}+V(\Vec{x}))w(\Vec{x}-\Vec{x_j}),
 \end{equation*}
-where $w(\Vec{x}-\Vec{x_i})$ is a single particle Wannier function localized to the i-th site, $V(\Vec{x}))$ is the lattice potential and $m$ is the mass of a single boson.
+where $w(\Vec{x}-\Vec{x_i})$ is a single particle Wannier function localized to the i-th site, $V(\Vec{x})$ is the lattice potential and $m$ is the mass of a single boson.
 $U$ is instead the matrix element for the interaction between bosons in the same site; it is:
 \begin{equation*}
     U = \frac{4\pi a}{m} \int d^3x \quad |w(\Vec{x})|^4, 
@@ -65,25 +71,25 @@ If the tunnel coupling term $J$ dominates the hamiltonian, the ground-state ener
 \end{equation*}
 i.e. all bosons occupy the same extended Bloch state. As pointed out by~\cite{Greiner_bose_hubbard}, an important feature of this state is that the probability distribution of the occupation $n_i$ of bosons on a single site is poissonian, so that its variance is given by $\langle n_i \rangle$; this means that it is well described by a macroscopic wavefunction with long-range phase coherence throughout the lattice.
 
-If the on-site intraction term $U$ dominates the hamiltonian, the ground state of the system will instead consist of localized wavefunctions with a fixed number of bosons per site that minimized the energy; the many-body ground state will be a product of local Fock states for each site:
+If the on-site intraction term $U$ dominates, the ground state of the system will instead consist of localized wavefunctions with a fixed number of bosons per site that minimized the energy; the many-body ground state will be a product of local Fock states for each site:
 \begin{equation*}
     \ket{\Psi_{MI}} \propto \prod_{i=1}^M \Bigl( \hat{a}^{\dagger}_i\Bigl)^N \ket{0}.
 \end{equation*}
 
-The two kind of ground state have been labeled with the subscripts "SF" and "MI", specifying the two phases to which the system may do the transition: superfluid and Mott insulator phases.
+The two kinds of ground state have been labeled with the subscripts "SF" and "MI", specifying the two phases to which the system may do the transition: superfluid and Mott insulator phases.
 
 
 \section{Quantum Simulators: Controllable Many-Body Systems}
 In order to overcome the mentioned problem, over the years several analytical and numerical methods have been developed. In addition to these more "traditional" approaches, during the last years it arose the idea of studying a quantum system by using a properly designed quantum device. The essential aim of this new strategy lies in the employment of controlled quantum devices called \emph{quantum simulators}; they are systems able to experimentally emulate the Hamiltonian model bearing the non-trivial properties of the system under study. The usefulness of this approach is twofold~\cite{Tomadin_Fazio}:  not only it allows to explore properties of the model in regions that are elusive to the analytical and numerical studies, but also it consents to test to which limits the Hamiltonian model is appropriate to describe the system or whether additional ingredients are required.
 
-Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably the first quantum simulators in Physics History, much progress have been made especially with the advent of cold atoms in optical lattices.
+Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably the first quantum simulators in the history of modern physics, much progress have been made especially with the advent of cold atoms in optical lattices.
 
 \subsection{Cold Atoms in Optical Lattices}
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{Figures/optical_lattice.png}
     \captionsetup{width=1.\linewidth}
-    \caption{Optical lattices are crystals made of light: lasers beams interfere to form a periodic potential in which ultracold atoms are trapped. Figure taken from LENS website.}
+    \caption{Optical lattices are crystals made of light: lasers beams interfere to form a periodic potential in which ultracold atoms are trapped. Figure taken from LENS laboratory, Florence~\cite{LENS_Florence}.}
     \label{fig:optical_lattice}
 \end{figure}
 
@@ -93,14 +99,18 @@ In short, optical lattices are created by making laser beams counter-propagating
 
 Ultracold atoms in optical lattices represent nearly perfect realization of fermionic and bosonic Hubbard models\footnote{The (fermionic) Hubbard model in one dimension is characterized by the following Hamiltonian:
 \begin{equation*}
-    \mathcal{H} = -t\sum_{\langle ij \rangle}a^{\dagger}_{i\sigma}a_{j\sigma} + U\sum_i n_{i\uparrow}n_{i\downarrow},
+    H = -t\sum_{\langle ij \rangle}c^{\dagger}_{i\sigma}c_{j\sigma} + U\sum_i n_{i\uparrow}n_{i\downarrow},
 \end{equation*}
-where the first term represents the hopping between adjacent sites and the second represents the on-site interaction between particles. The $n_{i\sigma}$ are the occupation numbers, that count the number of electron with spin $\sigma$ in site $i$.
+where $c_i$ and $c^{\dagger}_i$ are the fermionic creation and annihilation operators respectively, on the i-th site; they obey the fermionic commutation relations:
+\begin{equation*}
+    \{c_i, c_j^\dagger\} = \delta_{ij}, \quad \{c_i, c_j\} = 0 = \{c_i^\dagger, c_j^\dagger\}.
+\end{equation*}
+The first term in H represents the hopping between adjacent sites and the second represents the on-site interaction between particles. The $n_{i\sigma}$ are the occupation numbers, that count the number of electron with spin $\sigma$ in site $i$. This model is very similar to that described in section~\ref{hubb_model}, with the difference of nature of particles considered: here they are fermions, in Bose-Hubbard model are bosons instead. 
 In the text, the plural \emph{Hubbard models} refers to the several variations of this model.
 }~\cite{ultracoldAtoms_condMatter} and they are usually employed to simulate non-dissipative systems. However, new efforts have been made in order to introduce dissipation in these devices. 
 In fig.~\ref{fig:optical_lattice_dissipation}, a sketch of the implementation of the effective dissipative process in an optical \emph{superlattice} is shown. The so-called superlattice is made up coupling driven-dissipative ultracold atoms in an optical lattice with a coherently driven reservoir. 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/optical_lattice_dissipation.png}
     \captionsetup{width=1.\linewidth}
@@ -122,6 +132,14 @@ Another strategy involves trapping Rydberg atoms in optical lattices. Rydberg at
 \subsection{QED-Cavity Arrays}
 In the last few decades the field of quantum simulators has been enriched by a new idea, based on arrays of QED cavities~\cite{Tomadin_Fazio} (sketched in fig.~\ref{fig:QED_cavities}), in which light resonates and interacts with matter contained therein.  A compelling aspect of this kind of devices is the competition between two phenomena: while on the one hand light-matter interaction inside the cavity leads to photon blockade, on the other photon hopping between neighbouring cavities favors delocalization.
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Figures/QED_cavity.png}
+    \captionsetup{width=1.\linewidth}
+    \caption{Sketch of array of QED cavities. In the inset there is a draft of the interaction between the two-level system and the photon resonating in the cavity and then decaying. Photons in the cavities have finite life-time, so there is a coherent external drive.}
+    \label{fig:QED_cavities}
+\end{figure}
+
 QED cavities are mathematically described by the Jaynes-Cummings model~\cite{shore_knight}, in which one mode of the cavity interacts with a two-level system. By ignoring light-matter interaction, a single cavity confines several modes of electromagnetic field and each of them is quantized as a harmonic oscillator. If one considers a cavity with a single mode with frequency $\omega$, the Hamiltonian describing such a system can be written as
 \begin{equation}
 \label{eqn:single_cavity}
@@ -130,12 +148,12 @@ QED cavities are mathematically described by the Jaynes-Cummings model~\cite{sho
 where $a_l (a_l^{\dagger})$ annihilates (creates) a quantum of light in the mode of the l-th cavity.
 An array of cavities sufficiently close to allow for photon hopping, can be described by eq.~\ref{eqn:single_cavity} to which the following term should be added:
 \begin{equation*}
-    \mathcal{H}_{hop} = -J (a^{\dagger}_la_l + h.c.),
+    \mathcal{H}_{hop} = -J (a^{\dagger}_la_{l+1} + h.c.),
 \end{equation*}
 where J is associated with the tunneling rate.
 Now, if the light-matter interaction is introduced, the Hamiltonian can be written in this way:
 \begin{equation}
-    \mathcal{H} = \sum_l \mathcal{H}_l^{(0)} - J \sum_{\langle l, l' \rangle}(a^{\dagger}_la_l + h.c.),
+    \mathcal{H} = \sum_l \mathcal{H}_l^{(0)} - J \sum_{\langle l, l' \rangle}(a^{\dagger}_la_{l'} + h.c.),
 \end{equation}
 where the term $\mathcal{H}_l^{(0)}$ describes the light-matter interaction. In particular, we want to study QED cavities so the Hamiltonian term $\mathcal{H}_l^{(0)}$ is the Jaynes-Cummings model:
 \begin{equation}
@@ -156,16 +174,9 @@ An array of cavities in the impenetrable photon regime has been theoretically st
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{Figures/cavities_ring.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Sketch of an array of five cavities arranged in a ring geometry with periodic boundary conditions; the system is driven by a laser. Figure taken from~\cite{carusotto_ciuti}.}
     \label{fig:cavities_ring}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{Figures/QED_cavity.png}
-    \caption{Sketch of array of QED cavities. In the inset there is a draft of the interaction between the two-level system and the photon resonating in the cavity and then decaying. Photons in the cavities have finite life-time, so there is a coherent external drive.}
-    \label{fig:QED_cavities}
 \end{figure}
 
 % pag.5 Tomadin-Fazio per optical lattices vs cavity arrays
@@ -180,6 +191,7 @@ where $\omega_r$ and $\varepsilon$ are the the photon and qubit excitation frequ
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{Figures/superconducting_circuits.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Example of an array of resonators forming a honeycomb pattern. On the left, more than two hundred microwave cavities are coupled in a Kagome lattice, a natural two-dimensional lattice. Each cavity is coupled to two neighbours, through a capacitor that enables photon hopping. On the bottom-right, it can be seen the simmetric three-way capacitor that ensures uniform hopping rates throughout the array. Figure taken from~\cite{supercircuitsQED}.}
     \label{fig:superconducting_circuits}
 \end{figure}
@@ -203,6 +215,7 @@ A more complicated system has been investigated in~\cite{Hartmann_XYZ}, which us
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{Figures/superconductinCircuit_SpinSystem.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Simplified schematic of a superconducting flux qubit \\acting as a quantum mechanical spin~\cite{8spinChain_simulatedByQubits}.}
     \label{fig:superconductinCircuit_SpinSystem}
 \end{figure}

@@ -28,13 +28,13 @@ In this section, we will examine some of the numerical techniques used for study
 
 Two of the three numerical methods analyzed in this chapter are essentially based on the Wilson's \emph{renormalization group} approach~\cite{RevModPhys.47.773} combined with the fundamental contribution of the White's \emph{density matrix renormalization group} (DMRG) method~\cite{s_white:dmrg} and are the \emph{corner-space renormalization} and the \emph{matrix product density operators} methods. They both use the idea of a system decomposition into blocks; even if the basic idea is the same, the developed approaches are actually different.
 
-The first numerical method analyzed in the section~\ref{chapt2_qtm} is the \emph{quantum trajectories} method, based on the evolution of a Monte Carlo wave function.
+The first numerical method analyzed in the section~\ref{chapt3_qtm} is the \emph{quantum trajectories} method, based on the evolution of a Monte Carlo wave function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Quantum Trajectories (QT) Method}
-\label{chapt2_qtm}
+\label{chapt3_qtm}
 The \emph{quantum trajectories method} is an estabilished numerical method, in which pure states are the subjects of the study, instead of density matrices. This means that, if the Hilbert space has dimension $N$, the number of involved parameters ($\sim N$) is much smaller than the one required in calculations with density matrices ($\sim N^2$). This method was originally proposed in 1992 by Dalibard, Castin and Mølmer in~\cite{PhysRevLett.68.580}, then generalized in~\cite{Molmer:93}, as a stochastic unraveling of the master equation, namely a stochastic evolution for the wave function of a system coupled to a reservoir. It has been proved~\cite{PhysRevLett.68.580, Molmer:93} the equivalence of this \emph{Monte Carlo wave-function} approach with the master equation treatment.
 
 The idea of this method can be summarised in the following way.
@@ -238,14 +238,13 @@ one uses the D eigenstates with the largest weight (i.e. with the largest eigenv
     H_{A'} = OH_{A\bullet}O^\dagger.
 \end{equation*}
 At this point, one can replace the first block with the new $A'$.
-\textcolor{red}{REVIEW}
+%\textcolor{red}{REVIEW}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{Figures/dmrg_superblock_sketch.png}
     \captionsetup{width=1.\linewidth}
-    \caption{Sketch of superblocks formation in DMRG method.\textcolor{red}{TO DO: labels to blocks} %The rectangles represent block of $l$ and $l'$ sites respectively, while the circles represent single sites.
-    }
+    \caption{Sketch of superblocks formation in DMRG method.} %\textcolor{red}{TO DO: labels to blocks}%The rectangles represent block of $l$ and $l'$ sites respectively, while the circles represent single sites.
     \label{fig:DMRG_superblockSketch}
 \end{figure}
 
@@ -323,7 +322,7 @@ First of all, let us consider the~\ref{eqn:mpdo}: repeated single-value decompos
 where the superoperator formalism\footnote{Every linear operator $\hat{A}$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space:
 \begin{equation*}
     \hat{A} = \sum_{ij} A_{ij} \ket{i}\bra{j} \quad \rightarrow \quad |A\rangle\rangle = \sum_{ij} A_{ij} \ket{i}\ket{j}.
-\end{equation*}} is been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discounting the smallest single values; moreover, it is proportional to the amount of quantum correlation between the system sites that can be embedded in $\rho_{MPO}$.
+\end{equation*}} is been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discounting the smallest single values; moreover, it is proportional to the amount of quantum correlation between the system sites that can be embedded in $\rho_{MPO}$. As said in sec.~\ref{bi_mixed_states}, the operator space entanglement entropy is a good quantifier of this aspect; in particular, more its value is small, more the MPO method has a good functionality.
 
 %As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ %can be decomposed into terms that involve two contiguous sites, as
 %\begin{equation}

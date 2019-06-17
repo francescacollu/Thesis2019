@@ -17,9 +17,9 @@ This chapter has the purpose of giving a recap of the most useful characteristic
 
 %Da qualche parte devo dire che nella tesi mi occupo solo di spazi di Hilbert a dimensione finita.
 
-\section{Mathematical Backgroud}
+\section{Mathematical Background}
 \label{cl_open_qs}
-Before we explore the field of open quantum systems, we now assess the basic differences between a closed and an open quantum system are and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
+Before we explore the field of open quantum systems, we now assess the basic differences between a closed and an open quantum system and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
 
 In this section, we will briefly look at the different approaches in the study of the dynamics in closed and open quantum systems. 
 
@@ -154,6 +154,8 @@ Now we can go into a more specific definition of open quantum systems. It can be
     \label{fig:openSystems_sketch}
 \end{figure}
 
+$\ket{\psi}$
+
 Since $S$ and $E$ are in thermal contact, energy can be exchanged between them; however the interaction is supposed to be weak, so that both $S$ and $E$ at any time can be considered to be in definite energy eigenstates with energies $E_S$ and $E_E$ respectively. Naming $E$ one of the eigenenergies of the combined system, for the conservation of energy we have:
 \begin{equation*}
     E = E_S + E_E.
@@ -260,7 +262,7 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Approximate Description of Open Quantum Systems}
 \label{appr_dynam_oqs}
-If one consider a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
+If one considers a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
 
 \subsection{Quantum Dynamical Semigroups}
 For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
@@ -383,8 +385,7 @@ It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents th
 
 \section{Quantifying Correlations in Quantum Systems}
 \label{many_body_oqs}
-\textcolor{red}{TO DO}
-Now we consider the case of open many-body quantum systems, very relevant from the point of view of several physical fields as, e.g., Quantum Information. In this section, we will examine some of the phenomena and tools useful to better understand such systems. 
+In this section, we introduce a few concepts, useful to better understand quantum systems, as we will see in the following chapters.
 
 \subsection{Bipartite Pure States}
 
@@ -403,14 +404,14 @@ Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $
 Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{\chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{\chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
 \end{proof}
 
-A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it \textbf{cannot} be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ \textbf{can} be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
+A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it cannot be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ can be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
 
 \subsubsection{Von Neumann Entropy}
 A crucial tool useful to measure the entanglement of a bipartite pure state is the quantum entropy, defined by von Neumann in this way:
 \begin{equation}
     S(\rho) \equiv -\Tr ( \rho \log_2\rho),
 \end{equation}
-where $\rho$ is the state of the system. If $\lambda_i$ are the eigenvalues of $\rho$, we can write:
+where $\rho$ is the reduced density matrix $\rho_A$ of a subsystem $A$ which can be written as $\rho_A = \Tr_B (\ket{\psi}\bra{\psi})$. If $\lambda_i$ are the eigenvalues of $\rho$, we can write:
 \begin{equation*}
     S(\rho) = -\sum_i \lambda_i \log_2 \lambda_i.
 \end{equation*}
@@ -427,4 +428,39 @@ Let us highlight some important properties of the von Neumann entropy~\cite{niel
     where the equality sign holds if and only if $\rho$ describes an uncorrelated state. This means that the uncertainty about the product state is greater than that of the total system; this is because the operation of trace over the sub-systems causes a loss of information on correlations between the sub-systems, therefore the increase of entropy.
 \end{itemize}
 
-A comprehensive review that explains several kind of measures of entanglement in many-body systems is the ref.~\cite{RevModPhys.80.517}.
+\subsection{Bipartite Mixed States}
+\label{bi_mixed_states}
+Subsystems of a many-body pure state will generally be in a mixed state $\rho$. In this case, the measure of entanglement is unclear and diverse; three important representatives~\cite{RevModPhys.80.517}~\cite{phd_ross} are the following:
+\begin{description}
+    \item[entanglement cost,] an asymptotic limit of the number $k$ of maximally entangled states used to extract n copies of $\rho$, minimized over all the possible local quantum operations with classical communication (LOCC) manipulations:
+    \begin{equation*}
+        E_C(\rho) = \inf_{LOCC}\lim_{n\to\infty} \frac{k}{n};
+    \end{equation*}
+    \item[distillable entanglement,] an asymptotic limit of the number $k$ of maximally entangled states used to distill n copies of $\rho$, minimized over all the possible LOCC manipulations:
+    \begin{equation*}
+        E_D(\rho) = \inf_{LOCC}\lim_{n\to\infty} \frac{k}{n};
+    \end{equation*}
+    \item[entanglement of formation,] average of the entanglement of pure states which form the mixture, minimized over all the possible decompositions:
+    \begin{equation*}
+        E_F(\rho) = \min \sum_j p_j S(\rho_{A,j}),
+    \end{equation*}
+    where the minimum is taken over all the realizations of the state $\rho = \sum_j p_j \ket{\psi_j}\bra{\psi_j}$ and $S(\rho_{A,j})$ is the Von Neumann entropy of the reduced density matrix $\rho_{A,j} = \Tr_B (\ket{\psi_j}\bra{\psi_j})$;
+    \item[relative entropy of entanglement,] distance of $\rho$ from the nearest mixed separable state $\sigma$:
+    \begin{equation*}
+        E_R(\rho) = \min_{\sigma \in sep.} \Tr[\rho(\log_2 \rho -\log_2 \sigma)].
+    \end{equation*}
+\end{description}
+
+Moreover, the Von Neumann entropy can be used also for bipartite mixed states; that is, we can calculate
+\begin{equation*}
+    S(\rho) \equiv -\Tr ( \rho \log_2\rho),
+\end{equation*}
+where $\rho$ is the reduced density matrix of a subsystem that we can express in this way:
+\begin{equation*}
+    \rho = \Tr_B (\sum_{j = 1}^{N}\ket{\psi_{j}}\bra{\psi_j}).
+\end{equation*}
+In this case it is called \emph{operator space entanglement entropy} and it does not measure the entanglement but it is a good quantifier of the functionality of matrix product operators method, as we will see in the following chapters.
+
+%la von Neumann entropy per stati misti non misura l'entanglement propriamente detto, ma è un quantificatore chiamato anche operator space entanglement entropy (mpo) utile per discutere quanto mpo efficace; più è piccola, più gli mpo funzionano bene. 
+
+%MPO sec: funzionano bene quando entanglement entropy bipartite per uno stato misto è bassa 

@@ -1,132 +1,118 @@
-\chapter{A Nonequilibrium Phase Transition}
+\chapter{Performances of Different Numerical Methods}
 \label{chapter5}
 
-In an open system, the competition between unitary Hamiltonian evolution and dissipation can induce a dissipative phase transition for the steady state, as discussed for example in the case of spin systems by~\cite{phase_trans_spin_system}.
-A phase transition is an important phenomenon in condensed-matter physics and can happens tuning one or more parameters of the Hamiltonian of the system. 
+In this chapter, we will see some 
 
-So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, the behaviour of the chains under a variation of $J_z$ will be investigated.
+\section{The CSR Method: Limitations and Usability}
+The CSR method, described in section~\ref{chapter3_csr}, has been studied and implemented in order to analyze the model described in the last section. The algorithm is written in pseudocode in appendix~\ref{AppendixA}.
 
-First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} the spin current for several values of $J_z$ is displayed. Some consideration can be made in regards to this plots.
+In this section, it is shown that the CSR method is not a suitable method for investigating systems described by a model such as the one under consideration.
 
-%This behaviour is confirmed by the data obtained from QT method (fig.~\ref{fig:8sites_spinCurrVSJzQT}).
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites_spinCurrVSJz.pdf}
-    %\caption{Spin current of a 8-sites chain, with $\gamma = 1$ for several values of $J_z$. Data %obtained from MPO method.}
-    %\label{fig:8sites_spinCurrVSJz}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites/8sites_spinCurrVSJz%QT.pdf}
-    %\captionsetup{width=1.\linewidth}
-    %\caption{Spin current of a 8-sites chain, with $\gamma = 1$ %for several values of $J_z$. Data obtained from QT method.}
-    %\label{fig:8sites_spinCurrVSJzQT}
-%\end{figure}
+In order to reveal this, we can easily see the case of a 4-sites chain for the proposed model. In particular, we can study the magnetization profile of the chain, i.e. the steady-state expectation value $\langle \sigma^z \rangle$ of the Pauli spin- matrix $\sigma^z$ for each site:
+\begin{equation*}
+    \langle \sigma^z \rangle = \Tr(\sigma^z \rho),
+\end{equation*}
+being $\rho$ the steady-state density matrix of the system.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
+    \includegraphics[scale=0.7]{Figures/4sites/4sites_LM_convergenceIncreasingM.pdf}
     \captionsetup{width=1.\linewidth}
-    \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
-    \label{fig:16sites_SpinCurrVaryingJz}
+    \caption{Spin profile of a 4-sites chain for the model described above with $J_z=1$ for several values of corner-space dimensions $M \times M$. The cyan markers are those representing the expectation value of the magnetization calculated by means of a complete set of states of Hilbert space (which has dimension $2^4$).}
+    \label{fig:4sites_LM_convergenceIncreasingM}
 \end{figure}
 
-The spin current between the first and the last two sites is independent from $J_z$, for $J_z < 1$; this can be a sign of the prevalence of dissipation over the Hamiltonian dynamics. Otherwise, for $J_z \geq 1$ the peak values (i.e. the spin current between the first two and the last two sites of the chain) drop while $J_z$ increases; this can be a sign of the growing prevalence of the Hamiltonian over the dissipation, while the coupling $J_z$ grows.
+As shown in figure~\ref{fig:4sites_LM_convergenceIncreasingM}, it is clear that for such a system the convergence has not been reached. Even for $M = 15$, that covers almost the total Hilbert space dimension, the results are not the convergent ones.
 
-For the small values of $J_z$, i.e. for $J_z < 0.5$, the $\sigma_i^z\sigma_{i+1}^z$ term acts as a perturbation of the XY model. For this values, the spin current shows a discontinuous behaviour: the trend of spin current in the middle sites (i.e. all the sites excluding the first and the last) is almost constant. This is an additional sign of the prevalence of the role of dissipation.
-
-For values of $J_z \geq 0.5$, the trend of the spin current is polynomial, with smooth decrease and increase nearby the ends of the chain; while $J_z$ grows, in the middle sites the spin current is more and more constant, sign of the fact that the role of Hamiltonian is more and more predominant. 
-
-This irregular behaviour is suggestive of a phase transition; in order to get some numerical evidence of it, we have analyzed also the magnetization profile and the correlation function.
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites_LMvsJz.pdf}
-    %\caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for %several values of $J_z$. Data obtained from MPO method.}
-    %\label{fig:8sites_LMvsJz}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites_LMvsLowJz.pdf}
-    %\caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for $J_z %\leq 0.7$. Data obtained from MPO method.}
-    %\label{fig:8sites_LMvsLowJz}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites/8sites_LMvsJzQT.pdf}
-    %\caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for %several values of $J_z$. Data obtained from QT method.}
-    %\label{fig:8sites_LMvsJzQT}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites/8sites_CFBulkvsLowJz_QT.pdf}
-    %\caption{Bulk correlation function of a 8-sites chain, with $\gamma = 1$ for %several values of $J_z \leq 1$. Data obtained from QT method.}
-    %\label{fig:8sites_CFBulkvsLowJz_QT}
-%\end{figure}
-
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/12sites_spinCurrVSJz.pdf}
-    %\caption{Spin current of a 12-sites chain, with $\gamma = 1$ for several values %of $J_z$. Data obtained from MPO method.}
-    %\label{fig:12sites_spinCurrVSJz}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsJz.pdf}
-    %\caption{Magnetization profile of a 12-sites chain, with $\gamma = 1$ for $J_z %\leq 0.7$. Data obtained from MPO method.}
-    %\label{fig:my_label}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/12sites/12sites_LMvsLOWJz.pdf}
-    %\caption{Magnetization profile of a 12-sites chain, with $\gamma = 1$ for $J_z %\leq 0.7$. Data obtained from MPO method.}
-    %\label{fig:my_label}
-%\end{figure}
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/12sites/12sites_CFBulkVSLowJz.pdf}
-    %\caption{Bulk correlation function of a 12-sites chain, with $\gamma = 1$ for %several values of $J_z \leq 1$. Data obtained from MPO method.}
-    %\label{fig:12sites_CFBulkVSLowJz}
-%\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsJz.pdf}
-    \captionsetup{width=1.\linewidth}
-    \caption{Magnetization profile of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
-    \label{fig:16sites_LMvsJz}
-\end{figure}
-
-The magnetization profile (displayed in fig.~\ref{fig:16sites_LMvsJz}) for $J_z \geq 1$ shows a similar behaviour to the one seen in the previous chapter, when we considered variation of $\gamma$: the variation of the coupling constant $J_z$ has a similar effect of the one caused by the variation of the dissipation rate $\gamma$. 
-
-For small values of $J_z$, i.e. $J_z < 1$, a couple of things can be noted. First of all, for all the $J_z < 1$ the $\langle \sigma^z \rangle$ of the first and of the last spin of the chain is constant. This can be explained as an unimportance of the Hamiltonian terms in relation to dissipation. 
-
-It is worth noting that in the magnetization profile does not arise the discontinuity noticed in the trend of the spin current, for $J_z < 0.5$. Analyzing the two-point correlation function can be helpful in order to brighten this hypothesis.
-
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics[scale=0.7]{Figures/8sites/8sites_LMvsJz_gtOneQT.pdf}
-    %\caption{Magnetization profile of a 8-sites chain, with $\gamma = 1$ for %several values of $J_z \geq 1.1$. Data obtained from QT method.}
-    %\label{fig:8sites_LMvsJz_gtOneQT}
-%\end{figure}
-
+On the other hand, if we consider a model in which every site is coupled to a dissipator, we can see how the magnetization profile gets to convergence starting from $M = 9$ already.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_CFBulkCONNvsJz.pdf}
+    \includegraphics[scale=0.7]{Figures/4sites/4sites_totalDissipators.pdf}
     \captionsetup{width=1.\linewidth}
-    \caption{Correlation function of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
-    \label{fig:16sites_CFBulkCONNvsJz}
+    \caption{Spin profile of a 4-sites chain in which every spin of the chain is coupled to a dissipator. In this case, the convergence is reached for $M<\text{dim}(\mathcal{H})$.}
+    \label{fig:4sites_totalDissipators}
 \end{figure}
 
-The two-point correlation function, displayed in fig.~\ref{fig:16sites_CFBulkCONNvsJz}, for $J_z \geq 0.5$ shows a behaviour similar to that seen in the previous chapter, with an exponential profile of the correlation function. In this case, however, there is a discontinuity in its behaviour for $J_z < 0.5$. Indeed, the plots show a null correlation function for such values of $J_z$, trend that is consistent with the profile of spin current in fig.~\ref{fig:16sites_SpinCurrVaryingJz}.
+In order to confirm the limitations of this method, the same comparison is done for a longer chain, made up by 8 sites. In this case, the results of CSR method are compared to those of MPO method, since a brute-force diagonalization of the Liouvillian operator would not be possible: it would require a huge amount of memory. We have reason to believe that the results obtained from MPO method are plausible, as we will see in the next sections.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/1U1D_comparisonCSR_MPO_8site.pdf}
+    \captionsetup{width=1.\linewidth}
+    \caption{Spin profile of a 8-sites chain for the model described in sec.\ref{sec:model}. Significant differences between the data obtained for $M=50$ and $M=100$ are not noticed.}
+    \label{fig:1U1D_comparisonCSR_MPO_8site}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8sites/8sites_MPOvsCORNER_4U4D.pdf}
+    \captionsetup{width=1.\linewidth}
+    \caption{Spin profile of a 8-sites chain in which every spin of the chain is coupled to a dissipator.}
+    \label{fig:8sites_MPOvsCORNER_4U4D}
+\end{figure}
+
+In conclusion, in fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile of a 16-sites chain obtained by CSR and MPO methods.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/16sites/LMComparison16s1051.pdf}
+    \captionsetup{width=1.\linewidth}
+    \caption{Spin profile for a 16-sites chain for the model described in section~\ref{sec:model}. Data in red are obtained from MPO method, with m = 80 and T = 2000 and data in blue are obtained from CSR method, with M = 65. It is self-evident the inadequacy of the corner-space method, for the model under study.}
+    \label{fig:LMComparison16s1051}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Figures/8U8D_comparisonCSRvsMPO.pdf}
+    \captionsetup{width=1.\linewidth}
+    \caption{Spin profile for a 16-sites chain in which every spin of the chain is coupled to a dissipator. The dimension of the corner-space is $M=65$.}
+    \label{fig:LMComparison16s1051}
+\end{figure}
+
+\section{Comparison between QT and MPO}
+As a verification of the plausibility of data obtained from MPO method, we present here a comparison between the data obtained from MPO method and those obtained from QT method.
+
+\begin{figure}
+    \centering
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ10505.pdf}
+        \label{fig:LMComparison_8sJ10505}
+        \end{subfigure}\\
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ1051.pdf}
+        \label{fig:LMComparison_8sJ1051}
+        \end{subfigure}\\
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ10515.pdf}
+        \label{fig:LMComparison_8sJ10515}
+        \end{subfigure}\\
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/SpinCurrComparison_8sJ10505.pdf}
+        \label{fig:SpinCurrComparison_8sJ10505}
+        \end{subfigure}\\
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/SpinCurrComparison_8sJ1051.pdf}
+        \label{fig:SpinCurrComparison_8sJ1051}
+        \end{subfigure}\\
+        \begin{subfigure}{\columnwidth}
+        \centering
+        \includegraphics[scale=0.5]{Figures/SpinCurrComparison_8sJ10515.pdf}
+        \label{fig:SpinCurrComparison_8sJ10515}
+        \end{subfigure}\\
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
