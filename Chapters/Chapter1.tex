@@ -12,25 +12,25 @@
 %----------------------------------------------------------------------------------------
 The world we live in is constituted by parts that communicate with each other and exchange information. The difficulty of describing it, lies in the complexity of the interactions between those parts. To overcome this problem, simplifications and easier mathematical representations have been developed: in the following we will see some of them.
 
-This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will gather the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some important technical concept that we will use effectively in the original part of the present work.
+This chapter has the purpose of giving a recap of the most useful characteristics of open quantum systems, in the perspective of studying an open many-body system and, as stated before, a 1D spin chain, in particular. First of all, in section~\ref{cl_open_qs} we will specify the difference between closed and open systems and we will derive the density matrix formalism; then, in section~\ref{appr_dynam_oqs} we will introduce the master equation useful for describing the dynamics of open quantum systems; finally, in section~\ref{many_body_oqs} we will see some important technical concepts that we will use effectively in the original part of the present work.
 %properties of open many-body quantum systems, that we will use effectively in the original part of the present work.
 
 %Da qualche parte devo dire che nella tesi mi occupo solo di spazi di Hilbert a dimensione finita.
 
 \section{Mathematical Background}
 \label{cl_open_qs}
-Before we explore the field of open quantum systems, we now assess the basic differences between a closed and an open quantum system and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is. 
+Before we explore the field of open quantum systems, let us assess the basic differences between a closed and an open quantum system and why different approaches are required to treat these two distinct kinds of systems. First of all, let us define a \emph{closed} system as a physical system which does not exchange any information with its surroundings. On the contrary, an \emph{open} system is a physical system that interacts with the environment in which it is embedded.
 
 In this section, we will briefly look at the different approaches in the study of the dynamics in closed and open quantum systems. 
 
 \subsection{Pure and mixed states: the density matrix formalism}
-First of all, it is useful to consider another formalism in addition to that used normally for handling pure states, i.e. states that can be described by a single wave function. We now introduce the \emph{density matrix} formalism for managing the so-called mixed states, although - as we will see - it can be used also for pure states~\cite{bransden_qm}.
+In addition to the normally used formalism for handling pure states, i.e. states that can be described by a single wave function, it is useful to introduce the \emph{density matrix} formalism for managing the so-called mixed states, although - as we will see - it can be used also for pure states~\cite{bransden_qm}.
 
 Quantum systems prepared in such a way that their state vector being obtained performing a \emph{maximal measurement}, in the sense that the maximum possible information has been acquired (all values of a complete set of commuting observables have been ascertained), are in a pure state. 
 
 Quantum systems for which the maximum possible information is not available, are said to be in mixed state and are called \emph{statistical mixtures}.
 
-Let us consider a system consisting of an ensemble of N sub-systems $\alpha = 1, 2, \dots , N$. We suppose that every sub-system is in a pure state $\ket{\psi_\alpha}$. Then, we choose a complete set of basis vectors $\ket{n}$, such that $\sum_n \ket{n}\bra{n} = \mathds{1}$. Let us expand the pure states in the basis $\{\ket{n}\}$:
+Let us consider a system consisting of an ensemble of $N$ possible realizations $\alpha = 1, 2, \dots , N$. We suppose that every realization of the system is in a pure state $\ket{\psi_\alpha}$. Then, we choose a complete set of basis vectors $\ket{n}$, such that $\sum_n \ket{n}\bra{n} = \mathds{1}$. Let us expand the pure states in the basis $\{\ket{n}\}$:
 \begin{equation*}
     \ket{\psi_\alpha} = \sum_n c_n^{(\alpha)}\ket{n},
 \end{equation*}
@@ -38,7 +38,7 @@ where the coefficients $c_n^{(\alpha)}$ are such that
 \begin{equation*}
     \sum_n |c_n^{(\alpha)}|^2 = 1.
 \end{equation*}
-Now let us consider an observable represented by an operator $A$; its expectation value in the pure state $\psi_\alpha$ is:
+Now let us consider an observable represented by an operator $A$; its expectation value in the pure state $\ket{\psi_\alpha}$ is:
 \begin{align}
     \braket{A}_\alpha &= \bra{\psi_\alpha}A\ket{\psi_\alpha} \\
                       \label{braket_A}
@@ -88,11 +88,11 @@ that is true if we make the assumption that the $\ket{\psi_\alpha}$ are normaliz
 \begin{equation}
     \braket{A} = \frac{\Tr(\rho A)}{\Tr(\rho)}.
 \end{equation}
-The second characteristic of the density matrix is that it is Hermitian, namely:
+The second feature of the density matrix is that it is Hermitian, namely:
 \begin{equation}
     \bra{n}\rho\ket{n'} = \bra{n'}\rho\ket{n}^*.
 \end{equation}
-The third characteristic arises from the observation of the diagonal elements of $\rho$:
+The third feature arises from the observation of the diagonal elements of $\rho$:
 \begin{equation}
     \rho_{nn} = \bra{n}\rho\ket{n} = \sum_{\alpha = 1}^N w_\alpha |c_{n}^{(\alpha)}|^2,
 \end{equation}
@@ -101,7 +101,7 @@ which tells us, with the~\ref{charact_weights}, that
     \rho_{nn} \geq 0,
 \end{equation}
 i.e. $\rho$ is a positive semi-definite matrix.
-It is worth stress the physical interpretation of the diagonal elements; $w_\alpha$ is the probability of finding the system in the pure state $\psi_\alpha$, while $|c_{n}^{(\alpha)}|^2$ is the probability of finding $\psi_\alpha$ in the state $\ket{n}$. So, $\rho_{nn}$ gives the probability of finding a member of the ensemble in the state $\ket{n}$.
+It is worth stressing the physical interpretation of the diagonal elements; $w_\alpha$ is the probability of finding the system in the pure state $\ket{\psi_\alpha}$, while $|c_{n}^{(\alpha)}|^2$ is the probability of finding $\ket{\psi_\alpha}$ in the state $\ket{n}$. So, $\rho_{nn}$ gives the probability of finding a member of the ensemble in the state $\ket{n}$.
 
 \subsection{Closed Quantum Systems}
 \label{closed_systems}
@@ -128,7 +128,7 @@ We can write the dynamics of a closed system using the density matrix formalism 
 \begin{equation*}
     \rho(t_0) = \sum_{\alpha = 1}^N w_\alpha \ket{\psi_\alpha(t_0)} \bra{\psi_\alpha(t_0)},
 \end{equation*}
-that at a time $t$ evolves in this way:
+that evolves in this way:
 \begin{equation*}
     \rho(t) = \sum_{\alpha = 1}^N w_\alpha U(t,t_0)\ket{\psi_\alpha(t_0)} \bra{\psi_\alpha(t_0)}U(t,t_0)^\dagger,
 \end{equation*}
@@ -136,16 +136,16 @@ that is
 \begin{equation*}
      \rho(t) = U(t,t_0) \rho(t_0) U(t,t_0)^\dagger.
 \end{equation*}
-Differentiating with respect to time the last equation we have
+Differentiating with respect to time the last equation we have:
 \begin{equation}
 \label{eqn:motion_closed_dm}
-    \frac{d}{dt}\rho(t) = -i[H(t), \rho(t)]
+    \frac{d}{dt}\rho(t) = -i[H(t), \rho(t)],
 \end{equation}
-i.e. an equation of motion for the density matrix, often called the \emph{Liouville-von Neumann equation}~\cite{pet_breuer:open_quantum}.
+where $[,]$ indicates the commutator. This is the equation of motion for the density matrix, often called the \emph{Liouville-von Neumann equation}~\cite{pet_breuer:open_quantum}
 
 
 \subsection{Open Quantum Systems}
-Now we can go into a more specific definition of open quantum systems. It can be defined as a system $S$ coupled with another quantum system $E$, called the \emph{environment}. Usually, the total system $S+E$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems induce an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, a reservoir in a thermal equilibrium state is called \emph{bath}.
+Now we can go into a more specific definition of open quantum systems. An open quantum system can be defined as a system $S$ coupled with another quantum system $E$, called the \emph{environment}. Usually, the total system $S+E$ is treated as a closed system, so it follows Hamiltonian dynamics. The interactions between the two sub-systems induce an evolution in the state of the open system $S$, which can no longer be represented by unitary, Hamiltonian dynamics. Following the definitions given in~\cite{pet_breuer:open_quantum}, an environment with an infinite number of degrees of freedom such that the frequencies of the modes form a continuum, is called \emph{reservoir}. Also, a reservoir in a thermal equilibrium state is called \emph{bath}.
 
 \begin{figure}
     \centering
@@ -154,13 +154,11 @@ Now we can go into a more specific definition of open quantum systems. It can be
     \label{fig:openSystems_sketch}
 \end{figure}
 
-$\ket{\psi}$
-
 Since $S$ and $E$ are in thermal contact, energy can be exchanged between them; however the interaction is supposed to be weak, so that both $S$ and $E$ at any time can be considered to be in definite energy eigenstates with energies $E_S$ and $E_E$ respectively. Naming $E$ one of the eigenenergies of the combined system, for the conservation of energy we have:
 \begin{equation*}
     E = E_S + E_E.
 \end{equation*}
-Let $d\Gamma(E)$ be the total number of distinct states of the combined system with energies in the range $[E, E+dE]$. So, the probability the probability of finding the combined system with an energy in this range will be\footnote{This is true because of the postulate of equal \emph{a priori} probabilities, since the combined system is supposed to be close, so it is well described by a micro-canonical ensemble.}:
+Let $d\Gamma(E)$ be the total number of distinct states of the combined system with energies in the range $[E, E+dE]$. So, the probability of finding the combined system with an energy in this range will be\footnote{This is true because of the postulate of equal \emph{a priori} probabilities, since the combined system is supposed to be close, so it is well described by a micro-canonical ensemble.}:
 \begin{equation}
     dP = C d\Gamma(E), \quad E_0 \leq E \leq E_0 + \Delta
 \end{equation}
@@ -186,8 +184,9 @@ The probability $dP_n$ that the combined system is in a state such that the syst
 \end{equation}
 where $\Delta\Gamma_E(E-E_n)$ is the total number of states of the environment, that can be written in terms of the entropy $S_E$ of the reservoir:
 \begin{equation*}
-    \Delta\Gamma_E = \exp{(S_E/k)}.
+    \Delta\Gamma_E = \exp{(S_E/k)},
 \end{equation*}
+where $k$ denotes the Boltzmann constant.
 
 Since $E_n \ll E$, we can write:
 \begin{equation*}
@@ -239,7 +238,7 @@ Let us call $\mathcal{H}_S$ and $\mathcal{H}_E$ the Hilbert spaces of the system
 \end{equation}
 where $H_S$ and $H_E$ are the free Hamiltonians of the system and the environment, respectively, and $H_I(t)$ is the Hamiltonian describing the interactions between $S$ and $E$.
 
-At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}_{S+E}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $B$\footnote{A proof of this statement is given, e.g., in~\cite{nielsen_chuang}.}:
+At this point, we must find a relation between the density matrix $\rho \in \mathcal{H}_{S+E}$ and $\rho_S \in \mathcal{H}_S$; it is given by the partial trace over the environment $E$\footnote{A proof of this statement is given, e.g., in~\cite{nielsen_chuang}.}:
 \begin{equation}
     \rho_S = \Tr_E(\rho).
 \end{equation}
@@ -249,12 +248,12 @@ This helps us in the study of the dynamics of the so-called \emph{reduced} densi
 \end{equation}
 observing that we assumed the total system to be \emph{closed}, it evolves unitarily so we have:
 \begin{equation}
-    \rho_S(t) = \Tr_B\{U(t, t_0)\rho(t_0)U(t, t_0)^\dagger\},
+    \rho_S(t) = \Tr_E\{U(t, t_0)\rho(t_0)U(t, t_0)^\dagger\},
 \end{equation}
 where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. So we can use the equation of motion~\ref{eqn:motion_closed_dm} and trace over the degrees of freedom of the environment, in order to obtain the equation of motion for the $\rho_S(t)$:
 \begin{equation}
 \label{eqn:motion_open}
-    \frac{d}{dt}\rho_S(t) = -i \Tr_B[H(t), \rho(t)].
+    \frac{d}{dt}\rho_S(t) = -i \Tr_E[H(t), \rho(t)].
 \end{equation}
 
 
@@ -262,7 +261,7 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Approximate Description of Open Quantum Systems}
 \label{appr_dynam_oqs}
-If one considers a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. The following will derive a simpler description of the dynamics of an open quantum system. 
+If one considers a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. In the following, we will derive a simpler and approximate description of the dynamics of an open quantum system. 
 
 \subsection{Quantum Dynamical Semigroups}
 For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
@@ -298,7 +297,7 @@ where the $\{M_a\}$ obey the completeness relation
 \label{compl_rel_kraus}
     \sum_a M_a^\dagger M_a = \mathds{1}
 \end{equation}
-and are called \emph{Kraus operators} and are defined as
+and are called \emph{Kraus operators} and are defined as~\cite{nielsen_chuang}
 \begin{equation}
     M_a = \sqrt{\lambda_i} \bra{\psi_j}U(t,0)\ket{\psi_i}_a.
 \end{equation}
@@ -322,14 +321,14 @@ This object has some essential features that give it the name \emph{completely p
     \end{equation*}
 \end{itemize}
 
-The TPCP maps are called by other names; one of them is \emph{super-operator}, due to its function of connecting operators with operators, rather than vectors with vectors. Another name used in the field of Quantum Information is \emph{quantum channel}, that originates from communication theory and gives the image of the "channel" throughout the state $\rho$ travels to reach its destination as $\varepsilon(\rho)$.
+The CPTP maps are called by other names; one of them is \emph{super-operator}, due to its function of connecting operators with operators, rather than vectors with vectors. Another name used in the field of Quantum Information is \emph{quantum channel}, that originates from communication theory and gives the image of the "channel" throughout the state $\rho$ travels to reach its destination as $\varepsilon(\rho)$.
 
-There is a reason why we can say that the TPCP maps form a \emph{dynamical semigroup}: that is because the associative property is satisfied. Indeed, if $\varepsilon_1$ is a TPCP map with $N$ Kraus operators $\{A_a\}$ and $\varepsilon_2$ is a TPCP map with $M$ Kraus operators $\{B_b\}$, than $\varepsilon_1 \circ \varepsilon_2$ has an operator-sum representation with $NM$ Kraus operators $\{A_aB_b\}$.
+There is a reason why we can say that the CPTP maps form a \emph{dynamical semigroup}: that is because the associative property is satisfied. Indeed, if $\varepsilon_1$ is a CPTP map with $N$ Kraus operators $\{A_a\}$ and $\varepsilon_2$ is a CPTP map with $M$ Kraus operators $\{B_b\}$, than $\varepsilon_1 \circ \varepsilon_2$ has an operator-sum representation with $NM$ Kraus operators $\{A_aB_b\}$.
 
 \subsection{The Markovian Evolution}
-With a view to expressing the evolution of the density operator by a differential equation,  let us analyze if the evolution of an open quantum system can be described as a Markovian process\footnote{Let us recall what a Markovian process is: a stochastic process is a Markovian process if the probability that the random variable $X$ takes the value $x_n$ at an arbitrary time $t_n$, is conditioned only by the value $x_{n-1}$ that it took at time $t_{n-1}$ and does not depend on the values at earlier times.}, i.e. \emph{local in time}. The reasons of this lie in the fact that if we want that a (first order) differential equation in $t$ governs the evolution of $\rho(t)$, $\rho(t+dt)$ must be completely determined by $\rho(t)$.
+With the final purpose to cast the evolution of the density operator in terms of a differential equation, let us analyze if the evolution of an open quantum system can be described as a Markovian process\footnote{Let us recall what a Markovian process is: a stochastic process is a Markovian process if the probability that the random variable $X$ takes the value $x_n$ at an arbitrary time $t_n$, is conditioned only by the value $x_{n-1}$ that it took at time $t_{n-1}$ and does not depend on the values at earlier times.}, i.e. \emph{local in time}. The reasons of this lie in the fact that if we want that a (first order) differential equation in $t$ governs the evolution of $\rho(t)$, $\rho(t+dt)$ must be completely determined by $\rho(t)$.
 
-So, a problem emerges: an open system is \emph{dissipative}, in the sense that information can flow from the system into the environment but also can flow back from the environment into the system, causing non-Markovian fluctuations. This fact seems to outdistance the possibility of applying the Markovian model.  A possible solution is neglecting the typical correlation time of the fluctuations respect to the time scale of the evolution that we want to study.
+So, a problem emerges: an open system is \emph{dissipative}, in the sense that information can flow from the system into the environment but also can flow back from the environment into the system, causing non-Markovian fluctuations. This fact seems to prevent the possibility of applying the Markovian model.  A possible solution is neglecting the typical correlation time of the fluctuations with respect to the time scale of the evolution that we want to study.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -359,7 +358,7 @@ So we may assume that $M_0 = \mathds{1} + \mathcal{O}(dt)$ and the $M_a$ is of o
     M_0 &= \mathds{1} + (-iH+K)dt \\
     M_a &= \sqrt{dt}L_a, \hspace{1cm} a = 1,\dots,N^2-1
 \end{align}
-where $H$, $K$ are both hermitian, $L_a$, H, K are zeroth order in $dt$ and $N$ is the dimension of the Hilbert space.
+where $H$, $K$ are both hermitian, $L_a$, $H$, $K$ are zeroth order in $dt$ and $N$ is the dimension of the Hilbert space.
 Now, we can determine $K$ using the completeness relation~\ref{compl_rel_kraus}:
 \begin{equation}
 \begin{split}
@@ -372,14 +371,14 @@ so, keeping terms up to linear order in $dt$ we have:
 \begin{equation*}
     K = \frac{1}{2} \sum_{a=1}^{N^2-1} L_a^\dagger L_a.
 \end{equation*}
-Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}\footnote{The derivation of the master equation developed is not formally rigorous; for a more mathematically accurate derivation we refer to~\cite{pet_breuer:open_quantum}.}:
+Substituting in equation~\ref{op_sum_repr}, we obtain the \emph{Lindblad master equation}\footnote{The derivation of the master equation developed is not formally rigorous; for a more mathematically accurate derivation we refer to~\cite{pet_breuer:open_quantum}.}~\cite{presk:quant_info}:
 \begin{equation}
-\label{eqn:lindblad_eqn}
+\label{eqn:lindblad_eqn_chapt1}
     \dot{\rho} = \mathcal{L}[\rho] \equiv -i[H, \rho] - \sum_{a=1}^{N^2-1} \gamma_a \Bigl(\frac{1}{2}L_a^{\dagger}L_a\rho + \frac{1}{2}\rho L_a^{\dagger}L_a - L_a\rho L_a^{\dagger}\Bigl).
 \end{equation}
-This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a TPCP map. The quantities $\gamma_a$ are non-negative numbers that have the dimension of an inverse time and have the physical meaning of dissipation rate.
+This is the equation that governs the evolution of a quantum system, with the assumption that the evolution is a CPTP map. The quantities $\gamma_a$ are non-negative numbers that have the dimension of an inverse time and have the physical meaning of dissipation rate.
 
-It is clear that the first term of equation~\ref{eqn:lindblad_eqn} represents the unitary part of the dynamics generated by the Hamiltonian; the second part, instead, describes the possible evolution that the system may endure due to the interaction with the environment. Indeed, the $L_a$ are called \emph{quantum jump operators} or \emph{Lindblad operators}.
+It is clear that the first term of equation~\ref{eqn:lindblad_eqn_chapt1} represents the unitary part of the dynamics generated by the Hamiltonian; the second part, instead, describes the possible evolution that the system may undergo due to the interaction with the environment. Indeed, the $L_a$ are called \emph{quantum jump operators} or \emph{Lindblad operators}.
 
 
 
@@ -390,7 +389,7 @@ In this section, we introduce a few concepts, useful to better understand quantu
 \subsection{Bipartite Pure States}
 
 \subsubsection{Schmidt Decomposition and Entanglement}
-A very useful tool is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
+A very useful tool to manipulate pure quantum states is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
 \newtheorem{theo}{Theorem}[section]
 \begin{theo}
     Let us suppose that $\ket{\Psi}$ is a pure state of a composite system $AB$, that lives in the Hilbert space given by the tensor product $\mathcal{H}_A \otimes \mathcal{H}_B$. Then there exist orthonormal bases, the Schmidt bases, $\{\chi_i^{(A)}\}$ and $\{\chi_j^{(B)}\}$, in $\mathcal{H}_A$ and $\mathcal{H}_B$, respectevely, such that
@@ -400,18 +399,20 @@ A very useful tool is the \emph{Schmidt decomposition}, that we present here fol
     The $\alpha_i$ are complex numbers called Schmidt coefficients and the number of non-zero $\alpha_i$ is called Schmidt number.
 \end{theo}
 \begin{proof}
-Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
+Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements called \emph{singular values} of the matrix, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
 Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{\chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{\chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
 \end{proof}
 
 A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it cannot be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ can be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
 
+The \emph{entanglement} is one of the most peculiar manifestations of quantum mechanics. Given a composite quantum system, entanglement quantifies non-classical correlations between measurements performed on well-separated particles. Indeed, while after two classical systems have interacted, they can be described by two defined states, after two quantum systems have interacted, they can no longer be described independently of each other. 
+
 \subsubsection{Von Neumann Entropy}
-A crucial tool useful to measure the entanglement of a bipartite pure state is the quantum entropy, defined by von Neumann in this way:
+A crucial tool useful to measure the entanglement of a bipartite pure state is the quantum entropy, defined by Von Neumann entropy in this way:
 \begin{equation}
     S(\rho) \equiv -\Tr ( \rho \log_2\rho),
 \end{equation}
-where $\rho$ is the reduced density matrix $\rho_A$ of a subsystem $A$ which can be written as $\rho_A = \Tr_B (\ket{\psi}\bra{\psi})$. If $\lambda_i$ are the eigenvalues of $\rho$, we can write:
+where $\rho$ coincides with the reduced density matrix $\rho_A$ of a subsystem $A$ which can be written as $\rho_A = \Tr_B (\ket{\psi}\bra{\psi})$. If $\lambda_i$ are the eigenvalues of $\rho$, we can write:
 \begin{equation*}
     S(\rho) = -\sum_i \lambda_i \log_2 \lambda_i.
 \end{equation*}
@@ -421,16 +422,16 @@ Let us highlight some important properties of the von Neumann entropy~\cite{niel
     \item in a D-dimensional Hilbert space, the entropy is $S(\rho) \leq log_2 D$, where the equality sign holds if and only if the system in the completely mixed state $\rho = \mathds{1}/D$;
     \item if a composite system $AB$ is in a pure state, $S(A) = S(B)$;
     \item it is a concave functional $\rho \mapsto S(\rho)$ on the space of density matrices. This means that for any collection of $\rho_i$ and numbers $\lambda_i$ satisfying $\sum_i \lambda_i = 1$, one has $S(\sum_i \lambda_i \rho_i) \geq \sum_i \lambda_i S(\rho_i)$, where the equal sign holds if and only if all $\rho_i$ are equal to each other. This property means that the uncertainty of the state $\rho = \sum_i \lambda_i \rho_i$ is greater or equal to the average uncertainty of the states $\rho_i$ that constitute the total mixture;
-    \item if $\rho$ associated to Hilbert space $ \mathcal{H} = \matcal{H}_A \otimes \matcal{H}_B$ is the state of a system and $\rho^{(A)} = \Tr_B \rho$ and $\rho^{(B)} = \Tr_A \rho$ are the states of its sub-systems, the von Neumann entropy obeys the so-called subadditivity condition, i.e.
+    \item if $\rho$ associated to Hilbert space $ \mathcal{H} = \matcal{H}_A \otimes \matcal{H}_B$ is the state of a system and $\rho_A = \Tr_B \rho$ and $\rho_B = \Tr_A \rho$ are the states of its sub-systems, the von Neumann entropy obeys the so-called subadditivity condition, i.e.
     \begin{equation*}
-        S(\rho) \leq S(\rho^{(A)}) + S(\rho^{(B)}),
+        S(\rho) \leq S(\rho_A) + S(\rho_B),
     \end{equation*}
     where the equality sign holds if and only if $\rho$ describes an uncorrelated state. This means that the uncertainty about the product state is greater than that of the total system; this is because the operation of trace over the sub-systems causes a loss of information on correlations between the sub-systems, therefore the increase of entropy.
 \end{itemize}
 
 \subsection{Bipartite Mixed States}
 \label{bi_mixed_states}
-Subsystems of a many-body pure state will generally be in a mixed state $\rho$. In this case, the measure of entanglement is unclear and diverse; three important representatives~\cite{RevModPhys.80.517}~\cite{phd_ross} are the following:
+Subsystems of a many-body pure state will generally be in a mixed state $\rho$. In this case, the measure of entanglement is unclear and diverse; three important representatives~\cite{RevModPhys.80.517, phd_ross} are the following:
 \begin{description}
     \item[entanglement cost,] an asymptotic limit of the number $k$ of maximally entangled states used to extract n copies of $\rho$, minimized over all the possible local quantum operations with classical communication (LOCC) manipulations:
     \begin{equation*}
@@ -444,7 +445,11 @@ Subsystems of a many-body pure state will generally be in a mixed state $\rho$. 
     \begin{equation*}
         E_F(\rho) = \min \sum_j p_j S(\rho_{A,j}),
     \end{equation*}
-    where the minimum is taken over all the realizations of the state $\rho = \sum_j p_j \ket{\psi_j}\bra{\psi_j}$ and $S(\rho_{A,j})$ is the Von Neumann entropy of the reduced density matrix $\rho_{A,j} = \Tr_B (\ket{\psi_j}\bra{\psi_j})$;
+    where the minimum is taken over all the realizations of the state
+    \begin{equation*}
+        \rho = \sum_j p_j \ket{\psi_j}\bra{\psi_j}
+    \end{equation*}
+    and $S(\rho_{A,j})$ is the Von Neumann entropy of the reduced density matrix\\ $\rho_{A,j} = \Tr_B (\ket{\psi_j}\bra{\psi_j})$;
     \item[relative entropy of entanglement,] distance of $\rho$ from the nearest mixed separable state $\sigma$:
     \begin{equation*}
         E_R(\rho) = \min_{\sigma \in sep.} \Tr[\rho(\log_2 \rho -\log_2 \sigma)].
@@ -459,7 +464,7 @@ where $\rho$ is the reduced density matrix of a subsystem that we can express in
 \begin{equation*}
     \rho = \Tr_B (\sum_{j = 1}^{N}\ket{\psi_{j}}\bra{\psi_j}).
 \end{equation*}
-In this case it is called \emph{operator space entanglement entropy} and it does not measure the entanglement but it is a good quantifier of the functionality of matrix product operators method, as we will see in the following chapters.
+In this case it is called \emph{operator space entanglement entropy} and it does not measure the entanglement but it is a good quantifier of the functionality of matrix product operators method, as we will see in section~\ref{chap_numMethods_MPO}.
 
 %la von Neumann entropy per stati misti non misura l'entanglement propriamente detto, ma è un quantificatore chiamato anche operator space entanglement entropy (mpo) utile per discutere quanto mpo efficace; più è piccola, più gli mpo funzionano bene. 
 

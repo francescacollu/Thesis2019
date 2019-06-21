@@ -1,4 +1,4 @@
-\chapter{Case Study: a 1/2-spin XYZ Heisenberg Chain Coupled to Two External Baths}
+\chapter{Case Study: a Quantum Spin Chain Coupled to Two External Baths}
 \label{Chapter3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,21 +8,18 @@
 \label{sec:model}
 Non-equilibrium dynamics of quantum many-body systems have become a subject of great interest, due especially to the breakthrough in the experimental methods in the field of ultracold atoms. As already mentioned in chapter~\ref{chapter2}, several platforms, which have been theorised or implemented~\cite{exp_spinChain}, can realize one-dimensional spin chains with great accuracy. 
 
-One of the oldest and paradigmatic model of interacting quantum particles is the Heisenberg model. Despite being exactly solvable by the Bethe ansatz, calculating its properties is not trivial. 
+One of the oldest and paradigmatic model of interacting quantum particles is the Heisenberg model. Despite being exactly solvable by the Bethe ansatz, calculating its properties is definitely not trivial.
 
-%\textcolor{red}{add a sketch of the model}
-
-In the present work, we have chosen to consider the anisotropic Heisenberg model (see fig.~\ref{fig:sketch_model} for the sketch of the model): the Heisenberg XYZ chain of N $\frac{1}{2}$-spin, coupled to two external reservoirs positioned at its boundaries. The density matrix describing the chain evolves according to the Lindblad master equation
+In the present work, we have chosen to focus on the anisotropic Heisenberg model (see fig.~\ref{fig:sketch_model} for a sketch of the model): the Heisenberg XYZ chain of \textit{L} $\frac{1}{2}-$spin, coupled to two external reservoirs positioned at its boundaries. The density matrix describing the chain evolves according to the Lindblad master equation
 \begin{equation}
-    \frac{d\rho}{dt} = -i[H, \rho] - \sum_{i=1}^{N}\Bigl(\frac{1}{2}L_i^{\dagger}L_i\rho + \frac{1}{2}\rho L_i^{\dagger}L_i - L_i\rho L_i^{\dagger}\Bigl),
+    \frac{d\rho}{dt} = -i[H, \rho] - \sum_{i=1}^{N^2-1}\Bigl(\frac{1}{2}L_i^{\dagger}L_i\rho + \frac{1}{2}\rho L_i^{\dagger}L_i - L_i\rho L_i^{\dagger}\Bigl),
 \end{equation}
-where
-$H$ being the Hamiltonian of the model:
+where $N$ is the dimension of Hilbert space, $H$ is the Hamiltonian of the model:
 \begin{equation}
 \label{ham_chain}
-    H = \sum_{i = 1}^{N-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + J_z \sigma_i^z \sigma_{i+1}^z),
+    H = \sum_{i = 1}^{L-1} (J_x \sigma_i^x \sigma_{i+1}^x + J_y \sigma_i^y \sigma_{i+1}^y + J_z \sigma_i^z \sigma_{i+1}^z),
 \end{equation}
-where $\sigma^x$, $\sigma^y$ and $\sigma^z$ are the Pauli matrices, which are defined as follows:
+and $\sigma^x$, $\sigma^y$ and $\sigma^z$ are the Pauli matrices, which are defined as follows:
 \begin{equation}
 \sigma^x = 
     \begin{pmatrix}
@@ -41,11 +38,11 @@ where $\sigma^x$, $\sigma^y$ and $\sigma^z$ are the Pauli matrices, which are de
     \end{pmatrix}
     .
 \end{equation}
-The coupling constant are choose to be $J_x = 1$, $J_y = 0.5$ all over the dissertation, while $J_z$ will be varied as it will see in the following sections. However, in this chapter it assumes the value $J_z = 1$, when not specified differently.
+The coupling constant are chosen to be $J_x = 1$, $J_y = 0.5$ all over the dissertation, while $J_z$ will be varied as we will see in the following sections. However, throughout the full chapter, except for sec.~\ref{chapt4_phase_trans}, we will assume $J_z=1$.
 The $L_i$ are the Lindblad operators representing the single-spin bath coupled to the first and the last spin of the chain:
 \begin{equation}
 \label{dissipators}
-    L_1 = \sqrt{\gamma} \sigma^+ \quad \text{and} \quad L_2 =\sqrt{\gamma}\sigma^-,
+    L_1 = \sqrt{\gamma} \sigma_1^+ \quad \text{and} \quad L_2 =\sqrt{\gamma}\sigma_L^-,
 \end{equation}
 where 
 \begin{equation*}
@@ -57,7 +54,7 @@ and $\gamma$ is the bath-coupling strength parameter.
     \centering
     \includegraphics[scale=0.7]{Figures/sketch_model.png}
     \captionsetup{width=1.\linewidth}
-    \caption{Sketch of the model under study. The system is described by an Hamiltonian $H$; $\mathcal{B}_1$ and $\mathcal{B}_2$ are the baths coupled to the boundaries of the chain by the Lindblad operators $L_1$ and $L_L$. In this thesis, $\mathcal{B}_1$ ($\mathcal{B}_2$) is the bath that ``pumps'' spin up (down), but another similar system could be coupled to two reservoir with two different temperatures. In that case, one could study a temperature gradient, instead of magnetization and spin current.}
+    \caption{Sketch of the model under study. The system is described by an Hamiltonian $H$; $\mathcal{B}_1$ and $\mathcal{B}_2$ are the baths coupled to the boundaries of the chain by the Lindblad operators $L_1$ and $L_L$. In this thesis, $\mathcal{B}_1$ ($\mathcal{B}_2$) is the bath that ``pumps'' spin up (down), but another similar system could be coupled to two reservoirs with two different temperatures. In that case, one could study a temperature gradient, instead of magnetization and spin current.}
     \label{fig:sketch_model}
 \end{figure}
 
@@ -65,26 +62,24 @@ and $\gamma$ is the bath-coupling strength parameter.
 
 The physics of this model represents in a realistic way some behaviours of the Hubbard models described in chapter~\ref{chapter2}, i.e. the models tipically studied by quantum simulators.
 
-In the following sections, we will study three fundamental observables for the analysis of a XYZ Heisenberg chain: the magnetization profile, the two-point correlation function, the spin current; in particular, we will examine them in chains of different size: 8, 12, 16 sites. 
+In the following sections, we will study three fundamental observables: the magnetization profile, the two-point correlation function, the spin current; in particular, we will examine them in chains of different size: 8, 12, 16 sites. 
 
-All fits in the present and in the next chapters are made by~\cite{root_cern} with Minuit/Migrad and Linear minimizers.
+All fits in the present and in the next chapters are made with Minuit/Migrad and Linear minimizers~\cite{root_cern}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Magnetization Profile}
 \label{sec:magn_profile}
-The first observable we want examine is the magnetization profile of the chain, i.e. the expectation value $\langle \sigma^z \rangle$ of the Pauli matrix $\sigma^z$ for each site:
+The first observable we want to examine is the magnetization profile of the chain, i.e. the expectation value $\langle \sigma_i^z \rangle$ of the Pauli matrix $\sigma^z$ for each site:
 \begin{equation*}
-    \langle \sigma^z \rangle = \Tr(\sigma^z \rho_s),
+    \langle \sigma_i^z \rangle = \Tr(\sigma_i^z \rho_s),
 \end{equation*}
 being $\rho_s$ the steady-state density matrix of the system.
 
-The magnetization profile is the first marker of the dynamics of the chain: it reveals the behaviour of the system; in particular, it allows us to see the effects generated by the presence of the dissipators, described by the Lindblad operators~\ref{dissipators}. One should expect the profile to have the ends polarized toward opposite directions, because of the position (in the first and in the last chain site) of the dissipators.
+The magnetization profile is the first marker of the dynamics of the chain:  it reveals the responsivity of the system to the competing polarizing effects of the two baths; in particular, it allows us to see the effects generated by the presence of the dissipators, described by the Lindblad operators~\ref{dissipators}. One should expect the profile to have the ends polarized toward opposite directions, because of the position (in the first and in the last chain site) of the dissipators.
 
-%\textcolor{red}{competition between hamiltonian and dissipative dynamics}
-
-The behaviour of magnetization is shown in fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1}; it is congruent with the reasoning made before. The profile is symmetrical in respect to the center of the chain, while the first half is characterized by positive values of  $\langle \sigma^z \rangle$ and the second half by negative values of $\langle \sigma^z \rangle$, because the first dissipator (positioned in the first site) forces spins to align along the positive z-axis. The opposite happens for the second dissipator.
+The behaviour of magnetization along z spin direction is shown in fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1}; it is congruent with the reasoning made before. The profile is antisymmetric in respect to the center of the chain, while the first half is characterized by positive values of  $\langle \sigma_i^z \rangle$ and the second half by negative values of $\langle \sigma_i^z \rangle$, because the first dissipator (positioned in the first site) forces spins to align along the positive z-axis. The opposite happens for the second dissipator.
 
 %Moreover, in order to make sure the numerical results are under control, a comparison between MPO and QT methods is done for a 8-sites chain. It is clear that the results are overlapping, so it is reasonable to treat them as plausible ones.
 
@@ -96,72 +91,64 @@ The behaviour of magnetization is shown in fig.~\ref{fig:LM_comparisonVSsizeJz1G
     %\label{fig:8sites_LMcomparisonJz1}
 %\end{figure}
 
-Now, it is interesting to investigate how the change of chain length modifies the magnetization profile. In fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1} it is shown the comparison between the magnetization profile of chains with different lengths. Two characteristics stand out: the first one is the fact that the peak values of $\langle\sigma^z\rangle$ in the ends of the chain are independent from the size of the system; this is true also for different values of $\gamma$: the peak values still remains the same for different lengths of the chain; the second one involves the fact that increasing the length of the chain, the spin profile gets flatter.
+Now, it is interesting to investigate how the size of the chain influences the magnetization profile. Fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1} displays a comparison between the magnetization profile of chains with different lengths. In order to do so, we have scaled the x-axis so that the ends are 0 and 1. Two characteristics stand out: the first one is the fact that the peak values of $\langle\sigma_i^z\rangle$ in the ends of the chain are independent of the size of the system; this is true also for different values of $\gamma$: the peak values still remain the same for different lengths of the chain; the second one involves the fact that increasing the length of the chain, the spin profile gets flatter.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{Figures/NORM_LM_comparisonVSsize.pdf}
     \captionsetup{width=1.\linewidth}
-    \caption{Spin profile for the model under study at $J_z = 1$ and $\gamma=1$. Data for different chain length are shown and they are obtained from MPO method.}
+    \caption{Spin magnetization profile along the z axis as a function of the position inside the chain, rescaled between 0 and 1, at $J_z = 1$ and $\gamma=1$. Data for different chain lengths are shown and they are obtained from MPO method.}
     \label{fig:LM_comparisonVSsizeJz1Gamma1}
 \end{figure}
 
 In order to analyze these properties in more detail, in the following figures we see how the behaviour of magnetization profile changes for different values of dissipation rate $\gamma$. 
 
-First of all, it is convenient separate the curves for each size (8, 12 and 16 sites) in order to distinguish the profiles. The plots are shown in figures~\ref{fig:LMvsGamma3panelsSizes}.
+First of all, it is convenient to separate the curves for each size (8, 12 and 16 sites) in order to distinguish the profiles. The plots are shown in figures~\ref{fig:LMvsGamma3panelsSizes}.
 
-It is worth noting several aspects that arise from these plots. First of all, it seems clear that, while increasing $\gamma$, the ends of the chain become more and more polarized. This is true for every length of the chain because, as mentioned previously, the peak values are independent of the length of the chain.
+Several aspects of our numerical outcomes are worth to be noted and commented. First of all, it seems clear that, while increasing $\gamma$, the ends of the chain become more and more polarized. This is true for every length of the chain because, as mentioned previously, the peak values are independent of the length of the chain.
 
-The profile for the 8-sites chain (upper panel in fig.~\ref{fig:LMvsGamma3panelsSizes}) seems to be almost linear, but this is due to size effect: indeed, for 12 and 16-sites chain (middle and bottom panels of fig.~\ref{fig:LMvsGamma3panelsSizes}) the non-linear trend becomes more and more evident as the length increases. Indeed, while $L$ grows, the plots show with increasing clearness the formation of a \emph{plateau} in which the magnetization is zero. Only near the edges it tends to boost, because of the driving effect of the dissipators. 
+The profile for the 8-sites chain (upper panel in fig.~\ref{fig:LMvsGamma3panelsSizes}) seems to be almost linear, but this is due to size effect: indeed, for 12 and 16-sites chain (middle and bottom panels of fig.~\ref{fig:LMvsGamma3panelsSizes}) the non-linear trend becomes more and more evident as the length increases. Indeed, while $L$ grows, the plots show with increasing clarity the formation of a \emph{plateau} in the bulk of the system, in which the magnetization is zero; only near the edges the profile tends to deviate from the plateau, because of the driving effect of the dissipators.
+%Only near the edges it tends to differ from zero, because of the driving effect of the dissipators. 
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.6]{Figures/8sites/8sites_LMvsGamma.pdf}
+%\begin{subfigure}{\columnwidth}
+%\centering
+    \includegraphics[scale=0.55]{Figures/8sites/8sites_LMvsGamma.pdf}
     \label{fig:8sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.6]{Figures/12sites/12sites_LMvsGamma.pdf}
+%\end{subfigure}
+%\begin{subfigure}{\columnwidth}
+%\centering
+    \includegraphics[scale=0.55]{Figures/12sites/12sites_LMvsGamma.pdf}
     \label{fig:12sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.34]{Figures/16sites/prova.png}
+%\end{subfigure}
+%\begin{subfigure}{\columnwidth}
+%\centering
+    \includegraphics[scale=0.55]{Figures/16sites/16sites_LMvsGamma.pdf}
     \label{fig:16sites_LMvsGamma}
-\end{subfigure}\\
+%\end{subfigure}
 \captionsetup{width=1.\linewidth}
-\caption{Spin profile for a 8-sites chain (upper panel), 12-sites chain (central panel), 16-sites chain (bottom panel) varying on dissipation rate $\gamma$. Data are obtained from MPO method. The red arrows point at two sets of values that will be analyzed in the continuation.}
+\caption{Spin profile for a 8-sites chain (upper panel), 12-sites chain (central panel), 16-sites chain (bottom panel) varying on dissipation rate $\gamma$. Data are obtained from MPO method. The red arrows point at two sets of values that will be analyzed in the following.}
 \label{fig:LMvsGamma3panelsSizes}
 \end{figure}
 
-As said previously, the peak value of $\langle\sigma^z\rangle$ varies with $\gamma$. In the upper panel in fig.~\ref{fig:LM_PeakAnd4th_vsGamma2panels} it is presented the fit~\cite{root_cern} that shows an exponential behaviour. It is interesting noting that the same dependence is keep also by $\langle\sigma^z\rangle$ of spins lying in the $\frac{L}{4}$-th site (see the bottom panel in fig.~\ref{fig:LM_PeakAnd4th_vsGamma2panels}); the same trend is confirmed in the case of 8 and 12 sites, shown in \textcolor{red}{appendix?}).
+As said previously, the peak value of $\langle\sigma^z\rangle$ varies with $\gamma$. In the upper panel in fig.~\ref{fig:LM_PeakAnd4th_vsGamma} we present the fit~\cite{root_cern} that shows an exponential behaviour. It is interesting to note that the same dependence is also kept also by $\langle\sigma^z\rangle$ of spins lying in the $\frac{L}{4}$-th site (see the bottom panel in fig.~\ref{fig:LM_PeakAnd4th_vsGamma}); the same trend is confirmed in the case of 8 and 12 sites.
 
 The dependence shown by the fit is the following:
 \begin{equation*}
     \langle \sigma^z \rangle(\gamma) = p_0 (1- e^{-p_1\gamma}).
 \end{equation*}
-In fig.~\ref{fig:LM_PeakAnd4th_vsGamma2panels} the fit parameters for each plot are shown.
+In fig.~\ref{fig:LM_PeakAnd4th_vsGamma} the fit parameters for each plot are shown.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[width=1.\linewidth, height=0.5\linewidth]{Figures/FIT_PeakLMVsGamma.pdf}
-    \label{fig:12sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[width=1.\linewidth, height=0.5\linewidth]{Figures/FIT_16sites_4thSiteVSgamma.pdf}
-    \label{fig:16sites_LMvsGamma}
-\end{subfigure}\\
+\includegraphics[scale = 0.6]{Figures/LMvsGammaVsSiteIndex.pdf}
 \captionsetup{width=1.\linewidth}
-\caption{On the upper panel, the fit of the magnetization of the first site of the chain (coupled to the dissipator described by $\sigma^+$); in the lower panel, the fit of the magnetization of the forth spin of the chain of 16 sites.}
-\label{fig:LM_PeakAnd4th_vsGamma2panels}
+\caption{In red, the fit of the magnetization of the first site of the chain (coupled to the dissipator described by $\sigma^+$); in purple, the fit of the magnetization of the forth spin of the chain of 16 sites.}
+\label{fig:LM_PeakAnd4th_vsGamma}
 \end{figure}
 
-These two plots displayed in fig.~\ref{fig:LM_PeakAnd4th_vsGamma2panels} show that for large values of $\gamma$, i.e. for more and more important driving, $\langle\sigma^z\rangle$ tends asymptotically to a maximum value.
+These two plots displayed in fig.~\ref{fig:LM_PeakAnd4th_vsGamma} show that for large values of $\gamma$, i.e. for more and more important driving, $\langle\sigma^z\rangle$ tends asymptotically to a maximum value.
 
 Studying the gradient of the magnetization $\nabla \langle \sigma^z \rangle$ with respect to the position, we have found that its trend is consistent with the profiles just shown.
 
@@ -214,32 +201,35 @@ Studying the gradient of the magnetization $\nabla \langle \sigma^z \rangle$ wit
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Two-Point Correlation Functions}
-Another observable of interest is certainly the steady-state two-point correlation function, defined as follows:
+\section{Two-Point Correlation Function}
+Another observable of interest is the steady-state two-point correlation function, defined as follows:
 \begin{equation}
     C(i, j) = \langle \sigma^z_i \sigma^z_j \rangle - \langle \sigma^z_i \rangle \langle \sigma^z_j \rangle,
 \end{equation}
 where $\langle \sigma^z_i \sigma^z_j \rangle = \Tr(\sigma^z_i \sigma^z_j \rho_{s})$ and $\langle \sigma^z_i \rangle = \Tr(\sigma^z_i \rho_{s})$, being $\rho_{s}$ the steady-state density matrix.
 
-In particular, the two-point correlation function will be studied considering the system symmetry, using the so-called \emph{bulk} correlation function; that is, starting from the middle sites of the chain, the correlation function will be calculated between equidistant sites from the center of the chain. 
+In particular, the two-point correlation function will be studied considering the system symmetry, using the so-called \emph{bulk} correlation function; that is, starting from the middle sites of the chain, the correlation function will be calculated between equidistant sites from the center of the chain. In summary:
+\begin{equation*}
+    \text{for even} \quad i-j \quad
+\end{equation*}
 
-In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively. An interesting aspect that is quite clear in these plots, involves the finite-size effect; while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites the exponential profile starts to stand out. 
+In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively. An interesting aspect that is quite clear in these plots, involves the finite-size effect; while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites the exponential profile starts to appear clearly.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}{\columnwidth}
 \centering
-    \includegraphics[scale=0.6]{Figures/8sites/8sites_BulkCF_CONNvsGamma.pdf}
+    \includegraphics[scale=0.55]{Figures/8sites/8sites_BulkCF_CONNvsGamma.pdf}
     \label{fig:8sites_LMvsGamma}
 \end{subfigure}\\
 \begin{subfigure}{\columnwidth}
 \centering
-    \includegraphics[scale=0.6]{Figures/12sites/12sites_CFBulkCONNVSgamma.pdf}
+    \includegraphics[scale=0.55]{Figures/12sites/12sites_CFBulkCONNVSgamma.pdf}
     \label{fig:12sites_LMvsGamma}
 \end{subfigure}\\
 \begin{subfigure}{\columnwidth}
 \centering
-    \includegraphics[scale=0.6]{Figures/16sites/16sites_CFBulkCONNVSgamma.pdf}
+    \includegraphics[scale=0.55]{Figures/16sites/16sites_CFBulkCONNVSgamma.pdf}
     \label{fig:16sites_LMvsGamma}
 \end{subfigure}\\
 \captionsetup{width=1.\linewidth}
@@ -247,7 +237,7 @@ In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for se
 \label{fig:BulkCFvsGamma3panelsSizes}
 \end{figure}
 
-The fit made with~\cite{root_cern} shows that the profile of correlation function is exponential. In fig.~\ref{fig:16sites_FIT_CFBulkCONNvsGamma} several observations can be made; first of all, the trend of the two-point correlation function is exponential. In particular, the dependence from the distance between the spin reads:
+The fit shows that the profile of correlation function is exponential. In fig.~\ref{fig:16sites_FIT_CFBulkCONNvsGamma} several observations can be made; first of all, the trend of the two-point correlation function is exponential. In particular, the dependence from the distance between the spin reads:
 \begin{equation*}
     C(r) = p_0 e^{-p_1 r},
 \end{equation*}
@@ -331,21 +321,12 @@ In fig.~\ref{fig:spinCurrVSsizeVSgamma} we have kept the same scale of y-axis: t
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.6]{Figures/spinCurrVSsize_Gamma05.pdf}
+    \includegraphics[scale=0.55]{Figures/spinCurrVSsize_Gamma05.pdf}
     \label{fig:8sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.6]{Figures/spinCurrVSsize_Gamma1.pdf}
+    \includegraphics[scale=0.55]{Figures/spinCurrVSsize_Gamma1.pdf}
     \label{fig:12sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.6]{Figures/spinCurrVSsize_Gamma15.pdf}
+    \includegraphics[scale=0.55]{Figures/spinCurrVSsize_Gamma15.pdf}
     \label{fig:16sites_LMvsGamma}
-\end{subfigure}\\
 \captionsetup{width=1.\linewidth}
 \caption{Spin current for $\gamma = 0.5$ (upper panel), $\gamma = 1$ (middle panel), $\gamma = 1.5$ (bottom panel) and $J_z = 1$ are shown. In every panel, a comparison between different chain lengths is done. Data are obtained from MPO method.}
 \label{fig:spinCurrVSsizeVSgamma}
@@ -368,6 +349,7 @@ It is interesting noting that the peak values reach a maximum and then decrease,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A Conjectured Nonequilibrium Phase Transition}
+\label{chapt4_phase_trans}
 
 In an open system, the competition between unitary Hamiltonian evolution and dissipation can induce a dissipative phase transition for the steady state, as discussed for example in the case of spin systems by~\cite{phase_trans_spin_system}.
 A phase transition is an important phenomenon in condensed-matter physics and can happens tuning one or more parameters of the Hamiltonian of the system. 
