@@ -224,7 +224,7 @@ So, we can formally write the bulk correlation function in this way:
 \end{equation*}
 is the site index for the second half of the chain.
 
-In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively.  An interesting aspect that is quite clear in these plots, involves the finite-size effect; while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites the exponential profile starts to appear clearly.
+In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively. In order to encourage the comparison between the different sizes, we scaled the x-axis so that the ends are 0 and 1. An interesting aspect that is quite clear in these plots, involves the finite-size effect; while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites the exponential profile starts to appear clearly.
 
 \begin{figure}[H]
 \centering
@@ -248,7 +248,7 @@ In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for se
 \label{fig:BulkCFvsGamma3panelsSizes}
 \end{figure}
 
-The fit shows that the profile of correlation function is exponential. In fig.~\ref{fig:16sites_FIT_CFBulkCONNvsGamma} several observations can be made; first of all, the trend of the two-point correlation function is exponential. In particular, the dependence from the distance between the spin reads:
+The fit shows that the profile of correlation function is exponential. In fig.~\ref{fig:16sites_FIT_CFBulkCONNvsGamma} several observations can be made; first of all, the trend of the two-point correlation function is exponential. In particular, the dependence from the distance between the spins reads:
 \begin{equation*}
     C(r) = p_0 e^{-p_1 r},
 \end{equation*}
@@ -324,11 +324,9 @@ where $S_k^z \equiv \sigma_k^z/2$ and where $H$ is the Hamiltonian written in~\r
 %    \label{fig:my_label}
 %\end{figure}
 
-As done previously for the observables already studied, we can see how the spin current changes for chain of different lengths with the same model. In the middle panel of fig.~\ref{fig:spinCurrVSsizeVSgamma} it is shown the spin current for a 8, 12 and 16-sites chain, characterized by $J_z = 1$ and dissipation rate $\gamma = 1$. The curves are asymmetric, due to the fact that the Heisenberg model XYZ has an intrinsic anisotropy. While the length of the chain increases, the spin current shows a flatter profile which is consistent with the fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1} where the plateau of null magnetization becomes bigger while the size of the chain grows.
+As done previously for the observables already studied, we can see how the spin current changes for chain of different lengths with the same model. In the middle panel of fig.~\ref{fig:spinCurrVSsizeVSgamma} it is shown the spin current for a 8, 12 and 16-sites chain, characterized by $J_z = 1$ and dissipation rate $\gamma = 1$. The curves are asymmetric, due to the fact that the Heisenberg model XYZ has an intrinsic anisotropy. While the length of the chain increases, the spin current shows a flatter profile near zero, which is consistent with the fig.~\ref{fig:LM_comparisonVSsizeJz1Gamma1} where the plateau of null magnetization becomes bigger while the size of the chain grows.
 
-An aspect worth considering is the common peak value of the spin current, independent of the chain size. As done in the section~\ref{sec:magn_profile} studying the magnetization profile, we can see how this value changes varying $\gamma$. 
-
-In fig.~\ref{fig:spinCurrVSsizeVSgamma} we have kept the same scale of y-axis: this allows to note that the spin current between the first to spin of the chain, increases while $\gamma$ grows. 
+An aspect worth considering is the common peak value of the spin current, independent of the chain size. As done in the section~\ref{sec:magn_profile} studying the magnetization profile, we can see how this value changes varying $\gamma$. In fig.~\ref{fig:spinCurrVSsizeVSgamma} we have kept the same scale of y-axis: this allows to note that the spin current between the first to spin of the chain, increases while $\gamma$ grows. 
 
 \begin{figure}[H]
 \centering
@@ -343,7 +341,9 @@ In fig.~\ref{fig:spinCurrVSsizeVSgamma} we have kept the same scale of y-axis: t
 \label{fig:spinCurrVSsizeVSgamma}
 \end{figure}
 
-It is interesting noting that the peak values reach a maximum and then decrease, following a non-monotonic trend, as shown in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites}. This can be explained observing that there is a competition between two effects: the dissipation and the Hamiltonian of the system. If these two dynamics are characterized by the same magnitude, the regime becomes the one shown in the figure, with a non-trivial trend. However, if the effect of dissipation acquires a more important role over the Hamiltonian dynamics, the spin-flip is inhibited and there is no more transport of information: the system will be paralyzed in the configuration dictated by the dissipators. Instead, if the dissipation is too small, it cannot create correlations, so the spin transport will be zero. It is worth observing that having a maximum in the spin current, i.e. a non-trivial trend, would not have been possible if there was only dissipation or only the Hamiltonian dynamics; the trend in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites} is only possible because of the competition between them.
+It is interesting noting that the peak values reach a maximum and then decrease, following a non-monotonic trend, as shown in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites}, where is displayed the spin current between the first two spins of the chain. A similar trend has been observed for the current between the last two spins of the chain, but with a lower maximum. 
+
+This profile shown in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites} can be explained observing that there is a competition between two effects: the dissipation and the Hamiltonian of the system. If these two dynamics are characterized by the same magnitude, the regime becomes the one shown in the figure, with a non-trivial trend. However, if the effect of dissipation acquires a more important role over the Hamiltonian dynamics, the spin-flip is inhibited and there is no more transport of information: the system will be paralyzed in the configuration dictated by the dissipators. Instead, if the dissipation is too small, it cannot create correlations, so the spin transport will be zero (as it is in the x and y spin direction). It is worth observing that having a maximum in the spin current, i.e. a non-trivial trend, would not have been possible if there was only dissipation or only the Hamiltonian dynamics; the trend in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites} is only possible because of the competition between them.
 
 %analyzing the curve. First of all, for small values (i.e. $\gamma \sim 0.5$) there is a non-null spin current; as said, for a certain value of $\gamma$ the spin current reaches the maximum value and then begins to decrease tending asymptotically to zero. While $\gamma$ grows, the dissipation acquires a more important role over the Hamiltonian dynamics, the system is driven so that its spin current is zero. This is consistent with the trend shown in fig.~\ref{fig:LM_PeakAnd4th_vsGamma2panels} of the positive peak value of $\langle \sigma^z \rangle$ and of the value of $\langle \sigma^z \rangle$ for the forth site of the chain, in which while $\gamma$ increases the magnetization tends asymptotically to a constant value. 
 
@@ -363,9 +363,9 @@ It is interesting noting that the peak values reach a maximum and then decrease,
 \label{chapt4_phase_trans}
 
 In an open system, the competition between unitary Hamiltonian evolution and dissipation can induce a dissipative phase transition for the steady state, as discussed for example in the case of spin systems by~\cite{phase_trans_spin_system}.
-A phase transition is an important phenomenon in condensed-matter physics and can happens tuning one or more parameters of the Hamiltonian of the system. 
+A phase transition is an important phenomenon in condensed-matter physics and can happen tuning one or more parameters of the Hamiltonian of the system. 
 
-So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, we focus on the behaviour of a 16-sites chain under a variation of $J_z$ will be investigated. Ideally, in order to discuss phase transition one should study an infinite-size chain; for this reason, the only chain under consideration will be the one with the biggest size between the ones analyzed in the present work.
+So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, we focus on the behaviour of a 16-sites chain under a variation of $J_z$. Ideally, in order to discuss phase transition one should study an infinite-size chain; for this reason, the only chain under consideration will be the one with the biggest size between the ones analyzed in the present work.
 
 First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} the spin current for several values of $J_z$ is displayed. Some consideration can be made in regards to this plots.
 
@@ -388,17 +388,17 @@ First of all, we have analyzed the spin current under the variation of the coupl
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
+    \includegraphics[scale=0.8]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
     \label{fig:16sites_SpinCurrVaryingJz}
 \end{figure}
 
-The spin current between the first and the last two sites is independent from $J_z$, for $J_z < 1$; this can be a sign of the prevalence of dissipation over the Hamiltonian dynamics. Otherwise, for $J_z \geq 1$ the peak values (i.e. the spin current between the first two and the last two sites of the chain) drop while $J_z$ increases; this can be a sign of the growing prevalence of the Hamiltonian over the dissipation, while the coupling $J_z$ grows.
+The spin current between the first and the last two sites decreases slowly while $J_z$ increases, for $J_z < 1$; this can be a sign of the prevalence of dissipation over the Hamiltonian dynamics. Otherwise, for $J_z \geq 1$ the peak values (i.e. the spin current between the first two and the last two sites of the chain) drop while $J_z$ increases; this can be a sign of the growing prevalence of the Hamiltonian over the dissipation, while the coupling $J_z$ grows.
 
-For the small values of $J_z$, i.e. for $J_z < 0.5$, the $\sigma_i^z\sigma_{i+1}^z$ term acts as a perturbation of the XY model. For this values, the spin current shows a discontinuous behaviour: the trend of spin current in the middle sites (i.e. all the sites excluding the first and the last) is almost constant. This is an additional sign of the prevalence of the role of dissipation.
+Around $J_z = 0.5$, the spin current shows a discontinuous behaviour: the spins in the bulk of the chain (i.e. all of them excluding the first and the last) seem to produce a constant current. This is an additional sign of the prevalence of the role of dissipation.
 
-For values of $J_z \geq 0.5$, the trend of the spin current is polynomial, with smooth decrease and increase nearby the ends of the chain; while $J_z$ grows, in the middle sites the spin current is more and more constant, sign of the fact that the role of Hamiltonian is more and more predominant. 
+For $J_z \geq 0.5$, the trend of the spin current is polynomial; while $J_z$ grows, in the middle sites the spin current is more and more constant, sign of the fact that the role of Hamiltonian is more and more predominant. 
 
 This irregular behaviour is suggestive of a phase transition; in order to get some numerical evidence of it, we have analyzed also the magnetization profile and the correlation function.
 
@@ -461,7 +461,7 @@ This irregular behaviour is suggestive of a phase transition; in order to get so
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites/16sites_LMvsJz.pdf}
+    \includegraphics[scale=0.8]{Figures/16sites/16sites_LMvsJz.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Magnetization profile of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data obtained from MPO method.}
     \label{fig:16sites_LMvsJz}
