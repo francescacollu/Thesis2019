@@ -38,7 +38,8 @@ the (new) merged block replaces the old ones\;
 \label{pseudocode}
 \end{algorithm}
 
-One should notice the usefulness of object-oriented programming in the work of turning this algorithm in code. Indeed, the pseudocode written above is actually useful only if the physical system under consideration is invariant under translations, i.e. the merging blocks are the same. In most cases (as that ones considered in chapter~\ref{Chapter3}) there are no symmetries; for dealing with these circumstances, the creation of classes is a great support.
+\pagebreak
+One should notice the usefulness of object-oriented programming in the work of turning this algorithm in code. Indeed, the pseudocode written above is actually useful only if the physical system under consideration is invariant under translations, i.e. the merging blocks are the same. In most cases (as that ones considered in chapter~\ref{chapter_caseStudy}) there are no symmetries; for dealing with these circumstances, the creation of classes is a great support.
 
 In particular, two classes have been created:
 \begin{itemize}
@@ -46,7 +47,9 @@ In particular, two classes have been created:
     \item a \textbf{BLOCK} class: a \emph{block} is an object made up by a certain number of objects \emph{site} (you can say it is a nested class). Every time a merge between two blocks is done, a new block emerges. It is characterized by the spatial position: in a merge it is important to know if it is a left or a right block.
 \end{itemize}
 In the algorithm~\ref{alg:csr_algo_gen}, a more general version of the code is proposed; the presence of the objects mentioned above allows to treat systems that do not show any symmetry.
-\medskip
+
+%\pagebreak
+%\medskip
 \begin{algorithm}[H]
 \DontPrintSemicolon
 \SetAlgoLined
