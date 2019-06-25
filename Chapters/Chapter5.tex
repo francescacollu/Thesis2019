@@ -1,6 +1,6 @@
-\chapter{Performances of Different Numerical Methods}
+\chapter{Performances of the Different Numerical Methods}
 \label{chapterPerformances}
-As seen in chapter~\ref{chapter_caseStudy}, the only method used to study the model under consideration is the MPO method. However, other two methods have been analyzed and implemented for the same purpose, but with different performances: the QT method has been useful only for size chain of 8 and 10 sites, i.e. it has been useful in order to compare the MPO results and to confirm their plausibility, while CSR method has revealed not to be a suitable method for the study of this kind of models. In the present chapter, we show the limitations of CSR method for the case of 4-sites chain (for which we can perform a direct numerical integration of the master equation) and in the following sections, a comparison between QT and MPO results and a brief analysis of their convergence and numerical errors are shown.
+As seen in chapter~\ref{chapter_caseStudy}, the privileged numerical technique we employed to study our model is the MPO method. However, other two methods have been analyzed and implemented for the same purpose, but with different performances: the QT method has been useful only for size chain of 8 and 10 sites, i.e. it has been useful in order to compare the MPO results and to confirm their plausibility, while CSR method has revealed not to be a suitable method for the study of this kind of models. In the present chapter, we show the limitations of CSR method for the case of 4-sites chain (for which we can perform a direct numerical integration of the master equation) and in the following sections, a comparison between QT and MPO results and a brief analysis of their convergence and numerical errors are shown.
 
 \section{The CSR Method: Limitations and Usability}
 The CSR method, described in section~\ref{chapter3_csr}, has been studied and implemented in order to analyze the model described in the last section. The algorithm is written in pseudocode in appendix~\ref{AppendixA}.
@@ -29,7 +29,7 @@ In the upper panel of fig.~\ref{fig:4sites_LM_convergenceIncreasingM}, it is cle
 
 In order to confirm the limitations of this method, the same comparison is done for a longer chain, made up by 8 sites. In this case, the results of CSR method are compared to those of MPO method, since a brute-force diagonalization of the Liouvillian operator would not be possible: it would require a huge amount of memory. As already mentioned previously, the MPO method results are proved to be plausible.
 
-In the two panels of fig.~\ref{fig:comparisonCSR_MPO_8site}, it is clear that the convergence has not been reached in neither of the cases, but in the second one (the bottom panel) the profile is slightly more similar to the one obtained from MPO method. Moreover, in both cases there is no significant difference between the results obtained for $M = 50$ and $M = 80$. It is worth noting that the full Hilbert space for a 8-sites chain has dimension $2^{8} = 256$.
+In the two panels of fig.~\ref{fig:comparisonCSR_MPO_8site}, it is clear that the convergence has not been reached in none of the cases, but in the second one (the bottom panel) the profile is slightly more similar to the one obtained from MPO method. Moreover, in both cases there is no significant difference between the results obtained for $M = 50$ and $M = 100$ (upper panel of fig.~\ref{fig:comparisonCSR_MPO_8site}) and for $M = 50$ and $M = 80$ (bottom panel of fig.~\ref{fig:comparisonCSR_MPO_8site}). It is worth noting that the full Hilbert space for a 8-sites chain has dimension $2^{8} = 256$.
 
 \begin{figure}[H]
     \centering
@@ -40,7 +40,7 @@ In the two panels of fig.~\ref{fig:comparisonCSR_MPO_8site}, it is clear that th
     \label{fig:comparisonCSR_MPO_8site}
 \end{figure}
 
-In fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile along z direction of a 16-sites chain obtained by CSR and MPO methods. The full Hilbert space of such a chain has dimension $2^{16} = 65536$, while in the simulations using the CSR method, we have kept $M = 65$ states. One could think that the dimension of the corner-space is too little to reach the convergence, but in~\cite{PhysRevLett.115.080604}, the convergence is reached for corner-spaces with a smaller rate $\frac{M}{\dim(\mathcal{H})}$. In conclusion, the results obtained let us think that this is not a suitable numerical method for studying the kind of systems that we have the purpose to analyze in the present work.
+Fig.~\ref{fig:LMComparison16s1051} displays the magnetization profile along z direction of a 16-sites chain obtained by CSR and MPO methods. The full Hilbert space of such a chain has dimension $2^{16} = 65536$, while in the simulations using the CSR method, we have kept $M = 65$ states. One could think that the dimension of the corner-space is too little to reach the convergence, but in~\cite{PhysRevLett.115.080604}, the convergence is reached for corner-spaces with a smaller rate $\frac{M}{\dim(\mathcal{H})}$. In conclusion, the results obtained let us think that this is not a suitable numerical method for studying the kind of systems that we have the purpose to analyze in the present work.
 
 \begin{figure}[H]
     \centering
@@ -55,7 +55,7 @@ In fig.~\ref{fig:LMComparison16s1051} it is displayed the magnetization profile 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Performance of the QT Method}
-In this section we briefly discuss the convergence of the data and error calculus.
+In this section we briefly discuss the convergence of the data and error calculus for the quantum trajectories method.
 
 The QT method, explained in section~\ref{chapt3_qtm}, doing the stochastic unraveling of the master equation, builds the quantum trajectories after which it is named.  Every quantum trajectory corresponds to a simulated experiment and for the model under consideration, it has an oscillatory profile as that displayed in fig.~\ref{fig:QTrajectories3}. In order to stabilize the solution, for every quantum trajectory, the average in time is considered, starting from the end of the transient, which is needed for a solution of the Lindblad equation to converge towards the steady-state.
 
@@ -94,7 +94,7 @@ where $\sigma$ denotes the standard deviation.
 \section{Performance of the MPO Method}
 The convergence of MPO method depends essentially on the setting of two parameters: the bond dimension and the number of Trotter steps. The fig.~\ref{fig:convergence_8_12_16} shows the convergence profile of $\sigma^z$ for the first site of 8, 12, 16-sites chains for $J_z = 1$ and $\gamma = 1$. The same quantity can reach convergence in different times if, for example, $J_z$ assumes another value. 
 
-In the present work, for 8-sites chains it was considered a bond dimension $m = 100$ and Trotter steps in the range $[1200, 1500]$; for 12-sites chains it was considered a bond dimension $m = 60$ and Trotter steps in the range $[1000, 2000]$; for 16-sites chains it was considered a bond dimension $m = 80, 100, 140$ and Trotter steps in the range $[1000, 2500]$.
+In the present work, for 8-sites chains we considered a bond dimension $m = 100$ and Trotter steps in the range $[1200, 1500]$; for 12-sites chains we considered a bond dimension $m = 60$ and Trotter steps in the range $[1000, 2000]$; for 16-sites chains we considered a bond dimension $m = 80, 100, 140$ and Trotter steps in the range $[1000, 2500]$.
 
 The elapsed time $t$ for reaching the convergence with these set of parameters, is the following:
 \begin{itemize}
@@ -111,11 +111,11 @@ where $m_>$ ($m_<$) is the greater (smaller) bond dimension used for simulating 
 
 \begin{figure}[H]
 \centering
-    \includegraphics[scale=0.5]{Figures/convergence/Convergence_s8T3000J1051.pdf}
-    \includegraphics[scale=0.5]{Figures/convergence/Convergence_LM_L012_m060_Time001600_J1051.pdf}
-    \includegraphics[scale=0.5]{Figures/convergence/ConvergenceLM_L016_m080_Time002500_J1051.pdf}
+    \includegraphics[scale=0.35]{Figures/convergence/Convergence_s8T3000J1051.pdf}
+    \includegraphics[scale=0.35]{Figures/convergence/Convergence_LM_L012_m060_Time001600_J1051.pdf}
+    \includegraphics[scale=0.35]{Figures/convergence/ConvergenceLM_L016_m080_Time002500_J1051.pdf}
 \captionsetup{width=1.\linewidth}
-\caption{Study of convergence of the MPO method for a 8-sites chain, for bond dimension m = 100 and T = 3000 (upper panel); for a 12-sites chain for bond dimension m = 60 and T = 1600 (middle panel); for a 16-sites chain for bond dimension m = 100 and T = 2500 (middle panel).}
+\caption{Study of convergence of the MPO method for a 8-sites chain, for bond dimension m = 100 and T = 3000 (upper-left panel); for a 12-sites chain for bond dimension m = 60 and T = 1600 (upper-right panel); for a 16-sites chain for bond dimension m = 100 and T = 2500 (bottom panel).}
 \label{fig:convergence_8_12_16}
 \end{figure}
 
@@ -123,12 +123,12 @@ where $m_>$ ($m_<$) is the greater (smaller) bond dimension used for simulating 
 \section{Comparison between QT and MPO results}
 As a verification of the plausibility of data obtained from MPO method, we present here a comparison between the data obtained from MPO method and those obtained from QT method, for the analysis of magnetization profile along z direction. In fig.~\ref{fig:LM_comparison_QTvsMPO}, we can see that the results are completely consistent with each other. This is true also for the other observables studied during the thesis work (the two-point correlation function and the spin current) and for other choices of the system parameters (other values of $J_z$ and $\gamma$). Of course the difference of the time needed for reaching the convergence and the ability to reach bigger sizes, makes the MPO method more efficient than QT method.
 
-\begin{figure}
-    \centering
-        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ10505.pdf}
-        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ1051.pdf}
-        \includegraphics[scale=0.5]{Figures/LMComparison_8sJ10515.pdf}
+\begin{figure}[H]
+\centering
+        \includegraphics[scale=0.35]{Figures/LMComparison_8sJ10505.pdf}
+        \includegraphics[scale=0.35]{Figures/LMComparison_8sJ1051.pdf}
+        \includegraphics[scale=0.35]{Figures/LMComparison_8sJ10515.pdf}
     \captionsetup{width=1.\linewidth}
-    \caption{Magnetization profile for a 8-sites chain for $\gamma = 1$ and $J_z = 0.5$ (upper panel), $J_z = 1$ (middle panel), $J_z = 1.5$ (bottom panel). Data are obtained from MPO method (in red) and QT method (in green). The error bars are obtained as explained in the above sections.}
+    \caption{Magnetization profile for a 8-sites chain for $\gamma = 1$ and $J_z = 0.5$ (upper-left panel), $J_z = 1$ (upper-right panel), $J_z = 1.5$ (bottom panel). Data are obtained from MPO method (in red) and QT method (in green). The error bars are obtained as explained in the above sections.}
     \label{fig:LM_comparison_QTvsMPO}
 \end{figure}
