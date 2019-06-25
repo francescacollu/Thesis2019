@@ -4,7 +4,7 @@
 \label{chapter2}
 \epigraph{Can a quantum system be probabilistically simulated by a classical universal computer? [\dots] \\The answer is certainly, no!}{\textit{Richard P. Feynman}}
 
-Open quantum many-body systems represent a challenging area of study, due to the exponential growth of the number of freedom degrees with respect to the number of the constituent particles. The scientific community has built many strategies to overcome this obstacle, by developing and refining several analytical and numerical methods. In addition to these, another approach was proposed, based on the use of quantum simulators.
+Open quantum many-body systems represent a challenging area of study, due to the exponential growth of the number of freedom degrees with respect to the number of the constituent particles. The scientific community has built many strategies to overcome this obstacle, by developing and refining several analytical and numerical methods. In addition to these, another approach was proposed, based on the use of quantum simulators~\cite{quantum_sim_feynman}.
 
 In the present chapter we report a review of some of the most relevant ideas in the field of quantum simulators; in particular, the last section focuses on the simulation of spin systems, of remarkable interest in view of the model studied in this work.
 
@@ -45,42 +45,42 @@ In the present chapter we report a review of some of the most relevant ideas in 
 \section{Quantum Many-Body Systems}
 \label{hubb_model}
 Quantum many-body systems are systems made up by a certain number of interacting particles. Typical quantum many-body systems are represented by Hubbard-like models or spin chains. 
-A prototype of these systems is described by the non-dissipative Bose-Hubbard model~\cite{Greiner_bose_hubbard}: an interacting boson gas in a lattice potential. The hamiltonian reads:
+A prototype of these systems is described by the non-dissipative Bose-Hubbard model~\cite{Greiner_bose_hubbard}: an interacting boson gas in a lattice potential. The Hamiltonian reads:
 \begin{equation}
-    H = -J\sum_{\langle i,j \rangle} \hat{a}^{\dagger}_i \hat{a}_j + \sum_i \epsilon_i \hat{n}_i+ \frac{1}{2} U \sum_i \hat{n}_i(\hat{n}_i -1 ),
+    H = -J\sum_{\langle i,j \rangle} a^{\dagger}_i a_j + \sum_i \epsilon_i n_i+ \frac{1}{2} U \sum_i n_i(n_i -1 ),
 \end{equation}
-where the notation $\langle i, j \rangle$ denotes the sum over nearest-neighbour sites; $\hat{a}_i$ and $\hat{a}^{\dagger}_i$ are the bosonic creation and annihilation operators respectively, on the i-th site; they obey the bosonic commutation relations:
-\begin{equation*}
-    [\hat{a}_i, \hat{a}_j^\dagger] = \delta_{ij}, \quad [\hat{a}_i, \hat{a}_j] = 0 = [\hat{a}_i^\dagger, \hat{a}_j^\dagger].
-\end{equation*}
+where the notation $\langle i, j \rangle$ denotes the sum over nearest-neighbour sites; $a_i$ and $a^{\dagger}_i$ are the bosonic creation and annihilation operators respectively, on the i-th site; they obey the bosonic commutation relations:
+\begin{equation}
+    [a_i, a_j^\dagger] = \delta_{ij}, \quad [a_i, a_j] = 0 = [a_i^\dagger, a_j^\dagger].
+\end{equation}
 
-$\hat{n}_i$ is the number operator, which counts the number of bosons in the i-th site; $\epsilon_i$ is the energy due to the external harmonic confinement to which the bosons are undergone. The $J$ term is the one responsible for the hopping between adjacent sites due to the tunnel coupling; it is the matrix element:
-\begin{equation*}
+$n_i$ is the number operator, which counts the number of bosons in the i-th site; $\epsilon_i$ is the energy due to the external harmonic confinement to which the bosons are undergone. The $J$ term is the one responsible for the hopping between adjacent sites due to the tunnel coupling; it is the matrix element:
+\begin{equation}
     J = -\int d^3x \quad w(\Vec{x}-\Vec{x_i})(-\frac{\nabla^2}{2m}+V(\Vec{x}))w(\Vec{x}-\Vec{x_j}),
-\end{equation*}
+\end{equation}
 where $w(\Vec{x}-\Vec{x_i})$ is a single particle Wannier function localized to the i-th site, $V(\Vec{x})$ is the lattice potential and $m$ is the mass of a single boson.
 $U$ is instead the matrix element for the interaction between bosons in the same site; it is:
-\begin{equation*}
+\begin{equation}
     U = \frac{4\pi a}{m} \int d^3x \quad |w(\Vec{x})|^4, 
-\end{equation*}
+\end{equation}
 $a$ being the scattering length. 
 
 If the tunnel coupling term $J$ dominates the hamiltonian $(J \gg U)$, the ground-state energy is minimized if the single-particle wavefunctions of the $N$ bosons is spread out over the entire $M$ sites of the lattice; so the many-body ground state reads:
-\begin{equation*}
-    \ket{\Psi_{SF}} \propto \Bigl( \sum_{i=1}^M \hat{a}^{\dagger}_i \Bigl)^N \ket{0},
-\end{equation*}
-i.e. all bosons occupy the same extended Bloch state. As pointed out by~\cite{Greiner_bose_hubbard}, an important feature of this state is that the probability distribution of the occupation $n_i$ of bosons on a single site is poissonian, so that its variance is given by $\langle n_i \rangle$; this means that it is well described by a macroscopic wavefunction with long-range phase coherence throughout the lattice.
+\begin{equation}
+    \ket{\Psi_{SF}} \propto \Bigl( \sum_{i=1}^M a^{\dagger}_i \Bigl)^N \ket{0},
+\end{equation}
+i.e. all bosons occupy the same extended Bloch state. As pointed out by~\cite{Greiner_bose_hubbard}, an important feature of this state is that the probability distribution of the occupation $n_i$ of bosons on a single site is Poissonian, so that its variance is given by $\langle n_i \rangle$; this means that it is well described by a macroscopic wavefunction with long-range phase coherence throughout the lattice.
 
-If the on-site intraction term $U$ dominates $(U \gg J)$, the ground state of the system will instead consist of localized wavefunctions with a fixed number of bosons per site that minimized the energy; the many-body ground state will be a product of local Fock states for each site:
-\begin{equation*}
-    \ket{\Psi_{MI}} \propto \prod_{i=1}^M \Bigl( \hat{a}^{\dagger}_i\Bigl)^N \ket{0}.
-\end{equation*}
+If the on-site interaction term $U$ dominates $(U \gg J)$, the ground state of the system will instead consist of localized wavefunctions with a fixed number of bosons per site that minimized the energy; the many-body ground state will be a product of local Fock states for each site:
+\begin{equation}
+    \ket{\Psi_{MI}} \propto \prod_{i=1}^M \Bigl( a^{\dagger}_i\Bigl)^N \ket{0}.
+\end{equation}
 
 The two kinds of ground state have been labeled with the subscripts "SF" and "MI", specifying the two phases to which the system may be found: superfluid and Mott insulator phases.
 
 
 \section{Quantum Simulators: Controllable Many-Body Systems}
-In order to overcome the mentioned problem, over the years several analytical and numerical methods have been developed. In addition to these more "traditional" approaches, during the last years it arose the idea of studying a quantum system by using a properly designed quantum device. The essential aim of this new strategy lies in the employment of controlled quantum devices called \emph{quantum simulators}; they are systems able to experimentally emulate the Hamiltonian model bearing the non-trivial properties of the system under study. The usefulness of this approach is twofold~\cite{Tomadin_Fazio}:  not only it allows to explore properties of the model in regions that are elusive to the analytical and numerical studies, but also it consents to test to which limits the Hamiltonian model is appropriate to describe the system or whether additional ingredients are required.
+In order to overcome the difficulty in studying open many-body systems, over the years several analytical and numerical methods have been developed. In addition to these more "traditional" approaches, during the last twenty years it arose the idea of studying a quantum system by using a properly designed quantum device. The essential aim of this new strategy lies in the employment of controlled quantum devices called \emph{quantum simulators}; they are systems able to experimentally emulate the Hamiltonian model bearing the non-trivial properties of the system under study. The usefulness of this approach is twofold~\cite{Tomadin_Fazio}:  not only it allows to explore properties of the model in regions that are elusive to the analytical and numerical studies, but also it consents to test to which limits the Hamiltonian model is appropriate to describe the system or whether additional ingredients are required.
 
 Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably the first quantum simulators in the history of modern physics, much progress has been made especially with the advent of cold atoms in optical lattices.
 
@@ -147,9 +147,9 @@ QED cavities are mathematically described by the Jaynes-Cummings model~\cite{sho
 \end{equation}
 where $a_l (a_l^{\dagger})$ annihilates (creates) a quantum of light in the mode of the l-th cavity.
 An array of cavities sufficiently close to allow for photon hopping, can be described by eq.~\ref{eqn:single_cavity} to which the following term should be added:
-\begin{equation*}
+\begin{equation}
     H_{\text{hop}} = -J (a^{\dagger}_la_{l+1} + h.c.),
-\end{equation*}
+\end{equation}
 where $J$ is associated with the tunneling rate.
 Now, if the light-matter interaction is introduced, the Hamiltonian can be written in this way:
 \begin{equation}
@@ -208,7 +208,7 @@ Interacting two level systems, either spins or qubits, are of central importance
 
 Since the discover of the \emph{photon blockade}~\cite{ph_blockade}, it has been realized that the cavity mode is well described by a spin-$1/2$ Hamiltonian. Few years later, the Jaynes-Cummings model in the Mott regime was shown to simulate a XY spin model~\cite{angelakis}. In particular, the studied system consisted of coupled electromagnetic cavities doped with a single two-level system; it has been shown that it is possible to observe an insulator phase of total (atomic plus photonic, i.e. \emph{polaritonic}) excitations. From such a system, an effective XY Hamiltonian arises, with spin up (down) corresponding to the presence (absence) of a polariton.
 
-A scheme for realizing the Ising spin-spin interaction has been proposed in~\cite{LiGuGong}, with a system consisting in trapped two-level atoms in a one dimensional coupled microcavities. 
+A scheme for realizing the Ising spin-spin interaction has been proposed in~\cite{LiGuGong}, with a system consisting in trapped two-level atoms in one dimensional coupled microcavities. 
 
 A more complicated system has been investigated in~\cite{Hartmann_XYZ}, which uses three-level atoms in micro-cavities coupled to each other via the exchange of virtual photons; it is shown that it can model an anisotropic Heisenberg spin-1/2 chain in an external magnetic field. The two spin polarizations $\ket{\uparrow}$ and $\ket{\downarrow}$ are represented by two long-lived atomic levels of a $\Lambda$ level-structure; let us see why. The quantized mode of the cavity together with external lasers can induce a Raman transition between these two lowest-lying states.  With appropriately chosen detunings, the dominant Raman transition between the two lowest-lying states involves one laser and one cavity photon. This implies that the emission and absorption of virtual photons in the cavity is confined to only two states per atom, the long-lived ones, so that it can be described by a spin-1/2 Hamiltonian. The coupling of virtual photons between neighbouring cavities simulates $\sigma^x\sigma^x$ and $\sigma^y\sigma^y$ interactions; the effective spin can be coupled to an effective magnetic field $\sigma^z$; using the same atomic level configuration but a different set-up of the external sources an effective $\sigma^z\sigma^z$ interaction is obtained.
 
@@ -221,7 +221,7 @@ A more complicated system has been investigated in~\cite{Hartmann_XYZ}, which us
 \end{figure}
 
 It has been possible using superconducting circuits to simulate small spin chains, by directly coupling a number of superconducting qubits~\cite{8spinChain_simulatedByQubits}. Fig.\ref{fig:superconductinCircuit_SpinSystem} shows two superconducting loops in the qubit, each subject to an external flux bias $\Phi_{1x}$ and $\Phi_{2x}$. The dynamics of the device can be modelled as a quantum mechanical double-well potential. The two lowest energy states of the system correspond to clockwise or anticlockwise circulating current in loop 1. Considering only these two states (in the limit of low temperature it is a valid approximation), the qubit dynamics is that of an Ising spin. Qubits are then coupled together using programmable coupling elements; this allows to tune the spin coupling in a continous way between ferromagnetic and antiferromagnetic character. The behaviour of this system is well described by an Ising model Hamiltonian:
-\begin{equation*}
+\begin{equation}
     H = \sum_{i=1}^{N} h_i\sigma_i^z + \sum_{i,j=1}^{N} J_{ij}\sigma_i^z\sigma_j^z.
-\end{equation*}
+\end{equation}
 In this way, it has been possible to simulate a one-dimensional 8-sites spin chain, with the ends polarized in opposite directions.

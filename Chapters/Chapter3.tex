@@ -20,9 +20,9 @@ Nevertheless, some techniques for exact diagonalization of the Liouvillian super
 
 However, as seen previously, a direct integration of the master equation for an open many-body system becomes unfeasible even for relatively small sizes, so conceiving more clever numerical strategies seems to be necessary.
 
-One of them is based on the \emph{mean field} approach; the essential idea is considering the mean value of the Hamiltonian and, as suggested by Gutzwiller, factorizing the density matrix, defining a mean field density matrix $\rho_{MF} = \prod_j\rho_j$, where $\rho_j$ is the single site density matrix. In this way, all correlations and interactions between sites are neglected, so we can say it is a crude approximation for an interacting many-body system. In order to (partially) overcome this problem, the \emph{cluster mean field} method was developed: in this method a set of contiguous sites are isolated from the rest of the system. As explained in~\cite{jin_biella_ross}, this method suggests to write the Hamiltonian as $H_{CMF} = H_\mathcal{C} + H_{\mathcal{B(C)}}$, where the first term describes the exact interactions inside the cluster $\mathcal{C}$ while the second term represents the mean-field interactions between the cluster and the sites on its boundary $\mathcal{B(C)}$. The global density matrix will be $\rho_{CMF} = \bigotimes \rho_\mathcal{C}$, where the $\rho_\mathcal{C}$ is the density matrix of the $\mathcal{C}$-th cluster. One should note that, when the cluster is made up by a single site, the method becomes the above-mentioned standard one. 
+One of them is based on the \emph{mean field} approach; the essential idea is to consider the mean value of the Hamiltonian and, as suggested by Gutzwiller, to factorize the density matrix, defining a mean field density matrix $\rho_{MF} = \prod_j\rho_j$, where $\rho_j$ is the single site density matrix. In this way, all correlations and interactions between sites are neglected, so we can say it is a crude approximation for an interacting many-body system. In order to (partially) overcome this problem, the \emph{cluster mean field} method was developed: in this method a set of contiguous sites are isolated from the rest of the system. As explained in~\cite{jin_biella_ross}, this method suggests to write the Hamiltonian as $H_{CMF} = H_\mathcal{C} + H_{\mathcal{B(C)}}$, where the first term describes the exact interactions inside the cluster $\mathcal{C}$ while the second term represents the mean-field interactions between the cluster and the sites on its boundary $\mathcal{B(C)}$. The global density matrix will be $\rho_{CMF} = \bigotimes \rho_\mathcal{C}$, where the $\rho_\mathcal{C}$ is the density matrix of the $\mathcal{C}$-th cluster. One should note that, when the cluster is made up by a single site, the method becomes the above-mentioned standard one. 
 
-Other important numerical methods are the ones essentially based on the \emph{linked cluster expansions}~\cite{oitmaa}, in which the quantities of interest are expressed as sums of contributions from a sequence of clusters of sites; in particular, only connected clusters contribute. In~\cite{PhysRevX.6.021037} an application of this idea to the Liouvillian is done.
+Other important numerical methods are the ones essentially based on the \emph{linked cluster expansions}~\cite{oitmaa}, in which the quantities of interest are expressed as sums of contributions from a sequence of clusters of sites; in particular, only connected clusters contribute. In~\cite{PhysRevX.6.021037} an application of this idea to the Liouvillian is presented.
 
 In this section, we will examine some of the numerical techniques used for studying open quantum systems with very different approaches.
 
@@ -97,7 +97,7 @@ Since this results from a Monte Carlo process, we can consider the mean value ov
 \begin{equation}
     \langle A(t)\rangle = \lim_{N\to\infty} \frac{1}{N}\sum_{i=1}^{N}\bra{\phi_i(t)}A\ket{\phi_i(t)}.
 \end{equation}
-So, to sum up we can say a few things about QT algorithm; it allows to do the so-called \emph{stochastic unraveling} of the master equation, using pure states instead of density matrices: as we have seen, this simplifies the computational complexity of the problem. However, this method has an important limit: it does not prevent the exponential growth with respect to the size of the system. Trying to work this out will be a task of the methods that will be analyzed in the next two sections.
+So, to sum up we can say a few things about QT algorithm; it allows to do the so-called \emph{stochastic unraveling} of the master equation, using pure states instead of density matrices: as we have seen, this simplifies the computational complexity of the problem. However, this method has an important limit: it does not prevent the exponential growth with respect to the size of the system. The methods analyzed in the next two sections are specifically constructed to face with this issue.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,8 +223,7 @@ A detailed description of the implementation of the algorithm can be seen in App
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Matrix Product Density Operators (MPO) Method}
 \label{chap_numMethods_MPO}
-Finally, we analyze the \emph{matrix product density operators} (MPO) method.
-This method is rooted in one of the first and most efficient numerical methods to simulate strongly correlated quantum one dimensional systems: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
+The \emph{matrix product density operator} (MPO) method is rooted in one of the first and most efficient numerical methods to simulate strongly correlated quantum one dimensional systems: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
 
 Essentially, the DMRG is a generalization of Wilson's NRG method; its core lies in the construction of the so-called \emph{superblock} (see fig.~\ref{fig:DMRG_superblockSketch}): it is constructed in an iterative way, taking a portion of the system, then enlarging it until the desired size is reached; this superblock is usually indicated as $A \bullet \bullet B$. By numerical diagonalization of $H_{A \bullet \bullet B}$ one can find the ground state $\ket{\Psi_{GS}}$ that minimize the energy:
 \begin{equation*}
@@ -249,6 +248,8 @@ At this point, one can replace the first block with the new $A'$.
     \label{fig:DMRG_superblockSketch}
 \end{figure}
 
+%DMRG si può vedere come una riformulazione dei MPS come algoritmo variazionale; l'algoritmo scritto sopra può essere riformulato nell'ottica MPS come algoritmo variazionale
+The DMRG method can be expressed as a variational algorithm on a particular class of quantum states, the so-called \emph{matrix product states}~\cite{SCHOLLWOCK201196}.
 The MPO method is the generalization of the \emph{matrix product states} (MPS) method \cite{SCHOLLWOCK201196}, which is useful in the description of (closed) quantum many-body systems. The essential idea~\cite{Cirac_2009} behind the MPS techniques lies in Wilson's renormalization group, already mentioned in sec.~\ref{chapter3_csr}.
 So, let us consider two spins and a subspace of the corresponding Hilbert space $\mathcal{H}_2 \subset \mathcal{H}_1 \otimes \mathcal{H}_1$ of dimension $d_2 \leq d_1^2$; we write an arbitrary orthonormal basis $\{\ket{\beta}\}_{\beta=1}^{d_2}$ as
 \begin{equation*}
@@ -349,15 +350,15 @@ where
 having considered a Liouvillian made of arbitrary nearest-neighbouring interaction terms.
 
 For every small time step $\tau > 0$, the Trotter-Suzuki expansion of order $p$ for $\exp{(\mathcal{L} t)}$ reads:
-\begin{equation*}
+\begin{equation}
     e^{\mathcal{L}t} = e^{(F+ G)t} = e^{[(F+ G)\tau]\frac{t}{\tau}} \approx [f_p(U_{F\tau}, U_{G\tau})]^{\frac{t}{\tau}},
     %\prod_k \exp{(\alpha_k\hat{\mathcal{L}}_1\tau)}\dots\exp{(\beta_k\hat{\mathcal{L}}_N\tau)} + \mathcal{O}(\tau^p),
-\end{equation*}
+\end{equation}
 %with $p$ depending on the required accuracy.
 where $U_{F\tau} \equiv e^{F\tau}$ and $U_{G\tau} \equiv e^{G\tau}$ and where
-\begin{equation*}
+\begin{equation}
     f_1(x,y) = xy, \quad f_2(x, y) = x^{1/2}yx^{1/2}
-\end{equation*}
+\end{equation}
 for the first and the second order expansions.
 The simulation of time evolution~\ref{eqn:lindblad_dinamics} can then be accomplished by iteratively applying $U_{F\tau}$ and $U_{G\tau}$ to $\rho(0)$ a number $\mathcal{O}(\frac{t}{\tau})$ of times.
 
