@@ -15,7 +15,7 @@ As anticipated in section~\ref{sec:magn_profile}, along x and y direction the ma
     \label{fig:comparisonSigmaXYZ}
 \end{figure}
 
-The magnetization along z direction of every spin of the chain, increases with $\gamma$ following an exponential trend. This is confirmed also by the study of the gradient $\nabla \sigma^z$, the fit of which shows a dependence as the following:
+As seen in section~\ref{sec:magn_profile}, the magnetization along z direction of every spin of the chain, increases with $\gamma$ following an exponential trend. This is confirmed also by the study of the gradient $\nabla \sigma^z$, the fit of which shows a dependence as the following:
 \begin{equation*}
     \nabla \sigma^z (\gamma) = - p_0 + p_1 e^{-p_2\gamma},
 \end{equation*}
@@ -28,16 +28,24 @@ as displayed in fig.~\ref{fig:FIT_12sites_gradLM34VSgamma}, for a 16-sites chain
     \label{fig:FIT_12sites_gradLM34VSgamma}
 \end{figure}
 
-Another feature mentioned in section~\ref{sec:magn_profile}, is the fact that while $\gamma$ grows, the expectation value of $\sigma^z$ tends asymptotically to a limit value, that depends on the site under consideration. In section~\ref{sec:magn_profile}, the coefficient that controls this rate has been named $p_1$. In fig.~\ref{fig:16sites_p1VSsiteIndex} we see that $p_1$ has a linear dependence on the site position.
+Another feature of the exponential dependence of the magnetization on $\gamma$, is the fact that while $\gamma$ grows, the expectation value of $\sigma^z$ tends asymptotically to a limit value, that depends on the site under consideration. In section~\ref{sec:magn_profile}, this asymptotic value is called $p_0$ and the coefficient that controls this rate is called $p_1$. In fig.~\ref{fig:16sites_p0VSsiteIndex} and in fig.~\ref{fig:16sites_p1VSsiteIndex} the trends of $p_0$ and $p_1$ as a function of site position are shown. It is worth remarking that the trend of $p_0$ is approximately exponential, that is consistent with the expectations. The trend of $p_1$, instead, is not as clear due to large errors because of the fact that the sensitivity of the fit with respect to $p_1$ diminishes as $i$ increases. 
 
-%il primo punto è un effetto dovuto al bordo, dove risente della presenza del bagno c'è il dissipatore; il resto è costante. Da 5 in poi i punti sono molto vicini a zero, non li plttaimo perché abbiamo valori piccoli e non riusciamo ad avere uns tima accurata di p. Nel primo sito c'è un offset prob dovuto alla pres del bagno, perchè il sistem anon è omogeneo. Negli altri siti è praticamente costante. 
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=1.\linewidth}
+    \includegraphics[scale=0.6]{Figures/16sites_p0VsSiteIndex.pdf}
+    \caption{Coefficient $p_0$ versus site index. Errors have been estimated as explained in section~\ref{sec:MPO_errors}.}
+    \label{fig:16sites_p1VSsiteIndex}
+\end{figure}
+
+%il primo punto è un effetto dovuto al bordo, dove risente della presenza del bagno c'è il dissipatore; il resto è costante. Da 5 in poi i punti sono molto vicini a zero, non li plttaimo perché abbiamo valori piccoli e non riusciamo ad avere uns tima accurata di p. Nel primo sito c'è  un offset prob dovuto alla pres del bagno, perchè il sistem anon è omogeneo. Negli altri siti è praticamente costante. 
 
 \begin{figure}[H]
     \centering
     \captionsetup{width=1.\linewidth}
     \includegraphics[scale=0.6]{Figures/16sites_p1VSsiteIndex.pdf}
-    \caption{Growth rate coefficient $p_1$ versus site index. Beyond the fifth site the profile is no longer exponential because of the zero magnetization plateau.}
-    \label{fig:16sites_p1VSsiteIndex}
+    \caption{Rate coefficient $p_1$ versus site index. Errors have been estimated as explained in section~\ref{sec:MPO_errors}.}
+    \label{fig:16sites_p0VSsiteIndex}
 \end{figure}
 
 \section{Supplemental Plots on Correlations}
@@ -68,6 +76,6 @@ It is clear that the peak values of spin current are independent of $J_z$ while 
     \centering
     \captionsetup{width=1.\linewidth}
     \includegraphics[scale=0.6]{Figures/SpinCurrVSJzLth.pdf}
-    \caption{Spin current between the last two spins of a 16-sites chain, with $\gamma=1$ versus several values of $J_z$. In contrast to $j_{1,2}$, in this case there is a decreasing profile even for $J_z < 0.9$. This could be true or it be due to the difficulty on reaching convergence for this values of $J_z$. The numerical errors are displayed by the red error bars in the plot and they have been estimated as explained in section~\ref{sec:MPO_errors}.}
+    \caption{Spin current between the last two spins of a 16-sites chain, with $\gamma=1$ versus several values of $J_z$. In contrast to $j_{1,2}$, in this case there is a decreasing profile even for $J_z < 0.9$. The numerical errors are displayed by the red error bars in the plot and they have been estimated as explained in section~\ref{sec:MPO_errors}.}
     \label{fig:SpinCurrVSJzLth}
 \end{figure}

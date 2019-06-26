@@ -153,7 +153,7 @@ where the fit parameters $p_0$ and $p_1$ for each plot are shown in fig.~\ref{fi
 \label{fig:LM_PeakAnd4th_vsGamma}
 \end{figure}
 
-These two plots displayed in fig.~\ref{fig:LM_PeakAnd4th_vsGamma} show that for large values of $\gamma$, i.e. for more and more important driving, $\langle\sigma^z\rangle$ tends asymptotically to a maximum value $p_0$. It is interesting also noting that the the rate $p_1$ depends on the site on which we measure the magnetization: starting from the first one to the ones in the plateau area (where $\sigma^z$ is independent of $\gamma$) $p_1$ decreases linearly (see fig.~\ref{fig:16sites_p1VSsiteIndex} of appendix~\ref{appendix_supplemental}). The decrease of $p_1$ with respect to the position of spins in the chain, means that the influence of dissipators is progressively lesser while the spin is more distant.
+These two plots displayed in fig.~\ref{fig:LM_PeakAnd4th_vsGamma} show that for large values of $\gamma$, i.e. for more and more important driving, $\langle\sigma^z\rangle$ tends asymptotically to a maximum value $p_0$. The dependence of the coefficients $p_0$ and $p_1$ with respect to the position of the site on which we measure the magnetization is shown in fig.~\ref{fig:16sites_p0VSsiteIndex} and in fig.~\ref{fig:16sites_p1VSsiteIndex} of appendix~\ref{appendix_supplemental}.
 
 Moreover, studying the gradient of magnetization $\nabla \langle \sigma^z \rangle$ with respect to the position, we have found that its trend is consistent with the profiles just shown (the plot is shown in fig.~\ref{fig:FIT_12sites_gradLM34VSgamma} of appendix~\ref{appendix_supplemental}).
 
@@ -214,7 +214,8 @@ Another observable of interest is the steady-state two-point correlation functio
 \end{equation}
 where $\langle \sigma^z_i \sigma^z_j \rangle = \Tr(\sigma^z_i \sigma^z_j \rho_{s})$ and $\langle \sigma^z_i \rangle = \Tr(\sigma^z_i \rho_{s})$, being $\rho_{s}$ the steady-state density matrix.
 
-In particular, the two-point correlation function will be studied considering the system symmetry, using the so-called \emph{bulk} correlation function; that is, starting from the middle sites of the chain, the correlation function will be calculated between equidistant sites from the center of the chain. In summary, we can define $k$ as the distance between two sites:
+In particular, the two-point correlation function will be studied considering the system symmetry, using the so-called \emph{bulk} correlation function; that is, starting from the middle sites of the chain, the correlation function will be calculated between equidistant sites from the center of the chain.
+\\In summary, we can define $k$ as the distance between two sites:
 \begin{equation*}
     k \equiv |i-j|, \quad \text{i.e.} \quad k = 1, \dots L-1.
 \end{equation*}
@@ -236,11 +237,11 @@ An interesting aspect that is quite clear in these plots, is the fact that, whil
 
 It is interesting to note that the correlations between two nearest-neigh\-bours (i.e. the first point of every curve) grows as $\gamma$ increases, but also as the size of the chain increases, for every value of $\gamma$. So, the increase of nearest-neighbours correlation is due to two aspects: the strength of the dissipative forces and the number of spins involved.
 
-The exponential decay of correlation functions implies that the correlation between two sufficiently distant sites is exponentially suppressed: this is due to the absence of long-range order, that is the system is not long-range correlated.
+The exponential decay of correlation functions implies that the correlation between two sufficiently distant sites is exponentially suppressed: this is due to the absence of long-range order, i.e. the system is not long-range correlated.
 
 %il fatto che le funzioni di corr decadano esponenzialmente, implica che il sistema non è correlato a lungo raggio. Se ti metti suff lontano, la corr tra un sito e un sito a distanza l è esponenzialmente soppressa: questo è dovuto all'assenza di ordine a lungo raggio.
 
-\begin{figure}[H]
+\begin{figure}
 \centering
     \includegraphics[scale=0.55]{Figures/8sites_BulkCF_CONNvsGamma.pdf}
     \includegraphics[scale=0.55]{Figures/12sites_CFBulkCONNVSgamma.pdf}
@@ -258,7 +259,7 @@ where the coefficients $p_0$ and $p_1$ are given by the fit and are displayed in
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.8]{Figures/16sites_FIT_CFBulkCONNvsGammaFinal.pdf}
+    \includegraphics[scale=0.7]{Figures/16sites_FIT_CFBulkCONNvsGammaFinal.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Bulk correlation function for a 16-sites spin chain for several values of $\gamma$. In the inset the fit $C_{\text{bulk}} = p_0 \exp{(-p_1 r)}$ is shown in a semi-logarithmic scale. The fit parameters are shown in the same order of the legend for $\gamma$.}
     \label{fig:16sites_FIT_CFBulkCONNvsGamma}
@@ -362,15 +363,13 @@ The profile shown in fig.~\ref{fig:PeakValueSpinCurrVSgamma_8sites} can be expla
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Conjectured Nonequilibrium Phase Transition}
+\section[A Conjectured Nonequilibrium Phase Transition]{A Conjectured Nonequilibrium Phase \\Transition}
 \label{chapt4_phase_trans}
 
 In an open quantum system, the competition between unitary Hamiltonian evolution and dissipation can induce a dissipative phase transition for the steady state, as discussed for example in the case of spin systems by~\cite{phase_trans_spin_system}.
 A phase transition is an important phenomenon in condensed-matter physics and can happen when tuning one or more parameters of the Hamiltonian of the system. 
 
-So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, we focus on the behaviour of a 16-sites chain under a variation of $J_z$. Ideally, in order to discuss phase transitions one should study an infinite-size chain; for this reason, the only chain under consideration will be the one with the biggest size between the ones analyzed in the present work.
-
-First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} the spin current for several values of $J_z$ is displayed. Some consideration can be made in regards to this plot.
+So far, we have studied the behaviour of 8, 12 and 16-sites chain varying the coefficient of dissipation rate $\gamma$. In this chapter, we focus on the behaviour of a 16-sites chain under a variation of $J_z$. Ideally, in order to discuss phase transitions one should study an infinite-size chain; for this reason, the only chain under consideration will be the one with the largest size between the ones analyzed in the present work. 
 
 %This behaviour is confirmed by the data obtained from QT method (fig.~\ref{fig:8sites_spinCurrVSJzQT}).
 
@@ -391,7 +390,7 @@ First of all, we have analyzed the spin current under the variation of the coupl
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
+    \includegraphics[scale=0.7]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data are obtained from MPO method. It is worth saying that, for $J_z=0.2$ and $J_z=0.3$, it has not been possible to get better results than the ones here shown, because of the difficulty of MPO method in treating the system with such parametrization. We ascribe the presence of such fluctuations to the growth of entanglement entropy in the operator space. In order to obtain better results, one should perform simulations using larger bond links, that would require greater computational resources.}
     \label{fig:16sites_SpinCurrVaryingJz}
@@ -399,12 +398,14 @@ First of all, we have analyzed the spin current under the variation of the coupl
 
 %this is an effect due to the entaglment entropy; we ascribe the presence of such fluctuations to the entanglement entropy growth in the operatorial space, that would require larger bond link, thus simulations with greater computational resources. In this study we just want to see the two kind of behaviour of j.
 
+First of all, we have analyzed the spin current under the variation of the coupling constant $J_z$. In fig.~\ref{fig:16sites_SpinCurrVaryingJz} the spin current for several values of $J_z$ is displayed. Some consideration can be made in regards to this plot.
+
 In fig.~\ref{fig:16sites_SpinCurrVaryingJz}, two kinds of trends are shown. 
 
-Let us begin with that corresponding to $J_z \geq 0.5$: in this case, the spin current seems to have a regular behaviour: it goes from a peak value corresponding to the spin coupled to the dissipator ``up'', then smoothly decreases and increases until it gets to the other peak value corresponding to the spin coupled to the dissipator ``down''. While $J_z$ grows this trends tends to gets flatter (for $J_z = 1.5$ it is zero for all the sites except for those in proximity of the dissipators) until it reaches rapidly null values for all the spin in the chain. 
+Let us begin with that corresponding to $J_z \geq 0.5$: in this case, the spin current seems to have a regular behaviour: it goes from a peak value corresponding to the spin coupled to the dissipator ``up'', then smoothly decreases and increases until it gets to the other peak value corresponding to the spin coupled to the dissipator ``down''. While $J_z$ grows this trend tends to get flatter (for $J_z = 1.5$ it is zero for all the sites except for those in proximity of the dissipators) until it reaches rapidly null values for all the spin in the chain. 
 
 %The spin current between the first and the last two sites decreases slowly while $J_z$ increases, for $J_z \leq 1$; this can be a sign of the prevalence of dissipation over the Hamiltonian dynamics. Otherwise, for $J_z \geq 1$ the peak values (i.e. the spin current between the first two and the last two sites of the chain) drop while $J_z$ increases; this can be a sign of the growing prevalence of the Hamiltonian over the dissipation, while the coupling $J_z$ grows.
-Around $J_z = 0.5$, the spin current shows a discontinuous behaviour: the spins in the bulk of the chain (i.e. all of them excluding the first and the last) seem to produce a constant current. This is an additional sign of the prevalence of the role of dissipation.
+Around $J_z = 0.5$, the spin current shows a discontinuous behaviour: the spins in the bulk of the chain (i.e. all of them excluding the ones in proximity of the ends of the chain) seem to produce an approximately constant current.
 
 %For $J_z \geq 0.5$, the trend of the spin current is polynomial; while $J_z$ grows, in the middle sites the spin current is more and more constant, sign of the fact that the role of Hamiltonian is more and more predominant. 
 

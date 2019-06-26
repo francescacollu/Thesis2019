@@ -12,7 +12,7 @@ where
 \end{equation}
 $N$ being the dimension of the Hilbert space.
 
-In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-$\frac{1}{2}$ system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ while the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct numerical integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the equation~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
+In such a system the number of variables scales as the square of the dimension of the Hilbert space; for example, in a spin-1/2 system made up by $n$ elements, the size of the Hilbert space $\mathcal{H}$ is $2^n$ while the \emph{liouvillian dimension} equals to $2^{2n} \times 2^{2n}$. Clearly, a direct numerical integration of the equation~\ref{eqn:lindblad_eqn} can be made only for systems with a very limited number of elements. One only needs to note the fact that for a brute-force integration of the equation~\ref{eqn:lindblad_eqn} for a system consisting of $8$ sites, about $34$ GB of memory would be necessary\footnote{This calculation considers the fact that the liouvillian contains, in general, complex numbers, each of them valued with a single precision (32 bit).}.
 
 Nevertheless, some techniques for exact diagonalization of the Liouvillian superoperator~\ref{eqn:lindblad_eqn} have been developed. Let us mention, for example, the one devised by Prosen~\cite{Prosen_2008}, for studying a system characterized by a quadratic Hamiltonian and linear Lindblad operators, which prescribes to diagonalize the Liouville super-operator in terms of $2n$ normal master modes, i.e. anticommuting super-operators which act on the Fock space of density operators. This can be understood as a complex version of the Bogoliubov transformation.
 
@@ -73,7 +73,7 @@ is the probability that a jump occurs; in this case, the system evolves into the
 \end{equation}
 Otherwise, if no jump happens, the system evolves according to the effective Hamiltonian $H_\text{eff}$ in the following way:
 \begin{equation}
-    \ket{\phi_0} = \frac{(1-\textrm{i}H_{eff}dt)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
+    \ket{\phi_0} = \frac{(\mathds{1}-\textrm{i}H_{\text{eff}}dt)}{\sqrt{1-\sum_\mu dp_\mu}}\ket{\phi(t_0)}.
 \end{equation}
 
 In order to decide if the jump occurs or not, a Monte Carlo method will be integrated in this picture. Namely, an uniform distribution in the unit interval $[0,1]$ is taken under consideration; for every experiment, a pseudo-random number $\epsilon$ is chosen from this uniform distribution, i.e. a coin is tossed: depending on the result of the throw, the possible situations are the following:
@@ -191,7 +191,7 @@ So, now it becomes necessary doing a change of basis to the new block $A \cup B$
 \begin{equation}
     H' = \widetilde{O} H_{A\cup B} \widetilde{O}^\dagger,
 \end{equation}
-where $\widetilde{O}$ is a pseudo-unitary\footnote{The matrix $\widetilde{O}$ is called pseudo-unitary because it is not a square matrix.} $M\times N$ matrix, where $N$ is the dimension of $H_{A\cup B}$; $\widetilde{O}$ is formed by the $M$ eigenvectors of $\rho_{A\cup B}$ living in the corner-space. This density matrix can now be used to calculate the expectation values of any observable.
+where $\widetilde{O}$ is a pseudo-unitary\footnote{The matrix $\widetilde{O}$ is called pseudo-unitary because it is not a square matrix.} $M\times N$ matrix, $N$ is the dimension of $H_{A\cup B}$; $\widetilde{O}$ is formed by the $M$ eigenvectors of $\rho_{A\cup B}$ living in the corner-space. This density matrix can now be used to calculate the expectation values of any observable.
 
 The larger is $M$, the closer to exactness are the results, because the basis~\ref{basis_corner} spans a larger part of the Hilbert space. Therefore, at this point the value of $M$ should be increased until the convergence is reached.
 
@@ -217,7 +217,7 @@ In short, the algorithm is structured in the following stages, as sketched in fi
     \item[increase] of the dimension M of the corner-space until the convergence of the observable is achieved.
 \end{description}
 
-A detailed description of the implementation of the algorithm can be seen in Appendix~\ref{AppendixA}.
+A detailed description of the implementation of the algorithm can be seen in appendix~\ref{AppendixA}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -225,13 +225,13 @@ A detailed description of the implementation of the algorithm can be seen in App
 \label{chap_numMethods_MPO}
 The \emph{matrix product density operator} (MPO) method is rooted in one of the first and most efficient numerical methods to simulate strongly correlated quantum one dimensional systems: the \emph{density matrix renormalization group} (DMRG)~\cite{s_white:dmrg, PhysRevB.48.10345, RevModPhys.77.259}.
 
-Essentially, the DMRG is a generalization of Wilson's NRG method; its core lies in the construction of the so-called \emph{superblock} (see fig.~\ref{fig:DMRG_superblockSketch}): it is constructed in an iterative way, taking a portion of the system, then enlarging it until the desired size is reached; this superblock is usually indicated as $A \bullet \bullet B$. By numerical diagonalization of $H_{A \bullet \bullet B}$ one can find the ground state $\ket{\Psi_{GS}}$ that minimize the energy:
+Essentially, the DMRG is a generalization of Wilson's NRG method; its core lies in the construction of the so-called \emph{superblock} (see fig.~\ref{fig:DMRG_superblockSketch}): it is constructed in an iterative way, taking a portion of the system, then enlarging it until the desired size is reached; this superblock is usually indicated as $A \bullet \bullet B$. By numerical diagonalization of $H_{A \bullet \bullet B}$ one can find the ground state $\ket{\psi_{GS}}$ that minimize the energy:
 \begin{equation*}
-    E = \bra{\Psi_{GS}} H_{A \bullet \bullet B}\ket{\Psi_{GS}}.
+    E = \bra{\psi_{GS}} H_{A \bullet \bullet B}\ket{\psi_{GS}}.
 \end{equation*}
 Since we do not want an exponential increase of the dimension of the Hilbert space, we choose the D most relevant states for block $A \bullet$ (similarly for $\bullet B$). So, having the reduced density operator for $A \bullet$:
 \begin{equation*}
-    \rho_{A \bullet} = \Tr_{\bullet B} \ket{\Psi_{GS}}\bra{\Psi_{GS}},
+    \rho_{A \bullet} = \Tr_{\bullet B} \ket{\psi_{GS}}\bra{\psi_{GS}},
 \end{equation*}
 one uses the D eigenstates with the largest weight (i.e. with the largest eigenvalues) to construct the pseudo-unitary matrix O, useful to truncate the basis:
 \begin{equation*}
@@ -324,7 +324,7 @@ First of all, let us consider the expression~\ref{eqn:mpdo}: repeated single-val
 where the superoperator formalism\footnote{Every linear operator $A$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space~\cite{davRoss_wordpress}:
 \begin{equation*}
     A = \sum_{ij} A_{ij} \ket{i}\bra{j} \quad \rightarrow \quad |A\rangle\rangle = \sum_{ij} A_{ij} \ket{i}\ket{j}.
-\end{equation*}} has been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discarding the smallest single values; moreover, it is proportional to the amount of quantum correlations between the system sites that can be embedded in $\rho_{MPO}$. As said in sec.~\ref{bi_mixed_states}, the operator space entanglement entropy is a good quantifier of this aspect; in particular, the smaller is its value, the better is the functionality of the MPO method.
+\end{equation*}} has been used in order to write the superket $||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discarding the smallest single values; moreover, it is proportional to the amount of quantum correlations between the system sites that can be embedded in $\rho_{MPO}$. As said in sec.~\ref{bi_mixed_states}, the operator space entanglement entropy is a good quantifier of this aspect; in particular, the smaller is its value, the better is the functionality of the MPO method.
 
 %As shown in~\cite{Prosen_2009, PhysRevLett.93.207205}, $\hat{\mathcal{L}}$ %can be decomposed into terms that involve two contiguous sites, as
 %\begin{equation}

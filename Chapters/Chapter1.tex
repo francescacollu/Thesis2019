@@ -124,7 +124,7 @@ subject to the initial condition
 \begin{equation}
     U(t_0, t_0) = \mathds{1}.
 \end{equation}
-We can write the dynamics of a closed system using the density matrix formalism seen in the previous section. In order to do this, let us assume that at a initial time $t_0$ the state of the system is characterized by the density matrix
+We can write the dynamics of a closed system using the density matrix formalism seen in the previous section. In order to do this, let us assume that at an initial time $t_0$ the state of the system is characterized by the density matrix
 \begin{equation}
     \rho(t_0) = \sum_{\alpha = 1}^N w_\alpha \ket{\psi_\alpha(t_0)} \bra{\psi_\alpha(t_0)},
 \end{equation}
@@ -150,6 +150,7 @@ Now we can go into a more specific definition of open quantum systems. An open q
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{Figures/openSystems_sketch.png}
+    \captionsetup{width=1.\linewidth}
     \caption{Schematic representation of an open quantum system.}
     \label{fig:openSystems_sketch}
 \end{figure}
@@ -257,9 +258,9 @@ where $U(t, t_0)$ is the time-evolution operator of the combined system $S+E$. S
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Approximate Description of \\Open Quantum Systems}
+\section[Approximate Description of Open Quantum Systems]{Approximate Description of \\Open Quantum Systems}
 \label{appr_dynam_oqs}
-If one considers a many-particles system, where the Hilbert space becomes "large", solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. In the following, we will derive a simpler and approximate description of the dynamics of an open quantum system. 
+If one considers a many-particles system, where the Hilbert space becomes ``large'', solving exactly the equation~\ref{eqn:motion_open} is rather difficult, because of the fact that the environment may represent a reservoir consisting of infinitely many degrees of freedom, or its modes may be neither known nor controllable, for example. In the following, we will derive a simpler and approximate description of the dynamics of an open quantum system. 
 
 \subsection{Quantum Dynamical Semigroups}
 For reasons that will be clear later, let us rewrite the equation~\ref{eqn:motion_open} as a \emph{dynamical map} acting on $\mathcal{H}_S$ that connect the states of the system $S$ from time $t_0$ to time $t_1$, that is:
@@ -393,18 +394,18 @@ In this section, we introduce a few concepts, useful to better understand quantu
 A very useful tool to manipulate pure quantum states is the \emph{Schmidt decomposition}, that we present here following the line of reasoning of~\cite{nielsen_chuang}.
 \newtheorem{theo}{Theorem}[section]
 \begin{theo}
-    Let us suppose that $\ket{\Psi}$ is a pure state of a composite system $AB$, that lives in the Hilbert space given by the tensor product $\mathcal{H}_A \otimes \mathcal{H}_B$. Then there exist orthonormal bases, the Schmidt bases, $\{\chi_i^{(A)}\}$ and $\{\chi_j^{(B)}\}$, in $\mathcal{H}_A$ and $\mathcal{H}_B$, respectevely, such that
+    Let us suppose that $\ket{\psi}$ is a pure state of a composite system $AB$, that lives in the Hilbert space given by the tensor product $\mathcal{H}_A \otimes \mathcal{H}_B$. Then there exist orthonormal bases, the Schmidt bases, $\{\chi_i^{(A)}\}$ and $\{\chi_j^{(B)}\}$, in $\mathcal{H}_A$ and $\mathcal{H}_B$, respectevely, such that
     \begin{equation}
-        \ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}.
+        \ket{\psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}.
     \end{equation}
     The $\alpha_i$ are complex numbers called Schmidt coefficients and the number of non-zero $\alpha_i$ is called Schmidt number.
 \end{theo}
 \begin{proof}
-Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\Psi}$ can be written as $\ket{\Psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements called \emph{singular values} of the matrix, $u$ and $v$ are unitary matrices. So we have $\ket{\Psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
-Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{\chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{\chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\Psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
+Let $\ket{\chi_j}$ and $\ket{\chi_k}$ be orthonormal bases for systems $A$ and $B$, respectevely. So, $\ket{\psi}$ can be written as $\ket{\psi} = \sum_{jk} a_{jk}\ket{\chi_j}\ket{\chi_k}$. Using the singular value decomposition, we can write the matrix $a$ constituted by the elements $a_{jk}$, in this way: $a = udv$, where $d$ is a diagonal matrix with non-negative elements called \emph{singular values} of the matrix, $u$ and $v$ are unitary matrices. So we have $\ket{\psi} = \sum_{ijk} u_{ji}d_{ii}v_{ik} \ket{\chi_j}\ket{\chi_k}$.
+Defining $\ket{\chi_i^{(A)}} \equiv \sum_j u_{ji}\ket{\chi_j}$, $\ket{\chi_i^{(B)}} \equiv \sum_k v_{ik}\ket{\chi_k}$ and $\alpha_i \equiv d_{ii}$, we get $\ket{\psi} = \sum_i \alpha_i \ket{\chi_i^{(A)}}\otimes \ket{\chi_i^{(B)}}$.
 \end{proof}
 
-A state $\ket{\Psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it cannot be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other the state $\ket{\Psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\Psi}$ can be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
+A state $\ket{\psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$ is said to be \emph{entagled} if it cannot be written as a tensor product $\ket{\chi^{(A)}}\otimes \ket{\chi^{(B)}}$ of states of the sub-systems, i.e. if the Schmidt number is greater than 1. Moreover, if the absolute values of all non-vanishing Schmidt coefficients are equal to each other, the state $\ket{\psi}$ is said to be \emph{maximally entangled}. Conversely, if a state $\ket{\psi}$ can be written as a tensor product is named \emph{product state} and this is true if and only if the Schmidt number is equal to 1. We can say that the Schmidt number is a measure of the entanglement between the system $A$ and the system $B$.
 
 The \emph{entanglement} is one of the most peculiar manifestations of quantum mechanics. Given a composite quantum system, entanglement quantifies non-classical correlations between measurements performed on well-separa\-ted particles. Indeed, while after two classical systems have interacted, they can be described by two defined states, after two quantum systems have interacted, they can no longer be described independently of each other. This kind of systems violate the \emph{Bell's inequality}, which can be explained in a heuristic way by means of a thought experiment~\cite{nielsen_chuang}. 
 
@@ -417,7 +418,7 @@ Now, Charlie prepares a quantum system of two qubits in the state
 \begin{equation*}
     \ket{\psi} = \frac{\ket{00}+\ket{11}}{\sqrt{2}},
 \end{equation*}
-and then he passes a qubit to Alice and a qubit to Bob. Now, if Alice performes a measurement obtaining $\ket{0}$ or $\ket{1}$, Bob will get the same measure obtained by Alice, since $\ket{00}$ is the only state in which the qubit measured by Alice is in the state $\ket{0}$. If they perform measurements of some observables $Q, R, S, T$, they find out that the Bell's inequality is violated. This is an example of maximally entangled quantum states of two qubits, called in this way because it violates maximally the inequality written above. Since about the 80s, this kind of experiments~\cite{exp_bell_inequalities} has been performed in reality, proving the quantum mechanical predictions.
+and then he passes a qubit to Alice and a qubit to Bob. Now, if Alice performes a measurement obtaining $\ket{0}$ or $\ket{1}$, Bob will get the same measure obtained by Alice, since $\ket{00}$ is the only state in which the qubit measured by Alice is in the state $\ket{0}$. If they perform measurements of some observables $Q, R, S, T$, they find out that the Bell's inequality is violated. This is an example of maximally entangled quantum states of two qubits, called in this way because it violates maximally the inequality written above. Since about the 80s, this kind of experiments has been performed in laboratory~\cite{exp_bell_inequalities}, proving the quantum mechanical predictions.
 
 The notion of entanglement is useful also for the characterization of the efficiency of some numerical methods for the simulation of quantum many-body systems, in particular the ones based on tensor networks, as the matrix product operators method, which we will use in the following.
 
@@ -447,7 +448,7 @@ Let us highlight some important properties of the von Neumann entropy~\cite{niel
 
 \subsection{Bipartite Mixed States}
 \label{bi_mixed_states}
-Subsystems of a many-body pure state will generally be in a mixed state $\rho$. In the case of mixed states, the measure of entanglement is unclear and diverse; three important representatives~\cite{RevModPhys.80.517, phd_ross} are the following:
+Subsystems of a many-body pure state will generally be in a mixed state $\rho$. In the case of mixed states, the measure of entanglement is unclear and diverse; four important representatives~\cite{RevModPhys.80.517, phd_ross} are the following:
 \begin{description}
     \item[entanglement cost,] an asymptotic limit of the number $k$ of maximally entangled states used to extract n copies of $\rho$, minimized over all the possible local quantum operations with classical communication (LOCC) manipulations:
     \begin{equation}
