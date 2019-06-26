@@ -321,7 +321,7 @@ First of all, let us consider the expression~\ref{eqn:mpdo}: repeated single-val
     \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad \sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi &(\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) ||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle,
     \end{split}
 \end{equation*}
-where the superoperator formalism\footnote{Every linear operator $A$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space:
+where the superoperator formalism\footnote{Every linear operator $A$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space~\cite{davRoss_wordpress}:
 \begin{equation*}
     A = \sum_{ij} A_{ij} \ket{i}\bra{j} \quad \rightarrow \quad |A\rangle\rangle = \sum_{ij} A_{ij} \ket{i}\ket{j}.
 \end{equation*}} has been used in order to write the superket \\$||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle$. The bond-link dimension $\chi$ can be kept under a threshold by discarding the smallest single values; moreover, it is proportional to the amount of quantum correlations between the system sites that can be embedded in $\rho_{MPO}$. As said in sec.~\ref{bi_mixed_states}, the operator space entanglement entropy is a good quantifier of this aspect; in particular, the smaller is its value, the better is the functionality of the MPO method.
