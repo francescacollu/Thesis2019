@@ -102,7 +102,7 @@ So, to sum up we can say a few things about QT algorithm; it allows to do the so
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Corner-Space Renormalization (CSR) Method}
+\section{The Corner-Space Renormalization (CSR) \\Method}
 \label{chapter3_csr}
 The numerical methods based on renormalization group à la Wilson are characterized by the fact that the dimension of the Hilbert space increases, while two blocks are merged; the fundamental aim of the corner-space renormalization (CSR) method~\cite{PhysRevLett.115.080604} is to deal with this problem and try to overcome the limitation mentioned above. 
 
@@ -178,7 +178,7 @@ The steady-state density matrix of the \emph{merged block} constituted of the bl
     = \sum_{r} \sum_{r'} p_r^{(A)}p_{r'}^{(B)}\ket{\phi_r^{(A)}}\ket{\phi_{r'}^{(B)}} \otimes \bra{\phi_{r'}^{(B)}}\bra{\phi_{r}^{(A)}}
 \end{equation}
 
-At this point, the CSR method suggests to delineate the \emph{corner-space}; for this purpose, we consider the $M$ most probable product states coming from~\ref{rhoAUB} of the form $\ket{\phi_{r}^{(A)}}\ket{\phi_{r'}^{(B)}}$, i.e. we rank them according to the joint probability $p_r^{(A)}p_{r'}^{(B)}$. The $M$ states form an orthonormal basis that generates a subspace
+At this point, the CSR method suggests to delineate the \emph{corner-space}; for this purpose, we consider the $M$ most probable product states coming from equation~\ref{rhoAUB} of the form $\ket{\phi_{r}^{(A)}}\ket{\phi_{r'}^{(B)}}$, i.e. we rank them according to the joint probability $p_r^{(A)}p_{r'}^{(B)}$. The $M$ states form an orthonormal basis that generates a subspace
 \begin{equation}
 \label{basis_corner}
     \Bigl\{\ket{\phi_{r_1}^{(A)}}\ket{\phi_{r_1'}^{(B)}}, \ket{\phi_{r_2}^{(A)}}\ket{\phi_{r_2'}^{(B)}}, \dots, \ket{\phi_{r_M}^{(A)}}\ket{\phi_{r_M'}^{(B)}} \Bigl\},
@@ -290,7 +290,7 @@ Another way of considering the expression~\ref{mps_general} is the graphical not
     \label{fig:mps_graphical}
 \end{figure}
 
-The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204}. The physical index is now doubled, as illustrated in fig.~\ref{fig:mpo_graphical}
+The matrix product \emph{density operators} (MPO) extend the MPS from pure to mixed states, following the idea explained, for example, in~\cite{PhysRevLett.93.207204, MPO_method}. The physical index is now doubled, as illustrated in fig.~\ref{fig:mpo_graphical}
 \begin{equation}
 \label{eqn:mpdo}
     \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d} \sum_{j_1, \dots ,j_N = 1}^{d} \Tr\Bigl(A_1^{i_1,j_1} \dots A_N^{i_N,j_N}\Bigl) \ket{i_1, \dots ,i_N}\bra{j_1, \dots ,j_N}.
@@ -318,7 +318,7 @@ First of all, let us consider the expression~\ref{eqn:mpdo}: repeated single-val
 \begin{equation*}
 \label{mpo_ansatz}
 \begin{split}
-    \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad \sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi &(\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) ||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle,
+    \rho_{MPO} = \sum_{i_1, \dots ,i_N = 1}^{d}\quad \sum_{j_1, \dots ,j_N = 1}^{d}\quad &\sum_{\alpha_1,\dots, \alpha_{N-1} = 1}^\chi (\Gamma_{1, \alpha_1}^{[1]i_1, j_1}\lambda_{\alpha_1}^{[1]})(\Gamma_{\alpha_1, \alpha_2}^{[2]i_, j_2}\lambda_{\alpha_2}^{[2]}) \dots \\  \times &(\lambda_{\alpha_{N-1}}^{[N-1]}\Gamma_{N, \alpha_{N-1}}^{[N]i_N, j_N}) ||i_1, \dots ,i_N, j_1, \dots ,j_N\rangle\rangle,
     \end{split}
 \end{equation*}
 where the superoperator formalism\footnote{Every linear operator $A$ acting on the Hilbert space $\mathcal{H}$ can be associated with a vector in a superoperator space~\cite{davRoss_wordpress}:

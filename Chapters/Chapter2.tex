@@ -79,7 +79,7 @@ If the on-site interaction term $U$ dominates $(U \gg J)$, the ground state of t
 The two kinds of ground state have been labeled with the subscripts "SF" and "MI", specifying the two phases to which the system may be found: superfluid and Mott insulator phases.
 
 
-\section{Quantum Simulators: Controllable Many-Body Systems}
+\section{Quantum Simulators: Controllable \\Many-Body Systems}
 In order to overcome the difficulty in studying open many-body systems, over the years several analytical and numerical methods have been developed. In addition to these more "traditional" approaches, during the last twenty years it arose the idea of studying a quantum system by using a properly designed quantum device. The essential aim of this new strategy lies in the employment of controlled quantum devices called \emph{quantum simulators}; they are systems able to experimentally emulate the Hamiltonian model bearing the non-trivial properties of the system under study. The usefulness of this approach is twofold~\cite{Tomadin_Fazio}:  not only it allows to explore properties of the model in regions that are elusive to the analytical and numerical studies, but also it consents to test to which limits the Hamiltonian model is appropriate to describe the system or whether additional ingredients are required.
 
 Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably the first quantum simulators in the history of modern physics, much progress has been made especially with the advent of cold atoms in optical lattices.
@@ -95,7 +95,7 @@ Since the Josephson junction arrays~\cite{josephsonArrays}, that were probably t
 
 The employment of cold atoms in optical lattices has proved to be a successful way to create simulators of a large variety of strongly interacting systems~\cite{ultracoldAtoms_condMatter}. 
 
-In short, optical lattices are created by making laser beams counter-propagating interfere with each other~\cite{optical_lattice_interview}. The result is a standing wave with a periodic pattern (see sketch in fig.~\ref{fig:optical_lattice}). Then, ultracold atoms can be trapped in the potential wells, creating first a Bose-Einstein condensate or a cold gas of fermionic atoms and then slowly ramping up the laser beams to create the periodic lattice potential. 
+In short, optical lattices are created by making laser beams counter-propa\-gating interfere with each other~\cite{optical_lattice_interview}. The result is a standing wave with a periodic pattern (see sketch in fig.~\ref{fig:optical_lattice}). Then, ultracold atoms can be trapped in the potential wells, creating first a Bose-Einstein condensate or a cold gas of fermionic atoms and then slowly ramping up the laser beams to create the periodic lattice potential. 
 
 Ultracold atoms in optical lattices represent nearly perfect realization of fermionic and bosonic Hubbard models\footnote{The (fermionic) Hubbard model in one dimension is characterized by the following Hamiltonian:
 \begin{equation*}
@@ -140,7 +140,7 @@ In the last few decades the field of quantum simulators has been enriched by a n
     \label{fig:QED_cavities}
 \end{figure}
 
-QED cavities are mathematically described by the Jaynes-Cummings model~\cite{shore_knight}, in which one mode of the cavity interacts with a two-level system. By ignoring light-matter interaction, a single cavity confines several modes of electromagnetic field and each of them is quantized as a harmonic oscillator. If one considers a cavity with a single mode with frequency $\omega$, the Hamiltonian describing such a system can be written as
+QED cavities are mathematically described by the Jaynes-Cummings mo\-del~\cite{shore_knight}, in which one mode of the cavity interacts with a two-level system. By ignoring light-matter interaction, a single cavity confines several modes of electromagnetic field and each of them is quantized as a harmonic oscillator. If one considers a cavity with a single mode with frequency $\omega$, the Hamiltonian describing such a system can be written as
 \begin{equation}
 \label{eqn:single_cavity}
     H = \omega a^{\dagger}_la_l,
@@ -182,7 +182,7 @@ An array of cavities in the impenetrable photon regime has been theoretically st
 % pag.5 Tomadin-Fazio per optical lattices vs cavity arrays
 
 \subsection{Superconducting Circuits}
-As for QED-cavities, also for superconducting circuits, or QED-circuits, light-matter interaction is central. In these simulators~\cite{supercircuitsQED}, the quantum "particles" are excitations, not physical particles subjected to conservation laws, so they naturally access non-equilibrium physics. Photonic modes can be realized with on-chip microwave resonators, typically Fabry-Perot kind of cavities. A qubit coupled to such a resonator can be described by the Jaynes-Cummings model:
+As for QED-cavities, also for superconducting circuits, or QED-circuits, light-matter interaction is central. In these simulators~\cite{Nat.Phys2012}, the quantum "particles" are excitations, not physical particles subjected to conservation laws, so they naturally access non-equilibrium physics. Photonic modes can be realized with on-chip microwave resonators, typically Fabry-Perot kind of cavities. A qubit coupled to such a resonator can be described by the Jaynes-Cummings model:
 \begin{equation}
     H_{\text{JC}} = \omega_r a^{\dagger}a+ \varepsilon\sigma^+\sigma^- + g(a\sigma^+ + a^{\dagger}\sigma^-),
 \end{equation}
@@ -220,7 +220,7 @@ A more complicated system has been investigated in~\cite{Hartmann_XYZ}, which us
     \label{fig:superconductinCircuit_SpinSystem}
 \end{figure}
 
-It has been possible using superconducting circuits to simulate small spin chains, by directly coupling a number of superconducting qubits~\cite{8spinChain_simulatedByQubits}. Fig.\ref{fig:superconductinCircuit_SpinSystem} shows two superconducting loops in the qubit, each subject to an external flux bias $\Phi_{1x}$ and $\Phi_{2x}$. The dynamics of the device can be modelled as a quantum mechanical double-well potential. The two lowest energy states of the system correspond to clockwise or anticlockwise circulating current in loop 1. Considering only these two states (in the limit of low temperature it is a valid approximation), the qubit dynamics is that of an Ising spin. Qubits are then coupled together using programmable coupling elements; this allows to tune the spin coupling in a continous way between ferromagnetic and antiferromagnetic character. The behaviour of this system is well described by an Ising model Hamiltonian:
+By means of superconducting circuits, it has been possible to simulate small spin chains, by directly coupling a number of superconducting qu\-bits~\cite{8spinChain_simulatedByQubits}. Fig.\ref{fig:superconductinCircuit_SpinSystem} shows two superconducting loops in the qubit, each subject to an external flux bias $\Phi_{1x}$ and $\Phi_{2x}$. The dynamics of the device can be modelled as a quantum mechanical double-well potential. The two lowest energy states of the system correspond to clockwise or anticlockwise circulating current in loop 1. Considering only these two states (in the limit of low temperature it is a valid approximation), the qubit dynamics is that of an Ising spin. Qubits are then coupled together using programmable coupling elements; this allows to tune the spin coupling in a continous way between ferromagnetic and antiferromagnetic character. The behaviour of this system is well described by an Ising model Hamiltonian:
 \begin{equation}
     H = \sum_{i=1}^{N} h_i\sigma_i^z + \sum_{i,j=1}^{N} J_{ij}\sigma_i^z\sigma_j^z.
 \end{equation}

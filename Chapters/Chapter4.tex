@@ -39,7 +39,7 @@ and $\sigma^x$, $\sigma^y$ and $\sigma^z$ are the Pauli matrices, which are defi
     \end{pmatrix}
     .
 \end{equation}
-The coupling constant are chosen to be $J_x = 1$, $J_y = 0.5$ all over the dissertation, while $J_z$ will be varied as we will see in the following sections. However, throughout the full chapter, except for sec.~\ref{chapt4_phase_trans}, we will assume $J_z=1$.
+The coupling constants are chosen to be $J_x = 1$, $J_y = 0.5$ all over the dissertation, while $J_z$ will be varied as we will see in the following sections. However, throughout the full chapter, except for sec.~\ref{chapt4_phase_trans}, we will assume $J_z=1$.
 The $L_i$ are the Lindblad operators representing the single-spin bath coupled to the first and the last spin of the chain:
 \begin{equation}
 \label{dissipators}
@@ -63,7 +63,9 @@ and $\gamma$ is the bath-coupling strength parameter.
 
 The physics of this model represents in a realistic way some behaviours of the Hubbard models described in chapter~\ref{chapter2}, i.e. the models tipically studied by quantum simulators.
 
-In the following sections, we will study three fundamental observables: the magnetization profile, the two-point correlation function, the spin current; in particular, we will examine them in chains of different size: 8, 12, 16 sites. 
+In the following sections, we will study three fundamental observables: the magnetization profile, the two-point correlation function and the spin current. Since we want to analyze a quantum many-body system, ideally we should investigate it in the thermodynamic limit. The best we can do with the computational resources we have at our disposal is to examine chains of these three different sizes: 8, 12, 16 sites.
+
+%nello studio di mb systems, solitamente si guarda il lim TD; siccome vogliamo analizzare un sistema a molti corpi, l'ideale sarebbe andare a taglie grandi (idealmente infiniti). 
 
 All the fits of numerical data in the present and in the next chapters are made with Minuit/Migrad and Linear minimizers~\cite{root_cern}.
 
@@ -226,29 +228,23 @@ So, we can formally write the bulk correlation function in this way:
 \end{equation*}
 is the site index for the second half of the chain.
 
-In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively. In order to encourage the comparison between the different sizes, we scaled the x-axis so that the ends are 0 and 1. An interesting aspect that is quite clear in these plots, involves the finite-size effect; while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites the exponential profile starts to appear clearly.
+In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for several values of $\gamma$ is shown, for 8, 12 and 16 sites spin chain respectively. In order to encourage the comparison between the different sizes, we scaled the x-axis so that the ends are 0 and 1. 
 
-It is interesting to note that the correlations between two nearest-neighbours (i.e. the first point of every curve) grows as $\gamma$ increases, but also as the size of the chain increases, for every value of $\gamma$. So, the increase of nearest-neighbours correlation is due to two aspects: the strength of the dissipative forces and the number of spins involved.
 
-Considering long distances, we see that the system is not correlated, that is a sign of absence of long-range order. 
+An interesting aspect that is quite clear in these plots, is the fact that, while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites (middle panel of fig.~\ref{fig:BulkCFvsGamma3panelsSizes}) the exponential profile starts to appear clearly. The trend of correlation function for the 8-sites chain (upper panel of fig.~\ref{fig:BulkCFvsGamma3panelsSizes}) has a quite evident deviation from the exponential behaviour of the 12 and 16-sites chains. These differences are probably due to finite-size effects that emerges in chains made up by a low number of sites; in the case under consideration, we can see it in the 8-sites chain.
+%deviazioni molto visibili dall'esponenziale (nel top panel), sono molto prob dovute a effetti di taglia finita data dal fatto che lì ho solo 8 siti.
+
+It is interesting to note that the correlations between two nearest-neigh\-bours (i.e. the first point of every curve) grows as $\gamma$ increases, but also as the size of the chain increases, for every value of $\gamma$. So, the increase of nearest-neighbours correlation is due to two aspects: the strength of the dissipative forces and the number of spins involved.
+
+The exponential decay of correlation functions implies that the correlation between two sufficiently distant sites is exponentially suppressed: this is due to the absence of long-range order, that is the system is not long-range correlated.
+
+%il fatto che le funzioni di corr decadano esponenzialmente, implica che il sistema non è correlato a lungo raggio. Se ti metti suff lontano, la corr tra un sito e un sito a distanza l è esponenzialmente soppressa: questo è dovuto all'assenza di ordine a lungo raggio.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.55]{Figures/8sites/8sites_BulkCF_CONNvsGamma.pdf}
-    \label{fig:8sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.55]{Figures/12sites/12sites_CFBulkCONNVSgamma.pdf}
-    \label{fig:12sites_LMvsGamma}
-\end{subfigure}\\
-\begin{subfigure}{\columnwidth}
-\centering
-    \includegraphics[scale=0.55]{Figures/16sites/16sites_CFBulkCONNVSgamma.pdf}
-    \label{fig:16sites_LMvsGamma}
-\end{subfigure}\\
+    \includegraphics[scale=0.55]{Figures/8sites_BulkCF_CONNvsGamma.pdf}
+    \includegraphics[scale=0.55]{Figures/12sites_CFBulkCONNVSgamma.pdf}
+    \includegraphics[scale=0.55]{Figures/16sites_CFBulkCONNVSgamma.pdf}
 \captionsetup{width=1.\linewidth}
 \caption{Bulk correlation function for a 8-sites chain (upper panel), 12-sites chain (central panel), 16-sites chain (bottom panel) varying on dissipation rate $\gamma$. Data are obtained from MPO method.}
 \label{fig:BulkCFvsGamma3panelsSizes}
@@ -397,9 +393,11 @@ First of all, we have analyzed the spin current under the variation of the coupl
     \centering
     \includegraphics[scale=0.75]{Figures/16sites/16sites_SpinCurrVaryingJz.pdf}
     \captionsetup{width=1.\linewidth}
-    \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data are obtained from MPO method. It is worth saying that, for $J_z=0.2$ and $J_z=0.3$, it has not been possible to get better results than the ones here shown, because of the difficulty of MPO method in treating the system with such parametrization.}
+    \caption{Spin current of a 16-sites chain, with $\gamma = 1$ for several values of $J_z$. Data are obtained from MPO method. It is worth saying that, for $J_z=0.2$ and $J_z=0.3$, it has not been possible to get better results than the ones here shown, because of the difficulty of MPO method in treating the system with such parametrization. We ascribe the presence of such fluctuations to the growth of entanglement entropy in the operator space. In order to obtain better results, one should perform simulations using larger bond links, that would require greater computational resources.}
     \label{fig:16sites_SpinCurrVaryingJz}
 \end{figure}
+
+%this is an effect due to the entaglment entropy; we ascribe the presence of such fluctuations to the entanglement entropy growth in the operatorial space, that would require larger bond link, thus simulations with greater computational resources. In this study we just want to see the two kind of behaviour of j.
 
 In fig.~\ref{fig:16sites_SpinCurrVaryingJz}, two kinds of trends are shown. 
 

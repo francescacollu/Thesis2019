@@ -1,11 +1,11 @@
 \chapter*{Conclusions}
-\addcontentsline{toc}{chapter}{Conclusions}
+\addcontentsline{toc}{chapter}{Conclusions} \markboth{Conclusions}{}
 
 \label{Conclusions}
 
 In the presented work, we have focused on the study of one dimensional strongly correlated quantum system driven on the two edges by quantum baths. %steady-state system
 
-One could wonder why it would be interesting to study such kind of systems: the answer comes from the breakthroughs in  experimental methods, e.g. in the field of ultracold atoms and QED cavities, the platforms that make it possible to reproduce Hamiltonian models not analyzable otherwise and consequently to understand complex quantum-physical phenomena. 
+One could wonder why it would be interesting to study such kind of systems: the answer comes from the breakthroughs in  experimental methods, e.g. in the field of ultracold atoms~\cite{ultracoldAtoms_condMatter} and QED cavities~\cite{Tomadin_Fazio, Nat.Phys2012}, the platforms that make it possible to reproduce Hamiltonian models not analyzable otherwise and consequently to understand complex quantum-physical phenomena. 
 
 In this thesis work, we concentrated on a specific model: the anisotropic XYZ Heisenberg spin-1/2 chain driven far from equilibrium with a pair of dissipators acting on the edge of the chain only.
 
@@ -20,7 +20,7 @@ The third physical quantity that we have examined is the spin current. The profi
 In the second part of this thesis, we have also studied the spin current varying the coupling constant $J_z$ in the Hamiltonian. We discovered a discontinuous behaviour around the critical value $J_z = J_z^{(c)}$: for $J_z < J_z^{(c)}$, %(this behaviour is instead replayed by the spin current of the chain characterized by $J_z \geq 0.5$), 
 the spins in the bulk of the chain (i.e. all of them excluding the first and the last) seem to produce an approximately constant current; for $J_z > J_z^{(c)}$, the spin current has the polynomial trend already observed. Even for the magnetization profile, we observe that the edges of the chain are characterized by the same values, for any $J_z<1$. However, for this observable we do not see any signature of discontinuity in the bulk, in contrast to the spin current. Instead, the two-point correlation function reveals another discontinuity again around $J_z = J_z^{(c)}$: for $J_z < J_z^{(c)}$, it is compatible to zero, while for $J_z > J_z^{(c)}$, it is finite and exhibits an exponentially decaying profile.
 
-In order to develop this analysis, three different numerical methods have been employed.  The substantial use of the MPO method has allowed us to compute the physical quantities for all lengths of the chain examined in this thesis (8, 12, 16 sites). A preexisting code has been adjusted for the problem under consideration. The QT method has been useful to compare the results obtained from MPO for 8-sites chain and to explore the plausibility of some results for 10-sites chain. The CSR method has been studied and implemented but it seems not to be useful for this kind of quantum systems. In particular, it seems to work more properly when all the spins of the chain are coupled to dissipators. For the last two numerical methods, a code has been written and implemented from scratch, during this thesis work.
+In order to develop this analysis, three different numerical methods have been employed.  The substantial use of the MPO method~\cite{MPO_method} has allowed us to compute the physical quantities for all lengths of the chain examined in this thesis (8, 12, 16 sites). A preexisting code has been adjusted for the problem under consideration. The QT method~\cite{PhysRevLett.68.580} has been useful to compare the results obtained from MPO for 8-sites chain and to explore the plausibility of some results for 10-sites chain. The CSR method~\cite{PhysRevLett.115.080604} has been studied and implemented but it seems not to be useful for this kind of quantum systems. In particular, it seems to work more properly when all the spins of the chain are coupled to dissipators. For the last two numerical methods, a code has been written and implemented from scratch, during this thesis work.
 
 In conclusion, with the present work we have performed an analysis of a boundary-driven interacting quantum spin system, that
 has allowed us to better understand such kind of systems, but it also raises some open questions which encourage future investigations.
