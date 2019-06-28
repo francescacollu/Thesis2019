@@ -206,6 +206,7 @@ Moreover, studying the gradient of magnetization $\nabla \langle \sigma^z \rangl
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Two-Point Correlation Function}
 \label{sec:2P_correlationFunction}
 Another observable of interest is the steady-state two-point correlation function, defined as follows:
@@ -235,13 +236,7 @@ In fig.~\ref{fig:BulkCFvsGamma3panelsSizes} the bulk correlation function for se
 An interesting aspect that is quite clear in these plots, is the fact that, while the size of the chain grows, the exponential profile of the correlation function become more clear. Indeed, only starting from size of 12 sites (middle panel of fig.~\ref{fig:BulkCFvsGamma3panelsSizes}) the exponential profile starts to appear clearly. The trend of correlation function for the 8-sites chain (upper panel of fig.~\ref{fig:BulkCFvsGamma3panelsSizes}) has a quite evident deviation from the exponential behaviour of the 12 and 16-sites chains. These differences are probably due to finite-size effects that emerges in chains made up by a low number of sites; in the case under consideration, we can see it in the 8-sites chain.
 %deviazioni molto visibili dall'esponenziale (nel top panel), sono molto prob dovute a effetti di taglia finita data dal fatto che lì ho solo 8 siti.
 
-It is interesting to note that the correlations between two nearest-neigh\-bours (i.e. the first point of every curve) grows as $\gamma$ increases, but also as the size of the chain increases, for every value of $\gamma$. So, the increase of nearest-neighbours correlation is due to two aspects: the strength of the dissipative forces and the number of spins involved.
-
-The exponential decay of correlation functions implies that the correlation between two sufficiently distant sites is exponentially suppressed: this is due to the absence of long-range order, i.e. the system is not long-range correlated.
-
-%il fatto che le funzioni di corr decadano esponenzialmente, implica che il sistema non è correlato a lungo raggio. Se ti metti suff lontano, la corr tra un sito e un sito a distanza l è esponenzialmente soppressa: questo è dovuto all'assenza di ordine a lungo raggio.
-
-\begin{figure}
+\begin{figure}[H]
 \centering
     \includegraphics[scale=0.55]{Figures/8sites_BulkCF_CONNvsGamma.pdf}
     \includegraphics[scale=0.55]{Figures/12sites_CFBulkCONNVSgamma.pdf}
@@ -251,6 +246,13 @@ The exponential decay of correlation functions implies that the correlation betw
 \label{fig:BulkCFvsGamma3panelsSizes}
 \end{figure}
 
+It is interesting to note that the correlations between two nearest-neigh\-bours (i.e. the first point of every curve) grows as $\gamma$ increases, but also as the size of the chain increases, for every value of $\gamma$. So, the increase of nearest-neighbours correlation is due to two aspects: the strength of the dissipative forces and the number of spins involved.
+
+The exponential decay of correlation functions implies that the correlation between two sufficiently distant sites is exponentially suppressed: this is due to the absence of long-range order, i.e. the system is not long-range correlated.
+
+%il fatto che le funzioni di corr decadano esponenzialmente, implica che il sistema non è correlato a lungo raggio. Se ti metti suff lontano, la corr tra un sito e un sito a distanza l è esponenzialmente soppressa: questo è dovuto all'assenza di ordine a lungo raggio.
+
+
 The fit in fig.~\ref{fig:16sites_FIT_CFBulkCONNvsGamma} shows that the profile of correlation function is exponential. Several observations can be made; first of all, the trend of the two-point correlation function is exponential. In particular, the dependence on the distance between the spins reads:
 \begin{equation}
     C(k) = p_0 e^{-p_1 k},
@@ -259,7 +261,7 @@ where the coefficients $p_0$ and $p_1$ are given by the fit and are displayed in
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{Figures/16sites_FIT_CFBulkCONNvsGammaFinal.pdf}
+    \includegraphics[scale=0.6]{Figures/16sites_FIT_CFBulkCONNvsGammaFinal.pdf}
     \captionsetup{width=1.\linewidth}
     \caption{Bulk correlation function for a 16-sites spin chain for several values of $\gamma$. In the inset the fit $C_{\text{bulk}} = p_0 \exp{(-p_1 r)}$ is shown in a semi-logarithmic scale. The fit parameters are shown in the same order of the legend for $\gamma$.}
     \label{fig:16sites_FIT_CFBulkCONNvsGamma}
